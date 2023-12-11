@@ -4,23 +4,11 @@ using UnityEngine;
 
 public class PlayAreaRefManager : MonoBehaviour
 {
-    [Header("Debug Controls")]
-    [SerializeField] private static bool showDebug = false;
-
     private static GameObject playAreaBounds;
-    public static GameObject PlayAreaBounds 
-    { get 
-        {
-            if (playAreaBounds != null) { numberOfStaticVariableRetrievals++; }
-            if (showDebug) { Debug.Log($"{debugStatementTag} Play area bounds collider retrieved: {numberOfStaticVariableRetrievals} times"); }
-            return playAreaBounds; 
-        } 
-        private set { playAreaBounds = value; } 
-    }
+    public static GameObject PlayAreaBounds  { get { return playAreaBounds; } private set { playAreaBounds = value; } }
 
     private const string debugStatementTag = "PlayAreaRefManager Script: ";
 
-    private static int numberOfStaticVariableRetrievals = 0;
 
     private void Awake()
     {

@@ -14,15 +14,10 @@ public class Enemy_Object_Pool : Object_Pool_Template
     private Collider2D waveAreaTarget; // For use in setting a reference to the general play area.
     // Start is called before the first frame update
 
-   
-        
-
     void Start()
     {
-        
         InitialPoolSetup();
         PopulatePool();
-
     }
 
     
@@ -32,7 +27,6 @@ public class Enemy_Object_Pool : Object_Pool_Template
         objectPoolSize = enemyWaveData.EnemyPoolSize;
         SetObjectParentToSelf();
         SetTarget();
-       
     }
 
     protected override void PopulatePool()
