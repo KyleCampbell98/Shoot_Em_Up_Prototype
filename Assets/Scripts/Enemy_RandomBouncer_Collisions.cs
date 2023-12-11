@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,20 +29,28 @@ public class Enemy_RandomBouncer_Collisions : MonoBehaviour
         }
     }
     private int BouncesBeforeLeavingPlayArea { get { return bouncesBeforeLeavingPlayArea; } set { bouncesBeforeLeavingPlayArea = value; } }
-    
 
-    private void Start()
+    private void Awake()
     {
         thisEnemyCollider = GetComponent<Collider2D>();
+    }
+    private void Start()
+    {
+        
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if(playAreaColl == null)
+        {
+            playAreaColl = collision.GetComponent<Collider2D>(); // Will find edge collider. Could pass this reference in from object pool spawner so that every enemy doesnt have to
+            // NEEDS WORK, currently the enemies can be set as each others playareacoll if they collider before reaching the play area.
+        }
         if (!stayInPlayArea)
         {
             
             stayInPlayArea=true;
-            playAreaColl = collision.GetComponent<Collider2D>(); // Will find edge collider. Could pass this reference in from object pool spawner so that every enemy doesnt have to
+           
             // make a getComponent reference call
             thisEnemyCollider.isTrigger = false;
            Debug.Log("Coll type: " + playAreaColl.GetType());
@@ -58,4 +67,19 @@ public class Enemy_RandomBouncer_Collisions : MonoBehaviour
         }
         OnBounce();
     }
+
+    private void ResetCollisionLogic()
+    {
+        thisEnemyCollider.isTrigger = true;
+        stayInPlayArea = false;
+        currentBounces = 0;
+
+    }
+
+    private void OnDisable()
+    {
+        ResetCollisionLogic();
+    }
+
+    
 }

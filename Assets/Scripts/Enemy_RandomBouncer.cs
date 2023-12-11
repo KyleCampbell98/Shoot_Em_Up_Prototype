@@ -122,4 +122,11 @@ public class Enemy_RandomBouncer : Enemy
 
         return newTarget;
     }
+
+    protected override void ResetEnemyOnDisable()
+    {
+        base.ResetEnemyOnDisable();
+        
+    }
+
 }

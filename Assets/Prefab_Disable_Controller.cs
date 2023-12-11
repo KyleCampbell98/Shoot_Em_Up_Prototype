@@ -4,15 +4,30 @@ using UnityEngine;
 
 public class Prefab_Disable_Controller : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject[] children;
+
+    private void Awake()
     {
-        
+        children = new GameObject[transform.childCount];
+        if (children != null)
+        {
+            Debug.Log($"Child Count: {transform.childCount}");
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                children[i] = transform.GetChild(i).gameObject;
+
+            }
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
+        
+        foreach (GameObject child in children)
+        {
+            child.SetActive(false);
+        }
+
         
     }
 }

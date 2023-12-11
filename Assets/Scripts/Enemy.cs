@@ -45,9 +45,14 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void OnDisable()
+    protected virtual void ResetEnemyOnDisable()
     {
-        
+        transform.parent.position = originSpawnPoint;
+    }
+
+    protected void OnDisable()
+    {
+        ResetEnemyOnDisable();
     }
 
     
