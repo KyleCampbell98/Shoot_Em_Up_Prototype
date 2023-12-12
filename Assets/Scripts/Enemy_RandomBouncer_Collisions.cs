@@ -11,7 +11,7 @@ public class Enemy_RandomBouncer_Collisions : MonoBehaviour
     [SerializeField] private int currentBounces = 0;
 
     [Header("Component References")]
-    [SerializeField] private static Collider2D playAreaColl;
+    [SerializeField] private Collider2D playAreaColl;
     [SerializeField] private Collider2D thisEnemyCollider;
 
     public event UnityAction OnBounce;
@@ -35,10 +35,12 @@ public class Enemy_RandomBouncer_Collisions : MonoBehaviour
         thisEnemyCollider = GetComponent<Collider2D>();
         if (playAreaColl == null)
         {
+            Debug.Log("Play are collider assigned");
             playAreaColl = PlayAreaRefManager.PlayAreaBounds.GetComponent<Collider2D>(); // Will find edge collider. Could pass this reference in from object pool spawner so that every enemy doesnt have to
             // NEEDS WORK, currently the enemies can be set as each others playareacoll if they collider before reaching the play area.
         }
     }
+
 
     private void OnTriggerExit2D(Collider2D collision)
     {
