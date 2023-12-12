@@ -52,6 +52,7 @@ MonoBehaviour:
   movementDirection: {x: 1, y: 0}
   testInstantiator: {fileID: 4955490249393583000, guid: f4a0e2696aad43a43ad09f937ebeadf6, type: 3}
   playAreaBounds: {fileID: 0}
+  canMoveTowardsTarget: 0
 --- !u!1 &6472709418347385813
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,6 +166,7 @@ MonoBehaviour:
   stayInPlayArea: 0
   bouncesBeforeLeavingPlayArea: 6
   currentBounces: 0
+  playAreaColl: {fileID: 0}
   thisEnemyCollider: {fileID: 0}
 --- !u!1 &7964369208535161086
 GameObject:
@@ -176,6 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3006640828784868635}
   - component: {fileID: 3514458661738002566}
+  - component: {fileID: 4314492127782491981}
   m_Layer: 0
   m_Name: Enemy_Sprite
   m_TagString: Untagged
@@ -239,7 +242,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -250,3 +253,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4314492127782491981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7964369208535161086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5ba9fbc7a26ea242943fa01feec4e1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spinSpeed: 180
