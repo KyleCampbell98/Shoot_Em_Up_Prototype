@@ -33,19 +33,16 @@ public class Enemy_RandomBouncer_Collisions : MonoBehaviour
     private void Awake()
     {
         thisEnemyCollider = GetComponent<Collider2D>();
-    }
-    private void Start()
-    {
-        
+        if (playAreaColl == null)
+        {
+            playAreaColl = PlayAreaRefManager.PlayAreaBounds.GetComponent<Collider2D>(); // Will find edge collider. Could pass this reference in from object pool spawner so that every enemy doesnt have to
+            // NEEDS WORK, currently the enemies can be set as each others playareacoll if they collider before reaching the play area.
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(playAreaColl == null)
-        {
-            playAreaColl = collision.GetComponent<Collider2D>(); // Will find edge collider. Could pass this reference in from object pool spawner so that every enemy doesnt have to
-            // NEEDS WORK, currently the enemies can be set as each others playareacoll if they collider before reaching the play area.
-        }
+      
         if (!stayInPlayArea)
         {
             
