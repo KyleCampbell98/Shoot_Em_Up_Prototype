@@ -24,10 +24,10 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "TurnOctogon",
-                    "type": "Value",
+                    "name": "CycleShapes",
+                    "type": "Button",
                     "id": "4cc5385c-74a5-4cfa-8b58-16396079551d",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -130,39 +130,6 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "2D Vector",
-                    "id": "1dd71187-c80c-4f78-b437-9d52b71325cf",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "TurnOctogon",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "left",
-                    "id": "106ba45a-c621-46f3-9f48-054f4b957646",
-                    "path": "<Gamepad>/leftTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "TurnOctogon",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "afea785e-cc0e-4484-a194-6a0e38e4e586",
-                    "path": "<Gamepad>/rightTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "TurnOctogon",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
                     "name": "",
                     "id": "f2bf84c5-8cb2-448e-be96-b3c31e789fbd",
                     "path": "<Gamepad>/buttonSouth",
@@ -181,6 +148,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "BoostRelease",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "84b4cb12-9c7f-4445-af56-b6b5cc1fe062",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "CycleShapes",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "eb648716-e4d9-4747-a70f-2eac6e24d417",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "CycleShapes",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
