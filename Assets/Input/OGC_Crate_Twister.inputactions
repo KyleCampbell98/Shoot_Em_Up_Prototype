@@ -172,6 +172,28 @@
                     "action": "CycleShapes",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6241f41a-8095-4933-b0d3-73e07a3f9e14",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "CycleShapes",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1ff1bb67-b90f-4cf7-b95b-3d3c06abd85e",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "CycleShapes",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
