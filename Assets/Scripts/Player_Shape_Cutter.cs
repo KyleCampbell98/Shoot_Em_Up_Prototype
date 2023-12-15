@@ -7,7 +7,7 @@ using UnityEngine;
 public class Player_Shape_Cutter : MonoBehaviour
 {
     private Cutter_And_Enemy_Shape_Enums.ShapeType selectedShape;
-    [SerializeField] private Cutter_And_Enemy_Shape_Enums.ShapeType SelectedShape { get { return selectedShape; } set { selectedShape = value; } }
+    [SerializeField] private Cutter_And_Enemy_Shape_Enums.ShapeType SelectedShape { get { return selectedShape; } set { selectedShape = value; Debug.Log("SHAPE CHANGED"); } }
     
     [SerializeField] private int arrayIterator = 0;
     private int numberOfPossibleShapes;
@@ -27,6 +27,11 @@ public class Player_Shape_Cutter : MonoBehaviour
         // Link below is for reading further into Getting the total number of values in an ENUM/ how ENUMS work.
         // https://stackoverflow.com/questions/856154/total-number-of-items-defined-in-an-enum
 
+        SwitchActiveShape();
+    }
+
+    private void SwitchActiveShape()
+    {
         if (arrayIterator == numberOfPossibleShapes - 1)
         {
             arrayIterator = 0;
@@ -39,11 +44,11 @@ public class Player_Shape_Cutter : MonoBehaviour
                 SelectedShape = Cutter_And_Enemy_Shape_Enums.ShapeType.Circle;
                 break;
 
-                case 1:
+            case 1:
                 SelectedShape = Cutter_And_Enemy_Shape_Enums.ShapeType.Square;
                 break;
 
-                case 2:
+            case 2:
                 SelectedShape = Cutter_And_Enemy_Shape_Enums.ShapeType.Triangle;
                 break;
 
