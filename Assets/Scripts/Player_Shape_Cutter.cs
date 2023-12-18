@@ -6,21 +6,17 @@ using UnityEngine;
 
 public class Player_Shape_Cutter : MonoBehaviour
 {
-    private Cutter_And_Enemy_Shape_Enums.ShapeType selectedShape;
-    [SerializeField] private Cutter_And_Enemy_Shape_Enums.ShapeType SelectedShape { get { return selectedShape; } set { selectedShape = value; Debug.Log("SHAPE CHANGED"); } }
+    private Cutter_And_Enemy_Shape_Enums.ShapeType selectedShape; // Currently selected shape based on iterator.
+    private Cutter_And_Enemy_Shape_Enums.ShapeType SelectedShape { get { return selectedShape; } set { selectedShape = value; Debug.Log("SHAPE CHANGED"); } }
     
-    [SerializeField] private int arrayIterator = 0;
-    private int numberOfPossibleShapes;
+    // Internal Script Logic Variables
+    private int arrayIterator = 0; // iterates through the available shape enums. 
+    private int numberOfPossibleShapes; // upon instantiation, sets the possible number of shapes to iterate through.
 
     private void Awake()
     {
-       
-        SelectedShape = Cutter_And_Enemy_Shape_Enums.ShapeType.Circle;
-        Debug.Log($"Selected shape: {SelectedShape}");
-
-        numberOfPossibleShapes = Enum.GetNames(typeof(Cutter_And_Enemy_Shape_Enums.ShapeType)).Length;
-        Debug.Log($"Number of possible shapes: {numberOfPossibleShapes}");
-    }
+        ShapeCutterListSetup();
+    }  
 
     void OnCycleShapes()
     {
@@ -32,13 +28,14 @@ public class Player_Shape_Cutter : MonoBehaviour
 
     private void SwitchActiveShape()
     {
-        if (arrayIterator == numberOfPossibleShapes - 1)
+        if (arrayIterator == numberOfPossibleShapes - 1) // -1 due to the iterator being used on an array (indexed from 0)
         {
-            arrayIterator = 0;
+            arrayIterator = 0; // Resets iterator if value is greater than the potential maximum shape array index value. 
         }
         else { arrayIterator++; }
-        Debug.Log($"Iterator value is now: {arrayIterator}");
-        switch (arrayIterator)
+
+        
+        switch (arrayIterator) // Selects shape based on iterator value
         {
             case 0:
                 SelectedShape = Cutter_And_Enemy_Shape_Enums.ShapeType.Circle;
@@ -60,9 +57,13 @@ public class Player_Shape_Cutter : MonoBehaviour
     }
 
 
-    // Update is called once per frame
-    void Update()
+    private void ShapeCutterListSetup()
     {
-        
+        SelectedShape = Cutter_And_Enemy_Shape_Enums.ShapeType.Circle;
+        Debug.Log($"Selected shape: {SelectedShape}");
+        arrayIterator = 0;
+        numberOfPossibleShapes = Enum.GetNames(typeof(Cutter_And_Enemy_Shape_Enums.ShapeType)).Length;
+        Debug.Log($"Number of possible shapes: {numberOfPossibleShapes}");
     }
+
 }
