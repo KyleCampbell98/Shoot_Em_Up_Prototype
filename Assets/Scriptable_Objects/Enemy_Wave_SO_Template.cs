@@ -11,6 +11,10 @@ public class Enemy_Wave_SO_Template : ScriptableObject
     [SerializeField] private Cutter_And_Enemy_Shape_Enums.ShapeType waveShapeType;
     [SerializeField] private Sprite enemySprite;
 
+    [Header("Enemy Attributes")]
+    [SerializeField] private float enemySpeed;
+
+
     [Header("Wave Type Parameters")]
     [SerializeField] private int enemyPoolSize;
     [SerializeField] private float spawnRate;
@@ -23,7 +27,9 @@ public class Enemy_Wave_SO_Template : ScriptableObject
     // Properties
     public GameObject EnemyToSpawn { get { return enemyToSpawn; } }
     public Sprite EnemySprite { get { return enemySprite; } }
+    public Cutter_And_Enemy_Shape_Enums.ShapeType WaveShapeType { get { return waveShapeType; } }
     public int EnemyPoolSize { get { return enemyPoolSize; } }
+    public float EnemySpeed { get { return enemySpeed; } }
     public float SpawnRate { get { if (SpawnSequentially) { return spawnRate; } else { Debug.Log("No spawn rate returned, enemy wave type doesn't support spawn rates"); return 0; } } } 
     public bool SpawnSequentially {  get { return spawnSequentially; } }
     public bool TargetPlayer { get {  return targetPlayer; } }

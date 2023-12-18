@@ -36,11 +36,11 @@ public class Enemy_Object_Pool : Object_Pool_Template
         for (int i = 0; i < objectPoolSize; i++)
         {
             pooledObjects[i] = Instantiate(objectToPool, transform.position, Quaternion.identity, pooledObjectParent);
-            if (pooledObjects[i].GetComponent<Enemy>() == null) { pooledObjects[i].GetComponentInChildren<Enemy>().MovementTarget = waveTarget; }
-            else { pooledObjects[i].GetComponent<Enemy>().MovementTarget = waveTarget; }
+            Enemy localEnemyScript;
+            if (pooledObjects[i].GetComponent<Enemy>() == null) { localEnemyScript = pooledObjects[i].GetComponentInChildren<Enemy>(); }
+            else { localEnemyScript = pooledObjects[i].GetComponent<Enemy>(); }
+            localEnemyScript.SetupEnemy(enemyWaveData.EnemySpeed, enemyWaveData.WaveShapeType, enemyWaveData.EnemySprite);
             
-            if (pooledObjects[i].GetComponent<SpriteRenderer>() == null) { pooledObjects[i].GetComponentInChildren<SpriteRenderer>().sprite = enemyWaveData.EnemySprite; }
-            else { pooledObjects[i].GetComponent<SpriteRenderer>().sprite = enemyWaveData.EnemySprite; }
             pooledObjects[i].SetActive(false);
         }
     }

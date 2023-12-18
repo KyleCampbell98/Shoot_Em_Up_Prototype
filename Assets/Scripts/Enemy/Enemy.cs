@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
 {
    [Header("Component References")]
    [SerializeField] protected Rigidbody2D enemyRb;
+    [SerializeField] protected SpriteRenderer enemySpriteRenderer;
     
    [Header("Generic Movement Configs")]
    [SerializeField] protected float movementSpeed;
@@ -44,11 +45,32 @@ public class Enemy : MonoBehaviour
 
             }
         }
+        if (enemySpriteRenderer == null)
+        {
+            if (gameObject.GetComponent<SpriteRenderer>() != null)
+            {
+                enemySpriteRenderer = GetComponent<SpriteRenderer>();
+                //Debug.Log("Enemy rigidbody found in self.");
+            }
+            else
+            {
+                enemySpriteRenderer = GetComponentInParent<SpriteRenderer>();
+                //Debug.Log("Enemy rigidbody found in parent game object.");
+
+            }
+        }
     }
 
     protected virtual void ResetEnemyOnDisable()
     {
         transform.parent.position = originSpawnPoint;
+    }
+    
+    public void SetupEnemy(float waveMovementSpeed, Cutter_And_Enemy_Shape_Enums.ShapeType waveEnemyShapeType, Sprite enemySprite)
+    {
+       this.movementSpeed = waveMovementSpeed;
+        enemyShapeType = waveEnemyShapeType;
+        enemySpriteRenderer.sprite = enemySprite;
     }
 
     protected void OnDisable()
