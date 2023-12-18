@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Random_Bouncer_Wave_EG
   m_EditorClassIdentifier: 
   enemyToSpawn: {fileID: 6472709418347385813, guid: 9f9e2c4c9caee784f835920587423e51, type: 3}
-  enemyPoolSize: 4
+  waveShapeType: 0
+  enemySprite: {fileID: 7482667652216324306, guid: 660d4086801021e4ca8dcbf9068fa214, type: 3}
+  enemyPoolSize: 6
   spawnRate: 3
   spawnSequentially: 1
   targetPlayer: 0

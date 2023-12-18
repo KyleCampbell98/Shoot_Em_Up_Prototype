@@ -75,6 +75,7 @@ public class Enemy_RandomBouncer : Enemy
     // Internal Script Utility
     private void EventSubscriptions()
     {
+
         if (GetComponentInParent<Enemy_RandomBouncer>())
         {
             GetComponentInParent<Enemy_RandomBouncer_Collisions>().OnBounce += SwitchDirection;

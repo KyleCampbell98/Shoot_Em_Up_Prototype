@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player_Bullet_Object_Pool : Object_Pool_Template
 {
     [SerializeField] private Transform firePoint;
+ 
 
     private void Start()
     {

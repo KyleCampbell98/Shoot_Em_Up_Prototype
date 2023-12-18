@@ -533,7 +533,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dfe6c0c76cf36143801b73c6dca0967, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedCutOutShape: 0
 --- !u!1 &1871080090
 GameObject:
   m_ObjectHideFlags: 0

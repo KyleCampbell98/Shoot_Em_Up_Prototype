@@ -10,9 +10,8 @@ public class Enemy_Object_Pool : Object_Pool_Template
 {
     [SerializeField] private Enemy_Wave_SO_Template enemyWaveData;
     [SerializeField] private GameObject waveTarget;
-
+    
     private Collider2D waveAreaTarget; // For use in setting a reference to the general play area.
-    // Start is called before the first frame update
 
     void Start()
     {
@@ -39,6 +38,9 @@ public class Enemy_Object_Pool : Object_Pool_Template
             pooledObjects[i] = Instantiate(objectToPool, transform.position, Quaternion.identity, pooledObjectParent);
             if (pooledObjects[i].GetComponent<Enemy>() == null) { pooledObjects[i].GetComponentInChildren<Enemy>().MovementTarget = waveTarget; }
             else { pooledObjects[i].GetComponent<Enemy>().MovementTarget = waveTarget; }
+            
+            if (pooledObjects[i].GetComponent<SpriteRenderer>() == null) { pooledObjects[i].GetComponentInChildren<SpriteRenderer>().sprite = enemyWaveData.EnemySprite; }
+            else { pooledObjects[i].GetComponent<SpriteRenderer>().sprite = enemyWaveData.EnemySprite; }
             pooledObjects[i].SetActive(false);
         }
     }

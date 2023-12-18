@@ -8,11 +8,12 @@ public class Enemy : MonoBehaviour
 {
    [Header("Component References")]
    [SerializeField] protected Rigidbody2D enemyRb;
-
+    
    [Header("Generic Movement Configs")]
    [SerializeField] protected float movementSpeed;
    [SerializeField] protected GameObject movementTarget;
    [SerializeField] protected bool collideWithPlayAreaBoundaries;
+   [SerializeField] protected Cutter_And_Enemy_Shape_Enums.ShapeType enemyShapeType;
 
     [Header("Spawn Data")]
     [SerializeField] protected Vector2 originSpawnPoint;
