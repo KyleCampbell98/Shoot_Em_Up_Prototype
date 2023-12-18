@@ -24,7 +24,7 @@ public class Player_Shape_Cutter : MonoBehaviour
         // https://stackoverflow.com/questions/856154/total-number-of-items-defined-in-an-enum
 
         SwitchActiveShape();
-    }
+    } // Listens for player action from input system
 
     private void SwitchActiveShape()
     {
@@ -54,10 +54,10 @@ public class Player_Shape_Cutter : MonoBehaviour
                 break;
         }
         Debug.Log($"Selected shape: {SelectedShape}");
-    }
+    } // Logic for switching shape
 
 
-    private void ShapeCutterListSetup()
+    private void ShapeCutterListSetup() // Initial player weapon setup.
     {
         SelectedShape = Cutter_And_Enemy_Shape_Enums.ShapeType.Circle;
         Debug.Log($"Selected shape: {SelectedShape}");
