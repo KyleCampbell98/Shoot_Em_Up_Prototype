@@ -315,6 +315,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 553104688385583292, guid: 60159ca0d95210f4b94d6a9ca4d9820c, type: 3}
+      propertyPath: enemyWaveData
+      value: 
+      objectReference: {fileID: 11400000, guid: 126da2ac8e5934b488e274b477bd9ece, type: 2}
     - target: {fileID: 584697355061913917, guid: 60159ca0d95210f4b94d6a9ca4d9820c, type: 3}
       propertyPath: m_Name
       value: Enemy_Spawner

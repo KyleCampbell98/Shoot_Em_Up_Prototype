@@ -12,7 +12,7 @@ public class Enemy_Wave_SO_Template : ScriptableObject
     [SerializeField] private Sprite enemySprite;
 
     [Header("Enemy Attributes")]
-    [SerializeField] private float enemySpeed;
+    [Range(5, 30)][SerializeField] private float enemySpeed;
 
 
     [Header("Wave Type Parameters")]

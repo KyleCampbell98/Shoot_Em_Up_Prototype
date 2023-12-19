@@ -20,12 +20,12 @@ public class Enemy_RandomBouncer : Enemy
     {
         base.Awake();
         EventSubscriptions();
-        LocateComponentReferences();
+        base.LocateComponentReferences();
         
     }
     private void Start()
     {
-      SetAreaTarget(out bool targetSet);
+        SetAreaTarget(out bool targetSet);
         InitialMovementPush();
         canMoveTowardsTarget = targetSet;
 
@@ -48,7 +48,7 @@ public class Enemy_RandomBouncer : Enemy
     }
     private void SwitchDirection()
     {
-        enemyRb.velocity = new Vector2(Mathf.Clamp(enemyRb.velocity.x, -10, 10), Mathf.Clamp(enemyRb.velocity.y, -10, 10));
+        enemyRb.velocity = new Vector2(Mathf.Clamp(enemyRb.velocity.x, -movementSpeed, movementSpeed), Mathf.Clamp(enemyRb.velocity.y, -movementSpeed, movementSpeed));
 
         if (Math.Abs(enemyRb.velocity.y) <= 1)
         {
@@ -61,7 +61,7 @@ public class Enemy_RandomBouncer : Enemy
         }
 
     }
-    private int RandomForceGenerator() // Why static? 25/11/23 // Removed Static 27/11/28
+    private int RandomForceGenerator() // Why static? 25/11/23 // Removed Static 27/11/28 // Method called to prevent infinite bounce patterns. 
     {
         var forceToAdd = UnityEngine.Random.Range(1, -2);
         if (forceToAdd == 0)
@@ -118,6 +118,8 @@ public class Enemy_RandomBouncer : Enemy
 
         newTarget = new Vector2(UnityEngine.Random.Range(playAreaBounds.bounds.min.x, playAreaBounds.bounds.max.x),
             UnityEngine.Random.Range(playAreaBounds.bounds.min.y, playAreaBounds.bounds.max.y));
+
+        // Below code for debugging purpose only: Shows where is being targetted by the enemy with a visual aid. 
         Debug.Log($"New target destination for bouncer enemy: {newTarget}.");
         Instantiate(testInstantiator, newTarget, Quaternion.identity);
 

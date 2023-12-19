@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -47,17 +48,15 @@ public class Enemy : MonoBehaviour
         }
         if (enemySpriteRenderer == null)
         {
-            if (gameObject.GetComponent<SpriteRenderer>() != null)
+            if (gameObject.transform.parent.GetComponentInChildren<SpriteRenderer>() != null)
             {
-                enemySpriteRenderer = GetComponent<SpriteRenderer>();
-                //Debug.Log("Enemy rigidbody found in self.");
+                enemySpriteRenderer = gameObject.transform.parent.GetComponentInChildren<SpriteRenderer>();
             }
             else
             {
-                enemySpriteRenderer = GetComponentInParent<SpriteRenderer>();
-                //Debug.Log("Enemy rigidbody found in parent game object.");
-
+                Debug.LogError("Enemy Script: No Sprite Renderer found in other Enemy child game objects. COuld not Cache Reference.");   
             }
+            //Debug.Log("Enemy rigidbody found in self."); 
         }
     }
 
@@ -66,11 +65,14 @@ public class Enemy : MonoBehaviour
         transform.parent.position = originSpawnPoint;
     }
     
-    public void SetupEnemy(float waveMovementSpeed, Cutter_And_Enemy_Shape_Enums.ShapeType waveEnemyShapeType, Sprite enemySprite)
+    public void SetUpEnemy(float waveMovementSpeed, Cutter_And_Enemy_Shape_Enums.ShapeType waveEnemyShapeType, Sprite enemySprite, GameObject enemyMovementTarget)
     {
-       this.movementSpeed = waveMovementSpeed;
+        movementSpeed = waveMovementSpeed;
         enemyShapeType = waveEnemyShapeType;
         enemySpriteRenderer.sprite = enemySprite;
+        movementTarget = enemyMovementTarget;
+
+        // NEED TO IMPLEMENT LOGIC
     }
 
     protected void OnDisable()

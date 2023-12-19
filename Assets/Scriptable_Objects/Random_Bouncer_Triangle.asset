@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25b57a15018364e4baab4d049a7cd123, type: 3}
-  m_Name: Random_Bouncer_Wave_EG
+  m_Name: Random_Bouncer_Triangle
   m_EditorClassIdentifier: 
   enemyToSpawn: {fileID: 6472709418347385813, guid: 9f9e2c4c9caee784f835920587423e51, type: 3}
-  waveShapeType: 1
-  enemySprite: {fileID: 7482667652216324306, guid: 660d4086801021e4ca8dcbf9068fa214, type: 3}
-  enemySpeed: 10
-  enemyPoolSize: 6
-  spawnRate: 3
+  waveShapeType: 2
+  enemySprite: {fileID: 7482667652216324306, guid: ec50dfb5ec36e9a40b0820515ef258a4, type: 3}
+  enemySpeed: 17.97
+  enemyPoolSize: 10
+  spawnRate: 4
   spawnSequentially: 1
   targetPlayer: 0

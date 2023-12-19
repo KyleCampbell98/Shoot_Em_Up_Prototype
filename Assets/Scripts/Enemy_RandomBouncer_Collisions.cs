@@ -6,6 +6,7 @@ using UnityEngine.Events;
 
 public class Enemy_RandomBouncer_Collisions : MonoBehaviour
 {
+    [Header("Play Area Collision Control")]
     [SerializeField] private bool stayInPlayArea = false;
     [SerializeField] private int bouncesBeforeLeavingPlayArea;
     [SerializeField] private int currentBounces = 0;
@@ -14,7 +15,9 @@ public class Enemy_RandomBouncer_Collisions : MonoBehaviour
     [SerializeField] private Collider2D playAreaColl;
     [SerializeField] private Collider2D thisEnemyCollider;
 
+    //Events/Delegates
     public event UnityAction OnBounce;
+
     // Properties
     private int CurrentBounces
     {
@@ -41,13 +44,10 @@ public class Enemy_RandomBouncer_Collisions : MonoBehaviour
         }
     }
 
-
     private void OnTriggerExit2D(Collider2D collision)
     {
-      
         if (!stayInPlayArea)
         {
-            
             stayInPlayArea=true;
            
             // make a getComponent reference call
@@ -73,7 +73,7 @@ public class Enemy_RandomBouncer_Collisions : MonoBehaviour
         stayInPlayArea = false;
         currentBounces = 0;
 
-    }
+    } // Resets "Play Area Collision Control" on disable.
 
     private void OnDisable()
     {
