@@ -44,6 +44,14 @@ public class Enemy_RandomBouncer_Collisions : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<Player_Shape_Projectile_Logic>())
+        {
+            Debug.Log("BLAH BLAH BLAH");
+        }
+    }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (!stayInPlayArea)
