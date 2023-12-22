@@ -5,13 +5,18 @@ using UnityEngine;
 public class Player_Bullet_Object_Pool : Object_Pool_Template
 {
     [SerializeField] private Transform firePoint;
-
-    
+   
     private void Start()
     {
-        pooledObjectParent = Player_Projectile_Parent.PlayerProjectileParentReference.transform;
+        SetTransformCachedVariables();
         SubscribeToFireEvent();
         PopulatePool(); // bullet pool
+    }
+
+    private void SetTransformCachedVariables()
+    {
+        pooledObjectParent = Player_Projectile_Parent.PlayerProjectileParentReference.transform;
+        firePoint = gameObject.transform;
     }
 
     private void SubscribeToFireEvent()

@@ -62,10 +62,8 @@ public class New_Input_System_Controller : MonoBehaviour
 
     public void OnFire() 
     {
-
         Debug.Log("PlayerFired");
          
-
         if (canFire)
         {
            float timeSinceLastFire = Time.time - lastFireTime;
