@@ -9,7 +9,9 @@ public class Player_Shape_Projectile_Logic : MonoBehaviour
     private bool canGameOverPlayer; // Should be false upon placing the projectile, could be done through a trigger behaviour, or a timer?
 
     // Component References
-    private SpriteRenderer projectileSpriteRenderer; // Used to set sprite on each activation from the pool. 
+    [SerializeField] private SpriteRenderer projectileSpriteRenderer; // Used to set sprite on each activation from the pool. 
+    [SerializeField] private Transform projectileTransformParent; // Get in the player object pool script? So then the reference is only being retrieved once, then pass into each projectile
+    // from the object pool. Otherwise, each object is going to be spawning on the object pool creation, and getting the same static reference for caching. 
 
     // Timer attributes
     private float timeBeforeActivatingDanger; // This is the amount of seconds after being placed that the danger to the player of their own projectile will be instated.
@@ -22,6 +24,12 @@ public class Player_Shape_Projectile_Logic : MonoBehaviour
         } 
     }
 
+    private void Awake()
+    {
+        projectileSpriteRenderer = GetComponent<SpriteRenderer>();
+       
+    }
+
     private void OnDisable()
     {
         ResetProjectile();
@@ -30,6 +38,7 @@ public class Player_Shape_Projectile_Logic : MonoBehaviour
     private void ResetProjectile()
     {
         projectileSpriteRenderer.sprite = null;
+        transform.position = projectileTransformParent.position;
 
     }
 }
