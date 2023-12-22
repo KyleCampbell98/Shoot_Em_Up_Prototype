@@ -5,10 +5,11 @@ using UnityEngine;
 public class Player_Bullet_Object_Pool : Object_Pool_Template
 {
     [SerializeField] private Transform firePoint;
- 
 
+    
     private void Start()
     {
+        pooledObjectParent = Player_Projectile_Parent.PlayerProjectileParentReference.transform;
         SubscribeToFireEvent();
         PopulatePool(); // bullet pool
     }
@@ -27,13 +28,14 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
     {
      //   Debug.Log("Activate Bullets in Player Object Pool Called");
 
-        GameObject bullet = GetPooledObject();
-        if(bullet != null)
+        GameObject shapeProjectile = GetPooledObject();
+        if(shapeProjectile != null)
         {
-            bullet.transform.SetPositionAndRotation(firePoint.transform.position, transform.rotation.normalized);
-            bullet.SetActive(true);
+            shapeProjectile.transform.SetPositionAndRotation(firePoint.transform.position, transform.rotation.normalized);
+            
+            shapeProjectile.SetActive(true);
         }
-        else { Debug.Log("Could not retrieve object to enable from pool."); }
+        else { Debug.LogWarning("Could not retrieve object to enable from pool."); }
     }
 
     private void OnDisable()

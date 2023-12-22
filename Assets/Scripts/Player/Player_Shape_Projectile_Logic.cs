@@ -30,15 +30,21 @@ public class Player_Shape_Projectile_Logic : MonoBehaviour
        
     }
 
+    public void SetupProjectile(Cutter_And_Enemy_Shape_Enums.ShapeType currentShapeType, Sprite currentPlayerSprite) // This needs to be subbed to an event in the projectile pool (fired when projectile activation is called)
+    {
+        thisProjectilesShapeType = currentShapeType;
+        projectileSpriteRenderer.sprite = currentPlayerSprite;
+    }
+
     private void OnDisable()
     {
-        ResetProjectile();
+      //  ResetProjectile();
     }
 
     private void ResetProjectile()
     {
         projectileSpriteRenderer.sprite = null;
-        transform.position = projectileTransformParent.position;
+        transform.position = gameObject.transform.parent.position;
 
     }
 }
