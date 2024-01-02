@@ -7,8 +7,11 @@ using UnityEngine;
 public class Player_Shape_Cutter : MonoBehaviour
 {
     private Cutter_And_Enemy_Shape_Enums.ShapeType selectedShape; // Currently selected shape based on iterator.
-    private Cutter_And_Enemy_Shape_Enums.ShapeType SelectedShape { get { return selectedShape; } set { selectedShape = value; Debug.Log("SHAPE CHANGED"); } }
-    
+    private Cutter_And_Enemy_Shape_Enums.ShapeType SelectedShape { get { return selectedShape; } set { selectedShape = value; _selectedShapeEnum?.Invoke(value); } }
+
+    public delegate void PassSelectedShapeEnum(Cutter_And_Enemy_Shape_Enums.ShapeType currentShapeTypeEnum);
+    public PassSelectedShapeEnum _selectedShapeEnum;
+
     // Internal Script Logic Variables
     private int arrayIterator = 0; // iterates through the available shape enums. 
     private int numberOfPossibleShapes; // upon instantiation, sets the possible number of shapes to iterate through.

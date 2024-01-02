@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,14 +9,17 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
     private delegate void PassProjectileParameters(Cutter_And_Enemy_Shape_Enums.ShapeType shapeOfProj, Sprite spriteOfProj);
     private PassProjectileParameters _passProjectileParameters;
 
-    private Cutter_And_Enemy_Shape_Enums.ShapeType currentShapeType = Cutter_And_Enemy_Shape_Enums.ShapeType.Circle;
+    private Cutter_And_Enemy_Shape_Enums.ShapeType currentShapeType;
     [SerializeField] private Sprite currentShapeSelectionSprite;
+
+    [SerializeField] private Sprite[] sprites = new Sprite[Enum.GetNames(typeof(Cutter_And_Enemy_Shape_Enums.ShapeType)).Length];
 
     private void Start()
     {
         SetTransformCachedVariables();
         SubscribeToFireEvent();
         PopulatePool(); // bullet pool
+        
     }
 
     protected override void PopulatePool()
@@ -26,7 +30,7 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
             if(projectile.GetComponent<Player_Shape_Projectile_Logic>() != null)
             {
                 _passProjectileParameters += projectile.GetComponent<Player_Shape_Projectile_Logic>().SetupProjectile;
-                Debug.Log("Subbec to the event");
+               
             }
         }
     }
@@ -36,7 +40,33 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
         pooledObjectParent = Player_Projectile_Parent.PlayerProjectileParentReference.transform;
         firePoint = gameObject.transform;
     }
+    private void SetCurrentShape(Cutter_And_Enemy_Shape_Enums.ShapeType currentShapeSelection)
+    {
+        Debug.Log("SET CURRENT SHAPE CALLED");
+        currentShapeType = currentShapeSelection;
 
+        switch (currentShapeType)
+        {
+            case Cutter_And_Enemy_Shape_Enums.ShapeType.Circle:
+
+                currentShapeType = Cutter_And_Enemy_Shape_Enums.ShapeType.Circle;
+                currentShapeSelectionSprite = sprites[0];
+
+                break;
+            case Cutter_And_Enemy_Shape_Enums.ShapeType.Triangle:
+
+                currentShapeType = Cutter_And_Enemy_Shape_Enums.ShapeType.Triangle;
+                currentShapeSelectionSprite = sprites[1];
+
+                break;
+            case Cutter_And_Enemy_Shape_Enums.ShapeType.Square:
+
+                currentShapeType = Cutter_And_Enemy_Shape_Enums.ShapeType.Square;
+                currentShapeSelectionSprite = sprites[2];
+
+                break;
+        }
+    }
     private void SubscribeToFireEvent()
     {
         if (gameObject.GetComponentInParent<New_Input_System_Controller>() != null)
@@ -45,6 +75,12 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
             //Debug.LogError("YEYE");
         }
         else { Debug.LogError("PARENT OBJECT MISSING CONTROLLER SCRIPT"); }
+
+        if (gameObject.GetComponent<Player_Shape_Cutter>() != null)
+        {
+            this.GetComponent<Player_Shape_Cutter>()._selectedShapeEnum += SetCurrentShape;
+            //Debug.LogError("YEYE");
+        }
     }
 
     private void ActivateBullets()
