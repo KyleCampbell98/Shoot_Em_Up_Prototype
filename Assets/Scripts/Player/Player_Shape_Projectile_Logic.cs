@@ -7,7 +7,7 @@ public class Player_Shape_Projectile_Logic : MonoBehaviour
     // Object Control Attributes
     private Cutter_And_Enemy_Shape_Enums.ShapeType? thisProjectilesShapeType; // sets shape type on each activation from the pool.
     private bool canGameOverPlayer; // Should be false upon placing the projectile, could be done through a trigger behaviour, or a timer?
-
+    private bool callShapeSetupLogic = true;
     // Component References
     [SerializeField] private SpriteRenderer projectileSpriteRenderer; // Used to set sprite on each activation from the pool. 
     [SerializeField] private Transform projectileTransformParent; // Get in the player object pool script? So then the reference is only being retrieved once, then pass into each projectile
@@ -32,8 +32,14 @@ public class Player_Shape_Projectile_Logic : MonoBehaviour
 
     public void SetupProjectile(Cutter_And_Enemy_Shape_Enums.ShapeType currentShapeType, Sprite currentPlayerSprite) // This needs to be subbed to an event in the projectile pool (fired when projectile activation is called)
     {
+
+        if (!callShapeSetupLogic) { return; }
+       
+        callShapeSetupLogic = false;
         thisProjectilesShapeType = currentShapeType;
         projectileSpriteRenderer.sprite = currentPlayerSprite;
+        
+        
     }
 
     private void OnDisable()
@@ -43,6 +49,7 @@ public class Player_Shape_Projectile_Logic : MonoBehaviour
 
     private void ResetProjectile()
     {
+        callShapeSetupLogic = true;
         projectileSpriteRenderer.sprite = null;
         transform.position = gameObject.transform.parent.position;
 
