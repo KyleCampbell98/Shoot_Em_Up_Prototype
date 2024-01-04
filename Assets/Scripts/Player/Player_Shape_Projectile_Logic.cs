@@ -27,12 +27,13 @@ public class Player_Shape_Projectile_Logic : MonoBehaviour
     private void Awake()
     {
         projectileSpriteRenderer = GetComponent<SpriteRenderer>();
+        projectileTransformParent = gameObject.transform.parent;
        
     }
 
     public void SetupProjectile(Cutter_And_Enemy_Shape_Enums.ShapeType currentShapeType, Sprite currentPlayerSprite) // This needs to be subbed to an event in the projectile pool (fired when projectile activation is called)
     {
-
+        Debug.Log("Setup projectile called from projectile logic script");
         if (!callShapeSetupLogic) { return; }
        
         callShapeSetupLogic = false;
@@ -49,6 +50,7 @@ public class Player_Shape_Projectile_Logic : MonoBehaviour
 
     private void ResetProjectile()
     {
+        transform.position = projectileTransformParent.position;
         callShapeSetupLogic = true;
         projectileSpriteRenderer.sprite = null;
         transform.position = gameObject.transform.parent.position;

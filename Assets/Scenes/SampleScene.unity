@@ -576,6 +576,11 @@ MonoBehaviour:
   pooledObjects: []
   pooledObjectParent: {fileID: 0}
   firePoint: {fileID: 0}
+  currentShapeSelectionSprite: {fileID: 0}
+  sprites:
+  - {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  - {fileID: 7482667652216324306, guid: ec50dfb5ec36e9a40b0820515ef258a4, type: 3}
+  - {fileID: 7482667652216324306, guid: 660d4086801021e4ca8dcbf9068fa214, type: 3}
 --- !u!1 &1871080090
 GameObject:
   m_ObjectHideFlags: 0
