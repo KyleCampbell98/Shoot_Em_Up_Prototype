@@ -19,6 +19,7 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
         SetTransformCachedVariables();
         SubscribeToFireEvent();
         PopulatePool(); // bullet pool
+        SetCurrentShape(Cutter_And_Enemy_Shape_Enums.ShapeType.Circle);
         
     }
 
@@ -35,7 +36,7 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
             }
         }
     }
-
+    
     private void SetTransformCachedVariables()
     {
         pooledObjectParent = Player_Projectile_Parent.PlayerProjectileParentReference.transform;
@@ -72,23 +73,18 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
     {
         if (gameObject.GetComponentInParent<New_Input_System_Controller>() != null)
         {
-            this.GetComponentInParent<New_Input_System_Controller>().OnFireHit += ActivateBullets;
-            //Debug.LogError("YEYE");
+            this.GetComponentInParent<New_Input_System_Controller>().OnFireHit += ActivateBullets;         
         }
         else { Debug.LogError("PARENT OBJECT MISSING CONTROLLER SCRIPT"); }
 
         if (gameObject.GetComponent<Player_Shape_Cutter>() != null)
         {
             this.GetComponent<Player_Shape_Cutter>()._selectedShapeEnum += SetCurrentShape;
-            //Debug.LogError("YEYE");
         }
     }
 
     private void ActivateBullets()
-    {
-        //   Debug.Log("Activate Bullets in Player Object Pool Called");
-       
-
+    {  
         GameObject shapeProjectile = GetPooledObject();
         if(shapeProjectile != null)
         {

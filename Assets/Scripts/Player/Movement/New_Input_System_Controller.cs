@@ -46,6 +46,8 @@ public class New_Input_System_Controller : MonoBehaviour
 
 
     // Input System Events
+
+    // Movement
     public void OnMove(InputValue value) // Input System Method
     {
         movementDirection = value.Get<Vector2>();
@@ -60,6 +62,7 @@ public class New_Input_System_Controller : MonoBehaviour
         boostValue = 0;
     }
 
+    // Actions
     public void OnFire() 
     {
         Debug.Log("PlayerFired");
@@ -74,7 +77,7 @@ public class New_Input_System_Controller : MonoBehaviour
             }
            
         }
-    }// Input System Method
+    } // Input System Method
 
     
     
