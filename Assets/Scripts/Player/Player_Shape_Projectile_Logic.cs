@@ -14,7 +14,7 @@ public class Player_Shape_Projectile_Logic : MonoBehaviour
     // from the object pool. Otherwise, each object is going to be spawning on the object pool creation, and getting the same static reference for caching. 
 
     // Timer attributes
-    private float timeBeforeActivatingDanger; // This is the amount of seconds after being placed that the danger to the player of their own projectile will be instated.
+    [SerializeField] private float timeBeforeActivatingDanger; // This is the amount of seconds after being placed that the danger to the player of their own projectile will be instated.
 
     // Object Control Properties
     public Cutter_And_Enemy_Shape_Enums.ShapeType? ProjectilesShapeType { get { return thisProjectilesShapeType; } 
@@ -33,7 +33,9 @@ public class Player_Shape_Projectile_Logic : MonoBehaviour
 
     private void OnEnable()
     {
+        
         callShapeSetupLogic = false;
+        StartCoroutine(ActivateDanger());
     }
 
     public void SetupProjectile(Cutter_And_Enemy_Shape_Enums.ShapeType currentShapeType, Sprite currentPlayerSprite) // This needs to be subbed to an event in the projectile pool (fired when projectile activation is called)
@@ -57,7 +59,15 @@ public class Player_Shape_Projectile_Logic : MonoBehaviour
         transform.position = projectileTransformParent.position;
         callShapeSetupLogic = true;
         projectileSpriteRenderer.sprite = null;
+        projectileSpriteRenderer.color = Color.green;
         transform.position = gameObject.transform.parent.position;
 
+    }
+
+    private IEnumerator ActivateDanger()
+    {
+        yield return new WaitForSeconds(timeBeforeActivatingDanger);
+        canGameOverPlayer = true;
+        projectileSpriteRenderer.color = Color.red;
     }
 }

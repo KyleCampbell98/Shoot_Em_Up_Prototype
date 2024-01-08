@@ -25,9 +25,9 @@
                 },
                 {
                     "name": "CycleShapes",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "4cc5385c-74a5-4cfa-8b58-16396079551d",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -196,26 +196,37 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "6241f41a-8095-4933-b0d3-73e07a3f9e14",
+                    "name": "2D Vector",
+                    "id": "e44a4e25-0abd-4f41-ba76-f31d357fb93d",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CycleShapes",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "left",
+                    "id": "bba49439-c182-461b-a1c5-92a74c5c3924",
                     "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "CycleShapes",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
                 },
                 {
-                    "name": "",
-                    "id": "1ff1bb67-b90f-4cf7-b95b-3d3c06abd85e",
+                    "name": "right",
+                    "id": "5ef768cc-40a1-469f-a757-9ca86d0dfa0a",
                     "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "CycleShapes",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
                 }
             ]
         }

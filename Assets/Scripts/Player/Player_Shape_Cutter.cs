@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player_Shape_Cutter : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class Player_Shape_Cutter : MonoBehaviour
 
     // Internal Script Logic Variables
     private int arrayIterator = 0; // iterates through the available shape enums. 
+    private int shapeCyclerInt = 0;
     private int numberOfPossibleShapes; // upon instantiation, sets the possible number of shapes to iterate through.
 
     private void Awake()
@@ -21,11 +23,12 @@ public class Player_Shape_Cutter : MonoBehaviour
         ShapeCutterListSetup();
     }  
 
-    void OnCycleShapes()
+    void OnCycleShapes(InputValue value)
     {
         // Link below is for reading further into Getting the total number of values in an ENUM/ how ENUMS work.
         // https://stackoverflow.com/questions/856154/total-number-of-items-defined-in-an-enum
-
+        Vector2 valueAsVector = value.Get<Vector2>();
+        shapeCyclerInt = (int)valueAsVector.x;
         SwitchActiveShape();
     } // Listens for player action from input system
 
@@ -35,7 +38,11 @@ public class Player_Shape_Cutter : MonoBehaviour
         {
             arrayIterator = 0; // Resets iterator if value is greater than the potential maximum shape array index value. 
         }
-        else { arrayIterator++; }
+        else if(arrayIterator < 0)
+        {
+            arrayIterator = numberOfPossibleShapes - 1; // cylces back to the last option if trying to go backwards from the start of the array
+        }
+        else { arrayIterator += shapeCyclerInt; }
 
         
         switch (arrayIterator) // Selects shape based on iterator value
