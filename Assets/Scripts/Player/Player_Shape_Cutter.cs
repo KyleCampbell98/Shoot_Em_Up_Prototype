@@ -27,24 +27,18 @@ public class Player_Shape_Cutter : MonoBehaviour
     {
         // Link below is for reading further into Getting the total number of values in an ENUM/ how ENUMS work.
         // https://stackoverflow.com/questions/856154/total-number-of-items-defined-in-an-enum
+
         Vector2 valueAsVector = value.Get<Vector2>();
+     
         shapeCyclerInt = (int)valueAsVector.x;
+        ArrayCycler();
         SwitchActiveShape();
+        
+
     } // Listens for player action from input system
 
     private void SwitchActiveShape()
     {
-        if (arrayIterator == numberOfPossibleShapes - 1) // -1 due to the iterator being used on an array (indexed from 0)
-        {
-            arrayIterator = 0; // Resets iterator if value is greater than the potential maximum shape array index value. 
-        }
-        else if(arrayIterator < 0)
-        {
-            arrayIterator = numberOfPossibleShapes - 1; // cylces back to the last option if trying to go backwards from the start of the array
-        }
-        else { arrayIterator += shapeCyclerInt; }
-
-        
         switch (arrayIterator) // Selects shape based on iterator value
         {
             case 0:
@@ -66,6 +60,21 @@ public class Player_Shape_Cutter : MonoBehaviour
         Debug.Log($"Selected shape: {SelectedShape}");
     } // Logic for switching shape
 
+    private void ArrayCycler()
+    {
+        if (arrayIterator + shapeCyclerInt > numberOfPossibleShapes - 1)
+        {
+            arrayIterator = 0;
+        }
+        else if (arrayIterator + shapeCyclerInt < 0)
+        {
+            arrayIterator = numberOfPossibleShapes - 1;
+        }
+        else
+        {
+            arrayIterator += shapeCyclerInt;
+        }
+    }
 
     private void ShapeCutterListSetup() // Initial player weapon setup.
     {
