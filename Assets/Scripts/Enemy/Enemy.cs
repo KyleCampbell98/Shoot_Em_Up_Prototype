@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
    [Header("Component References")]
    [SerializeField] protected Rigidbody2D enemyRb;
     [SerializeField] protected SpriteRenderer enemySpriteRenderer;
+    [SerializeField] protected GameObject topMostParentGameObjRef;
     
    [Header("Generic Movement Configs")]
    [SerializeField] protected float movementSpeed;
@@ -50,6 +51,7 @@ public class Enemy : MonoBehaviour
         {
             if (gameObject.transform.parent.GetComponentInChildren<SpriteRenderer>() != null)
             {
+                Debug.Log("Im reaching here at least");
                 enemySpriteRenderer = gameObject.transform.parent.GetComponentInChildren<SpriteRenderer>();
             }
             else
@@ -57,6 +59,18 @@ public class Enemy : MonoBehaviour
                 Debug.LogError("Enemy Script: No Sprite Renderer found in other Enemy child game objects. COuld not Cache Reference.");   
             }
             //Debug.Log("Enemy rigidbody found in self."); 
+        }
+        if(topMostParentGameObjRef == null)
+        {
+            if(GetComponent<ParentObjectIndicator>() != null) 
+            { 
+                topMostParentGameObjRef = this.gameObject; 
+            }
+            else if(GetComponentInParent<ParentObjectIndicator>() != null)
+            {
+                topMostParentGameObjRef = GetComponentInParent<ParentObjectIndicator>().gameObject;
+            }
+            else { topMostParentGameObjRef = gameObject.transform.parent.GetComponentInChildren<ParentObjectIndicator>().gameObject; }
         }
     }
 

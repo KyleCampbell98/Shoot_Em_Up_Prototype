@@ -135,14 +135,18 @@ public class Enemy_RandomBouncer : Enemy
     protected override void ResetEnemyOnDisable()
     {
         base.ResetEnemyOnDisable();
+        enemyRb.velocity = Vector3.zero;
         
     }
 
-    private void OnCollisionWithPlayerProjectile(Cutter_And_Enemy_Shape_Enums.ShapeType? collisionShapeType)
+    private void OnCollisionWithPlayerProjectile(Cutter_And_Enemy_Shape_Enums.ShapeType? collisionShapeType, GameObject projectileCollidedWith)
     {
         if(collisionShapeType == enemyShapeType)
         {
             Debug.Log("Upon Collision, both the enemy and player had matching enum types. ");
+            projectileCollidedWith.SetActive(false);
+            topMostParentGameObjRef.SetActive(false);
+            
         }
         else
         {
