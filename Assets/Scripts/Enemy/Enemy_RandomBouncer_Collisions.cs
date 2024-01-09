@@ -17,7 +17,7 @@ public class Enemy_RandomBouncer_Collisions : MonoBehaviour
 
 
     //Events/Delegates
-    public delegate void CollideWithPlayerProjectile(Cutter_And_Enemy_Shape_Enums.ShapeType playerProjectileShapeType);
+    public delegate void CollideWithPlayerProjectile(Cutter_And_Enemy_Shape_Enums.ShapeType? playerProjectileShapeType);
     public event UnityAction OnBounce;
 
     public CollideWithPlayerProjectile collisionWithPlayerProjectile; // private so delegate can only be invoked from within this class. 
@@ -52,6 +52,10 @@ public class Enemy_RandomBouncer_Collisions : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<Player_Shape_Projectile_Logic>())
         {
+            if (collision.gameObject.GetComponent<Player_Shape_Projectile_Logic>())
+            {
+                collisionWithPlayerProjectile(collision.gameObject.GetComponent<Player_Shape_Projectile_Logic>().ProjectilesShapeType);
+            }
             Debug.Log("BLAH BLAH BLAH");
         }
     }
@@ -77,6 +81,7 @@ public class Enemy_RandomBouncer_Collisions : MonoBehaviour
            // Debug.Log(CurrentBounces + ": Current bounces");
         }
         OnBounce();
+        
     }
 
     private void ResetCollisionLogic()

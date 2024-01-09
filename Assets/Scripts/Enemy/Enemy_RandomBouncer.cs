@@ -138,7 +138,7 @@ public class Enemy_RandomBouncer : Enemy
         
     }
 
-    private void OnCollisionWithPlayerProjectile(Cutter_And_Enemy_Shape_Enums.ShapeType collisionShapeType)
+    private void OnCollisionWithPlayerProjectile(Cutter_And_Enemy_Shape_Enums.ShapeType? collisionShapeType)
     {
         if(collisionShapeType == enemyShapeType)
         {
