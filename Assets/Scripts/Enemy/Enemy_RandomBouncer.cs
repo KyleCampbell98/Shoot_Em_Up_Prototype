@@ -75,16 +75,22 @@ public class Enemy_RandomBouncer : Enemy
     // Internal Script Utility
     private void EventSubscriptions()
     {
+        Enemy_RandomBouncer_Collisions enemyCollisionComponent = null;
 
         if (GetComponentInParent<Enemy_RandomBouncer>())
         {
-            GetComponentInParent<Enemy_RandomBouncer_Collisions>().OnBounce += SwitchDirection;
+            enemyCollisionComponent = GetComponentInParent<Enemy_RandomBouncer_Collisions>();
+                
         }
         else if (GetComponent<Enemy_RandomBouncer>())
         {
-            GetComponent<Enemy_RandomBouncer_Collisions>().OnBounce += SwitchDirection;
+            enemyCollisionComponent = GetComponent<Enemy_RandomBouncer_Collisions>();
         }
         else { Debug.LogError("Component \"RandomBouncer Collisions\" not found within \"Random Bouncer Enemy\""); }
+
+        enemyCollisionComponent.OnBounce += SwitchDirection;
+        enemyCollisionComponent.collisionWithPlayerProjectile += OnCollisionWithPlayerProjectile;
+        
     }
     private void SetAreaTarget(out bool targetSuccessfullySet)
     {
@@ -132,4 +138,15 @@ public class Enemy_RandomBouncer : Enemy
         
     }
 
+    private void OnCollisionWithPlayerProjectile(Cutter_And_Enemy_Shape_Enums.ShapeType collisionShapeType)
+    {
+        if(collisionShapeType == enemyShapeType)
+        {
+            Debug.Log("Upon Collision, both the enemy and player had matching enum types. ");
+        }
+        else
+        {
+            Debug.Log("Collision logged, but shape types were mismatched");
+        }
+    }
 }

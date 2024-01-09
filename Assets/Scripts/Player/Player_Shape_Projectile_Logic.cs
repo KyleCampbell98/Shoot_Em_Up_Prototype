@@ -6,7 +6,7 @@ public class Player_Shape_Projectile_Logic : MonoBehaviour
 {
     // Object Control Attributes
     private Cutter_And_Enemy_Shape_Enums.ShapeType? thisProjectilesShapeType; // sets shape type on each activation from the pool.
-    private bool canGameOverPlayer; // Should be false upon placing the projectile, could be done through a trigger behaviour, or a timer?
+    private bool canGameOverPlayer = false; // Should be false upon placing the projectile, could be done through a trigger behaviour, or a timer?
     [SerializeField] private bool callShapeSetupLogic = true;
     // Component References
     [SerializeField] private SpriteRenderer projectileSpriteRenderer; // Used to set sprite on each activation from the pool. 
@@ -58,6 +58,7 @@ public class Player_Shape_Projectile_Logic : MonoBehaviour
         Debug.Log("PROJECTILE RESET CALLED");
         transform.position = projectileTransformParent.position;
         callShapeSetupLogic = true;
+        canGameOverPlayer = false;
         projectileSpriteRenderer.sprite = null;
         projectileSpriteRenderer.color = Color.green;
         transform.position = gameObject.transform.parent.position;

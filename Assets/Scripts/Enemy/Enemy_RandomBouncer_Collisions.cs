@@ -15,9 +15,13 @@ public class Enemy_RandomBouncer_Collisions : MonoBehaviour
     [SerializeField] private Collider2D playAreaColl;
     [SerializeField] private Collider2D thisEnemyCollider;
 
+
     //Events/Delegates
+    public delegate void CollideWithPlayerProjectile(Cutter_And_Enemy_Shape_Enums.ShapeType playerProjectileShapeType);
     public event UnityAction OnBounce;
 
+    public CollideWithPlayerProjectile collisionWithPlayerProjectile; // private so delegate can only be invoked from within this class. 
+   
     // Properties
     private int CurrentBounces
     {
