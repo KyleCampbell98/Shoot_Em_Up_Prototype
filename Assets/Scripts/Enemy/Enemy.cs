@@ -86,7 +86,7 @@ public class Enemy : MonoBehaviour
         enemySpriteRenderer.sprite = enemySprite;
         movementTarget = enemyMovementTarget;
 
-        // NEED TO IMPLEMENT LOGIC
+        
     }
 
     protected void OnDisable()
