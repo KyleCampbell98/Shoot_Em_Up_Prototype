@@ -63,18 +63,14 @@ public class Enemy_RandomBouncer_Collisions : Enemy_General_Collisions
         
     }
 
-    private void ResetCollisionLogic()
+    protected override void ResetCollisionLogic()
     {
-        thisEnemyCollider.isTrigger = true;
-        stayInPlayArea = false;
+        base.ResetCollisionLogic();
         currentBounces = 0;
 
     } // Resets "Play Area Collision Control" on disable.
 
-    private void OnDisable()
-    {
-        ResetCollisionLogic();
-    }
+    
 
     
 }

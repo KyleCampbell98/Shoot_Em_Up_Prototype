@@ -40,4 +40,15 @@ public class Enemy_General_Collisions : MonoBehaviour
         
 
     }
+    protected virtual void ResetCollisionLogic()
+    {
+        thisEnemyCollider.isTrigger = true;
+        stayInPlayArea = false;
+        
+    } // Resets "Play Area Collision Control" on disable.
+
+    protected void OnDisable()
+    {
+        ResetCollisionLogic();
+    }
 }
