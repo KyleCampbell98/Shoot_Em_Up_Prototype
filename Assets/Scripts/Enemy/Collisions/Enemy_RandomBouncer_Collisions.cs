@@ -4,24 +4,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Enemy_RandomBouncer_Collisions : MonoBehaviour
+public class Enemy_RandomBouncer_Collisions : Enemy_General_Collisions
 {
     [Header("Play Area Collision Control")]
-    [SerializeField] private bool stayInPlayArea = false;
     [SerializeField] private int bouncesBeforeLeavingPlayArea;
     [SerializeField] private int currentBounces = 0;
 
     [Header("Component References")]
-    [SerializeField] private Collider2D playAreaColl;
-    [SerializeField] private Collider2D thisEnemyCollider;
-
-
-    //Events/Delegates
-    public delegate void CollideWithPlayerProjectile(Cutter_And_Enemy_Shape_Enums.ShapeType? playerProjectileShapeType, GameObject projectileCollidedWith); // pass game object so that if enums match, GO reference can be used for transform details for animation
+    [SerializeField] private Collider2D playAreaColl; // Kept private to this class as other enemies that hunt the player won't need to be kept specifically confined to the play area.
+   
     public event UnityAction OnBounce;
 
-    public CollideWithPlayerProjectile collisionWithPlayerProjectile; // private so delegate can only be invoked from within this class. 
-   
     // Properties
     private int CurrentBounces
     {
@@ -37,9 +30,9 @@ public class Enemy_RandomBouncer_Collisions : MonoBehaviour
     }
     private int BouncesBeforeLeavingPlayArea { get { return bouncesBeforeLeavingPlayArea; } set { bouncesBeforeLeavingPlayArea = value; } }
 
-    private void Awake()
+    protected override void Awake()
     {
-        thisEnemyCollider = GetComponent<Collider2D>();
+       base.Awake();
         if (playAreaColl == null)
         {
             Debug.Log("Play are collider assigned");
@@ -47,19 +40,6 @@ public class Enemy_RandomBouncer_Collisions : MonoBehaviour
             // NEEDS WORK, currently the enemies can be set as each others playareacoll if they collider before reaching the play area.
         }
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.GetComponent<Player_Shape_Projectile_Logic>())
-        {
-            if (collision.gameObject.GetComponent<Player_Shape_Projectile_Logic>())
-            {
-                collisionWithPlayerProjectile(collision.gameObject.GetComponent<Player_Shape_Projectile_Logic>().ProjectilesShapeType, collision.gameObject);
-            }
-            Debug.Log("BLAH BLAH BLAH");
-        }
-    }
-
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (!stayInPlayArea)
@@ -72,13 +52,12 @@ public class Enemy_RandomBouncer_Collisions : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected override void OnCollisionEnter2D(Collision2D collision) 
     {
+        base.OnCollisionEnter2D (collision);
         if(collision.collider == playAreaColl)
         {
             CurrentBounces++;
-          
-           // Debug.Log(CurrentBounces + ": Current bounces");
         }
         OnBounce();
         

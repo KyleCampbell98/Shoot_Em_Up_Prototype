@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
 
     public GameObject MovementTarget
     {
-       set { movementTarget = value; }
+       set { movementTarget = value; Debug.Log("Setting movement target in general enemy script."); } // Could do a null check, and only set if the target is null (Extra precaution for public variable)
     }
 
     protected virtual void Awake()
