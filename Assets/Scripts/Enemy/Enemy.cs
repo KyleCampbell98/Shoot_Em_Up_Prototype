@@ -89,11 +89,30 @@ public class Enemy : MonoBehaviour
         
     }
 
+    protected virtual void EventSubscriptions()
+    {
+       Enemy_General_Collisions enemyCollisionComponent = GetComponent<Enemy_General_Collisions>();
+       enemyCollisionComponent.collisionWithPlayerProjectile += OnCollisionWithPlayerProjectile;
+    }
+
     protected void OnDisable()
     {
         ResetEnemyOnDisable();
     }
 
-    
+    protected void OnCollisionWithPlayerProjectile(Cutter_And_Enemy_Shape_Enums.ShapeType? collisionShapeType, GameObject projectileCollidedWith)
+    {
+        if (collisionShapeType == enemyShapeType)
+        {
+            Debug.Log("Upon Collision, both the enemy and player had matching enum types. ");
+            projectileCollidedWith.SetActive(false);
+            topMostParentGameObjRef.SetActive(false);
+
+        }
+        else
+        {
+            Debug.Log("Collision logged, but shape types were mismatched");
+        }
+    }
 
 }
