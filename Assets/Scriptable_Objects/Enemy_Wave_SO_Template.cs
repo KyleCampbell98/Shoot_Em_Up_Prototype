@@ -8,7 +8,7 @@ public class Enemy_Wave_SO_Template : ScriptableObject
 {
     [Header("Object References")]
     [SerializeField] private GameObject enemyToSpawn;
-    
+    [SerializeField] private Sprite[] potentialShapes;
     [SerializeField] private Sprite setEnemySprite; // Used if "AllShapesRandom" is false. This means that the enemy has a set, defined shape.
 
     [Header("Enemy Attributes")]
@@ -28,7 +28,7 @@ public class Enemy_Wave_SO_Template : ScriptableObject
 
     // Properties
     public GameObject EnemyToSpawn { get { return enemyToSpawn; } }
-    public Sprite EnemySprite { get { return setEnemySprite; } }
+    public Sprite EnemySprite { get { if (!allShapesRandom) { return setEnemySprite; } else  return setEnemySprite; } } 
     public Cutter_And_Enemy_Shape_Enums.ShapeType WaveShapeType { get { return waveShapeType; } }
     public int EnemyPoolSize { get { return enemyPoolSize; } }
     public float EnemySpeed { get { return enemySpeed; } }
