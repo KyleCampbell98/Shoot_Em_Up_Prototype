@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac86e4dd32611ed4aa4bcf0b5453b162, type: 3}
   m_Name: Triangle_Shape_Info
   m_EditorClassIdentifier: 
-  shapeType: 0
-  _sprite: {fileID: 0}
+  shapeType: 2
+  _sprite: {fileID: 7482667652216324306, guid: ec50dfb5ec36e9a40b0820515ef258a4, type: 3}

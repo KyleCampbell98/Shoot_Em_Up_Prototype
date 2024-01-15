@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyToSpawn: {fileID: 6472709418347385813, guid: 9f9e2c4c9caee784f835920587423e51, type: 3}
   potentialShapes:
-  - {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  - {fileID: 7482667652216324306, guid: 660d4086801021e4ca8dcbf9068fa214, type: 3}
-  - {fileID: 7482667652216324306, guid: ec50dfb5ec36e9a40b0820515ef258a4, type: 3}
-  enemySpeed: 17.97
+  - {fileID: 11400000, guid: 3d9ee8712f823404a90b3ad728fa4bb1, type: 2}
+  - {fileID: 11400000, guid: aa7ae99502defec41a5e7ee72ae914c2, type: 2}
+  - {fileID: 11400000, guid: 71a258af75e9b504c8da6f645c633921, type: 2}
+  enemySpeed: 8.71
   enemyPoolSize: 10
   spawnRate: 4
   spawnSequentially: 1
   targetPlayer: 0
-  allShapesRandom: 0
+  allShapesRandom: 1
