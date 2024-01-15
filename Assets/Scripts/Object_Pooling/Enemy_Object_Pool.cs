@@ -46,7 +46,8 @@ public class Enemy_Object_Pool : Object_Pool_Template
                 localEnemyScript = pooledObjects[i].GetComponent<Enemy>(); 
             }
 
-            localEnemyScript.SetUpEnemy(enemyWaveData.EnemySpeed, enemyWaveData.WaveShapeType, enemyWaveData.EnemySprite, waveTarget);
+            localEnemyScript.SetUpEnemy(enemyWaveData.EnemySpeed, enemyWaveData.EnemyShape, waveTarget); // Changed this m,ethod to only call for the shape info once, as calliong for sprite and type 
+            // separately was causing 2 random.range calculations, leading to mismatched data in each property call.  
             
             pooledObjects[i].SetActive(false);
         }

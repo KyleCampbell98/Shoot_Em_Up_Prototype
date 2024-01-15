@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -8,17 +10,14 @@ public class Enemy_Wave_SO_Template : ScriptableObject
 {
     [Header("Object References")]
     [SerializeField] private GameObject enemyToSpawn;
-    [SerializeField] private Sprite[] potentialShapes;
-    [SerializeField] private Sprite setEnemySprite; // Used if "AllShapesRandom" is false. This means that the enemy has a set, defined shape.
+    [SerializeField] private Shape_Info[] potentialShapes;
 
     [Header("Enemy Attributes")]
     [Range(5, 30)][SerializeField] private float enemySpeed;
 
-
     [Header("Wave Type Parameters")]
     [SerializeField] private int enemyPoolSize;
     [SerializeField] private float spawnRate;
-    [SerializeField] private Cutter_And_Enemy_Shape_Enums.ShapeType waveShapeType;
 
     [Header("Enemy Spawn Boolean Parameters")]
     [SerializeField] private bool spawnSequentially; // If true, a spawn rate will need to be set. If false, enemies will need to provide their own spawn logic.
@@ -28,8 +27,7 @@ public class Enemy_Wave_SO_Template : ScriptableObject
 
     // Properties
     public GameObject EnemyToSpawn { get { return enemyToSpawn; } }
-    public Sprite EnemySprite { get { if (!allShapesRandom) { return setEnemySprite; } else  return setEnemySprite; } } 
-    public Cutter_And_Enemy_Shape_Enums.ShapeType WaveShapeType { get { return waveShapeType; } }
+    public Shape_Info EnemyShape { get { if (!allShapesRandom) { return potentialShapes[0]; } else  return potentialShapes[UnityEngine.Random.Range(0, potentialShapes.Length)]; } } 
     public int EnemyPoolSize { get { return enemyPoolSize; } }
     public float EnemySpeed { get { return enemySpeed; } }
     public float SpawnRate { get { if (SpawnSequentially) { return spawnRate; } else { Debug.Log("No spawn rate returned, enemy wave type doesn't support spawn rates"); return 0; } } } 
