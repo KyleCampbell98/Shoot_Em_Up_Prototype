@@ -18,8 +18,7 @@ public class Enemy_Object_Pool : Object_Pool_Template
         InitialPoolSetup();
         PopulatePool();
     }
-
-    
+   
     private void InitialPoolSetup()
     {
         objectToPool = enemyWaveData.EnemyToSpawn;
@@ -60,7 +59,7 @@ public class Enemy_Object_Pool : Object_Pool_Template
 
         yield return new WaitForSeconds(enemyWaveData.SpawnRate);
         StartCoroutine(nameof(SequentialEnemySpawner));
-    }
+    } // Initial enemy spawning test.
 
     private void SetTarget()
     {

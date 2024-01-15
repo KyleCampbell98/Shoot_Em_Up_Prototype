@@ -5,12 +5,12 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour
 {
    [Header("Component References")]
    [SerializeField] protected Rigidbody2D enemyRb;
-    [SerializeField] protected SpriteRenderer enemySpriteRenderer;
-    [SerializeField] protected GameObject topMostParentGameObjRef;
+   [SerializeField] protected SpriteRenderer enemySpriteRenderer;
+   [SerializeField] protected GameObject topMostParentGameObjRef;
     
    [Header("Generic Movement Configs")]
    [SerializeField] protected float movementSpeed;
@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
 
     public GameObject MovementTarget
     {
-       set { movementTarget = value; }
+       set { movementTarget = value; Debug.Log("Setting movement target in general enemy script."); } // Could do a null check, and only set if the target is null (Extra precaution for public variable)
     }
 
     protected virtual void Awake()
@@ -89,11 +89,26 @@ public class Enemy : MonoBehaviour
         
     }
 
+    protected abstract void EventSubscriptions(); // Every enemy subclass must define its own set of Event subscriptions in order to function  
+
     protected void OnDisable()
     {
         ResetEnemyOnDisable();
     }
 
-    
+    protected void OnCollisionWithPlayerProjectile(Cutter_And_Enemy_Shape_Enums.ShapeType? collisionShapeType, GameObject projectileCollidedWith)
+    {
+        if (collisionShapeType == enemyShapeType)
+        {
+            Debug.Log("Upon Collision, both the enemy and player had matching enum types. ");
+            projectileCollidedWith.SetActive(false);
+            topMostParentGameObjRef.SetActive(false);
+
+        }
+        else
+        {
+            Debug.Log("Collision logged, but shape types were mismatched");
+        }
+    }
 
 }
