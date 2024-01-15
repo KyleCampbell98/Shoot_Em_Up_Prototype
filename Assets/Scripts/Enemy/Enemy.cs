@@ -79,11 +79,11 @@ public abstract class Enemy : MonoBehaviour
         transform.parent.position = originSpawnPoint;
     }
     
-    public void SetUpEnemy(float waveMovementSpeed, Cutter_And_Enemy_Shape_Enums.ShapeType waveEnemyShapeType, Sprite enemySprite, GameObject enemyMovementTarget)
+    public void SetUpEnemy(float waveMovementSpeed, Shape_Info shape_Info, GameObject enemyMovementTarget)
     {
         movementSpeed = waveMovementSpeed;
-        enemyShapeType = waveEnemyShapeType;
-        enemySpriteRenderer.sprite = enemySprite;
+        enemyShapeType = shape_Info.ShapeType;
+        enemySpriteRenderer.sprite = shape_Info.Sprite;
         movementTarget = enemyMovementTarget;
 
         
