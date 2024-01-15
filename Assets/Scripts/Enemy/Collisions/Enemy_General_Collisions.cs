@@ -21,6 +21,7 @@ public class Enemy_General_Collisions : MonoBehaviour
 
     protected void OnTriggerEnter2D(Collider2D collision)
     {
+       
         if (collision.gameObject.GetComponent<Player_Shape_Projectile_Logic>())
         {
             if (collision.gameObject.GetComponent<Player_Shape_Projectile_Logic>())

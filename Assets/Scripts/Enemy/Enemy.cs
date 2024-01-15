@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour
 {
    [Header("Component References")]
    [SerializeField] protected Rigidbody2D enemyRb;
@@ -89,11 +89,10 @@ public class Enemy : MonoBehaviour
         
     }
 
-    protected virtual void EventSubscriptions()
-    {
-       Enemy_General_Collisions enemyCollisionComponent = GetComponent<Enemy_General_Collisions>();
-       enemyCollisionComponent.collisionWithPlayerProjectile += OnCollisionWithPlayerProjectile;
-    }
+    protected abstract void EventSubscriptions(); // Every enemy subclass must define its own set of Event subscriptions in order to function
+    
+       
+    
 
     protected void OnDisable()
     {

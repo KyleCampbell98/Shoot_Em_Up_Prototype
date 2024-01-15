@@ -75,7 +75,7 @@ public class Enemy_RandomBouncer : Enemy
     // Internal Script Utility
     protected override void EventSubscriptions()
     {
-        base.EventSubscriptions();
+
         Enemy_RandomBouncer_Collisions enemyRBCollisionComponent = null;
 
         if (GetComponentInParent<Enemy_RandomBouncer>())
@@ -90,7 +90,7 @@ public class Enemy_RandomBouncer : Enemy
         else { Debug.LogError("Component \"RandomBouncer Collisions\" not found within \"Random Bouncer Enemy\""); }
 
         enemyRBCollisionComponent.OnBounce += SwitchDirection;
-       
+        enemyRBCollisionComponent.collisionWithPlayerProjectile += OnCollisionWithPlayerProjectile;
         
     }
     private void SetAreaTarget(out bool targetSuccessfullySet)
