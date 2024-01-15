@@ -24,7 +24,7 @@ public class Enemy_RandomBouncer_Collisions : Enemy_General_Collisions
             currentBounces = value;
             if (value >= BouncesBeforeLeavingPlayArea)
             {
-                Physics2D.IgnoreCollision(thisEnemyCollider, playAreaColl); // Will allow the enemy to leave the area. Upon deactivating the enemy, this should reset.
+                Physics2D.IgnoreCollision(thisEnemyCollider, playAreaColl); // Will allow the enemy to leave the area. Upon deactivating the enemy, this resets.
             }
         }
     }

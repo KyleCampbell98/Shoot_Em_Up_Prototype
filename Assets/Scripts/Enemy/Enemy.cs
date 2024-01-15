@@ -9,8 +9,8 @@ public abstract class Enemy : MonoBehaviour
 {
    [Header("Component References")]
    [SerializeField] protected Rigidbody2D enemyRb;
-    [SerializeField] protected SpriteRenderer enemySpriteRenderer;
-    [SerializeField] protected GameObject topMostParentGameObjRef;
+   [SerializeField] protected SpriteRenderer enemySpriteRenderer;
+   [SerializeField] protected GameObject topMostParentGameObjRef;
     
    [Header("Generic Movement Configs")]
    [SerializeField] protected float movementSpeed;
@@ -89,10 +89,7 @@ public abstract class Enemy : MonoBehaviour
         
     }
 
-    protected abstract void EventSubscriptions(); // Every enemy subclass must define its own set of Event subscriptions in order to function
-    
-       
-    
+    protected abstract void EventSubscriptions(); // Every enemy subclass must define its own set of Event subscriptions in order to function  
 
     protected void OnDisable()
     {

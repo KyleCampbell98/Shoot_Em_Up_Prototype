@@ -22,7 +22,7 @@ public class Object_Pool_Template : MonoBehaviour
             pooledObjects[i].SetActive(false);
         }
     }
-    protected GameObject GetPooledObject()
+    protected GameObject GetPooledObject() // Potentially override this so that once all enemies are active, "Populate Pool" is recalled with a new set of enemy data to be setup.
     {
         for (int i = 0; i < objectPoolSize; i++)
         {
