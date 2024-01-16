@@ -18,8 +18,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: aa7ae99502defec41a5e7ee72ae914c2, type: 2}
   - {fileID: 11400000, guid: 71a258af75e9b504c8da6f645c633921, type: 2}
   enemySpeed: 8.71
-  enemyPoolSize: 10
-  spawnRate: 4
+  enemyPoolSize: 15
+  spawnRate: 8
   spawnSequentially: 1
   targetPlayer: 0
   allShapesRandom: 1
