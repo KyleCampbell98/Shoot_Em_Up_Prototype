@@ -11,6 +11,9 @@ public class Object_Pool_Template : MonoBehaviour
     [SerializeField] protected GameObject[] pooledObjects;
     [SerializeField] protected Transform pooledObjectParent;
 
+    [Header("Pool Object Control")]
+    [SerializeField] protected int arrayControl = 0;
+
     protected virtual void PopulatePool()
     {
         Debug.Log("Populate Object pool called");
@@ -34,6 +37,13 @@ public class Object_Pool_Template : MonoBehaviour
 
         Debug.LogWarning("No Objects available. Consider increasing object pool size");
         return null;
+    }
+
+    protected GameObject GetNextObject(int indexOfRequiredObject)
+    {
+        if (indexOfRequiredObject > pooledObjects.Length - 1) { indexOfRequiredObject = 0; }
+        else { indexOfRequiredObject++; }
+        return pooledObjects[indexOfRequiredObject];
     }
 
     protected void SetObjectParentToSelf()

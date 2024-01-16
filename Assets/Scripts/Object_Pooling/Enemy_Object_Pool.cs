@@ -12,13 +12,23 @@ public class Enemy_Object_Pool : Object_Pool_Template
     [SerializeField] private GameObject waveTarget;
     
     private Collider2D waveAreaTarget; // For use in setting a reference to the general play area.
-
+    [SerializeField] private float spawnTimer;
     void Start()
     {
         InitialPoolSetup();
         PopulatePool();
+        spawnTimer = enemyWaveData.SpawnRate;
     }
-   
+    private void Update()
+    {
+        spawnTimer -= Time.deltaTime;
+        if(spawnTimer <= 0) 
+        {
+            GetPooledObject().SetActive(true);
+            spawnTimer = enemyWaveData.SpawnRate;
+        }
+    }
+
     private void InitialPoolSetup()
     {
         objectToPool = enemyWaveData.EnemyToSpawn;
@@ -56,10 +66,11 @@ public class Enemy_Object_Pool : Object_Pool_Template
     private IEnumerator SequentialEnemySpawner()
     {
 
-        GetPooledObject().SetActive(true);
+       GetNextObject(arrayControl).SetActive(true);
 
         yield return new WaitForSeconds(enemyWaveData.SpawnRate);
-        StartCoroutine(nameof(SequentialEnemySpawner));
+        StartCoroutine(SequentialEnemySpawner());
+        Debug.Log("Reached here during coroutine.");
     } // Initial enemy spawning test.
 
     private void SetTarget()
