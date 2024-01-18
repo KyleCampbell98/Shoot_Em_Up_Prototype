@@ -59,13 +59,16 @@ public class Enemy_Object_Pool : Object_Pool_Template
     {
         if (spawnTimerActive == true)
         {
-            spawnTimer -= Time.deltaTime;
+            SpawnTimer -= Time.deltaTime;
         }
     }
 
     private void ActivateEnemyOnSpawnRate()
     {
-        GetPooledObject().SetActive(true);
+        GameObject enemyToActivate = GetPooledObject();
+        enemyToActivate.transform.position = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Count)].position;
+        enemyToActivate.SetActive(true);
+        enemyToActivate = null;
         spawnTimer = enemyWaveData.SpawnRate;
     }
 
@@ -112,7 +115,6 @@ public class Enemy_Object_Pool : Object_Pool_Template
         for (int i = 0; i < transform.childCount; i++)
         {
             spawnPoints.Add(transform.GetChild(i).transform);
-            Debug.Log("Child assignment called " + i + " times.");
         }
 
         canPopulatePool = true;

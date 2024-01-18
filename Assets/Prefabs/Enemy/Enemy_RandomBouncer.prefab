@@ -168,10 +168,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stayInPlayArea: 0
-  bouncesBeforeLeavingPlayArea: 6
+  thisEnemyCollider: {fileID: 0}
+  bouncesBeforeLeavingPlayArea: 3
   currentBounces: 0
   playAreaColl: {fileID: 0}
-  thisEnemyCollider: {fileID: 0}
 --- !u!114 &7592442068581717222
 MonoBehaviour:
   m_ObjectHideFlags: 0
