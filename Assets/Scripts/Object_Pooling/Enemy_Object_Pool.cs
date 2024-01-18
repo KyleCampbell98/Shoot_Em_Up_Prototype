@@ -144,11 +144,6 @@ public class Enemy_Object_Pool : Object_Pool_Template
         }
     }
 
-    private void SetSpawnPosition() 
-    {
-
-    }
-
     private IEnumerator SequentialEnemySpawner()
     {
 
