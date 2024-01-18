@@ -3,51 +3,79 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.Pool;
 
 public class Enemy_Object_Pool : Object_Pool_Template
 {
+    [Header("Cached References")]
     [SerializeField] private Enemy_Wave_SO_Template enemyWaveData;
     [SerializeField] private GameObject waveTarget;
-    
     private Collider2D waveAreaTarget; // For use in setting a reference to the general play area.
+
+    [Header("Enemy Activation")]
     [SerializeField] private float spawnTimer;
-    [SerializeField] private Transform[] spawnPoints;
+    private float SpawnTimer { get { return spawnTimer; } set { spawnTimer = value; if (value <= 0) { SpawnTimerHitZero(); } } }
+    [SerializeField] private List<Transform> spawnPoints;
+
+    // Internal Script Control 
+    private bool canPopulatePool = false;
+    private bool spawnTimerActive = false;
+
+    private event UnityAction SpawnTimerHitZero;
+
+    // Unity Methods
+
     private void Awake()
     {
-        Debug.Log(transform.childCount);
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            spawnPoints[i] = transform.GetChild(i).transform;
-        }
-    }
-    void Start()
-    {
-      
-        InitialPoolSetup();
-        PopulatePool();
-        spawnTimer = enemyWaveData.SpawnRate;
-    }
-    private void Update()
-    {
-        BasicEnemySpawner();
+        InitializePoolSpawnPoints(); // is called once before the pool is populated. MUST BE CALLED BEFORE POOL POPULATION, as if called, after, the enemies will all be added as spawn points too.
     }
 
-    private void BasicEnemySpawner() // used for initial testing, can be refined later
+    void Start()
     {
-        spawnTimer -= Time.deltaTime;
-        if (spawnTimer <= 0)
+        EventSubscriptions();
+        InitialPoolSetup();
+        if (canPopulatePool)
         {
-            GetPooledObject().SetActive(true);
-            spawnTimer = enemyWaveData.SpawnRate;
+            PopulatePool();
+            spawnTimerActive = true;
+        }
+        else
+        {
+            Debug.LogError("PopulatePool() in Enemy_Object_Pool not called as the pool's spawn points weren't initially set first. \n" +
+                "InitializePoolSpawnPoints() must be called before PopulatePool()");
         }
     }
+
+    private void Update()
+    {
+        SpawnCountdownTimer();
+    }
+
+    // Spawning Methods
+
+    private void SpawnCountdownTimer() // used for initial testing, can be refined later
+    {
+        if (spawnTimerActive == true)
+        {
+            spawnTimer -= Time.deltaTime;
+        }
+    }
+
+    private void ActivateEnemyOnSpawnRate()
+    {
+        GetPooledObject().SetActive(true);
+        spawnTimer = enemyWaveData.SpawnRate;
+    }
+
+    // Pool Initialization Methods
 
     private void InitialPoolSetup()
     {
         objectToPool = enemyWaveData.EnemyToSpawn;
         objectPoolSize = enemyWaveData.EnemyPoolSize;
+        spawnTimer = enemyWaveData.SpawnRate;
         SetObjectParentToSelf();
         SetTarget();
     }
@@ -78,20 +106,24 @@ public class Enemy_Object_Pool : Object_Pool_Template
         }
     }
 
-   private void SetSpawnPosition() 
+    private void InitializePoolSpawnPoints()
     {
+        Debug.Log(transform.childCount);
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            spawnPoints.Add(transform.GetChild(i).transform);
+            Debug.Log("Child assignment called " + i + " times.");
+        }
 
+        canPopulatePool = true;
     }
 
-    private IEnumerator SequentialEnemySpawner()
+    // Internal Script Logic Methods
+
+    private void EventSubscriptions()
     {
-
-       GetNextObject(arrayControl).SetActive(true);
-
-        yield return new WaitForSeconds(enemyWaveData.SpawnRate);
-        StartCoroutine(SequentialEnemySpawner());
-        Debug.Log("Reached here during coroutine.");
-    } // Initial enemy spawning test.
+        SpawnTimerHitZero += ActivateEnemyOnSpawnRate;
+    }
 
     private void SetTarget()
     {
@@ -109,4 +141,21 @@ public class Enemy_Object_Pool : Object_Pool_Template
 
         }
     }
+
+    private void SetSpawnPosition() 
+    {
+
+    }
+
+    private IEnumerator SequentialEnemySpawner()
+    {
+
+       GetNextObject(arrayControl).SetActive(true);
+
+        yield return new WaitForSeconds(enemyWaveData.SpawnRate);
+        StartCoroutine(SequentialEnemySpawner());
+        Debug.Log("Reached here during coroutine.");
+    } // Initial enemy spawning test.
+
+  
 }
