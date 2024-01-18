@@ -68,7 +68,7 @@ public class Enemy_RandomBouncer : Enemy
         {
             forceToAdd = 1;
         }
-        Debug.Log("Array number randomly chosen: " + forceToAdd);
+    //    Debug.Log("Array number randomly chosen: " + forceToAdd);
         return forceToAdd;
     }
 
@@ -127,8 +127,8 @@ public class Enemy_RandomBouncer : Enemy
             UnityEngine.Random.Range(playAreaBounds.bounds.min.y, playAreaBounds.bounds.max.y));
 
         // Below code for debugging purpose only: Shows where is being targetted by the enemy with a visual aid. 
-        Debug.Log($"New target destination for bouncer enemy: {newTarget}.");
-        Instantiate(testInstantiator, newTarget, Quaternion.identity);
+       
+      //  Instantiate(testInstantiator, newTarget, Quaternion.identity);
 
         return newTarget;
     }

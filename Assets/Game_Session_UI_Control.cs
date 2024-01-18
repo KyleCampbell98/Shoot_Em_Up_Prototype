@@ -18,6 +18,6 @@ public class Game_Session_UI_Control : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        survivalTimer_TMP.text = currentGameSessionDetails.SurvivalTime.ToString("00.00.00");
+        survivalTimer_TMP.text = currentGameSessionDetails.SurvivalTime.ToString("00.00");
     }
 }

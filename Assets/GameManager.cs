@@ -8,33 +8,24 @@ public class GameManager : MonoBehaviour
     [Header("Cached References")]
     [SerializeField] private InPlay_Details currentGameSession;
 
-    [SerializeField] private float timerDelay = 3;
-
     private float timeSurvived;
-    bool startSurvivalTimer = false;
 
-    private void Awake()
+    private void Start()
     {
-      
+        EventSubscriptions();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void EventSubscriptions()
     {
-        StartCoroutine(DelaySurvivalTimeStart(timerDelay));
+        Player_Collisions.playerTookDamage += OnPlayerHit;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnPlayerHit()
     {
-        if (!startSurvivalTimer) { return; }
-        currentGameSession.SurvivalTime += Time.deltaTime;
+        Debug.Log("OnPlayerHit Called from game manager script");
+        if(currentGameSession.PlayerHP <= 0) { /* Game End Scenario Code */ }
+        currentGameSession.PlayerHP--;
     }
 
-    private IEnumerator DelaySurvivalTimeStart(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        startSurvivalTimer = true;
-
-    }
+  
 }

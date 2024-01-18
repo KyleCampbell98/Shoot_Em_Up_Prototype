@@ -19,7 +19,8 @@ public class Player_Collisions : MonoBehaviour
     {
         if (collision.collider.GetComponent<Enemy_General_Collisions>()) 
         { 
-            Debug.Log("Player detected an enemy upon collision."); 
+            Debug.Log("Player detected an enemy upon collision.");
+            playerTookDamage();
         }
     }
 }
