@@ -447,7 +447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d57d6aedb4a944da4bb5a7c2f89ef8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentGameSession: {fileID: 0}
+  currentGameSession: {fileID: 11400000, guid: c706da2b1a39e144b820c17284ff0b34, type: 2}
   timerDelay: 3
 --- !u!1001 &827198276
 PrefabInstance:
