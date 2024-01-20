@@ -9,10 +9,11 @@ public class Menu_UI_Control : MonoBehaviour
 
    public void OnButtonClicked(GameObject buttonBeingClicked)
     {
-        Debug.Log(buttonBeingClicked.name);
-
+    
         if (buttonBeingClicked.GetComponent<Button_Utility>() != null) 
         {
+            if (buttonBeingClicked.GetComponent<Button_Utility>().IsQuitButton) { Debug.Log("Quitting Application..."); Application.Quit(); }
+
             SceneManager.LoadScene(_Cache.ReturnConstSceneName(buttonBeingClicked.GetComponent<Button_Utility>().SceneAssociatedWithThisButton));
         }
         else { Debug.LogError("BUTTON DOES NOT CONTAIN A BUTTON UTILITY CLASS. ONE MUST BE ATTATCHED TO ASSIGN AN ENUM FOR UI CONNECTIVITY"); }
