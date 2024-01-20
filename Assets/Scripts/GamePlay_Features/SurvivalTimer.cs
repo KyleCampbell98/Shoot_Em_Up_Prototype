@@ -20,7 +20,7 @@ public class SurvivalTimer : MonoBehaviour
     void Update()
     {
         if (!startSurvivalTimer) { return; }
-        currentGameSession.SurvivalTime += Time.deltaTime;
+        currentGameSession.CurrentGameSurvivalTime += Time.deltaTime;
     }
 
     private IEnumerator DelaySurvivalTimeStart(float delay)
