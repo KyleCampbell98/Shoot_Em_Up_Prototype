@@ -44,6 +44,7 @@ public class InPlay_Details : ScriptableObject
     private void OnDisable()
     {
         CurrentGameSurvivalTime = 0f;
+        CurrentGameEnemiesDefeated = 0;
     }
 
 }
