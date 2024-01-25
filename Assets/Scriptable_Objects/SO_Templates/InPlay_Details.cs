@@ -28,7 +28,7 @@ public class InPlay_Details : ScriptableObject
 
     public bool CompareBestScores() // Called upon player defeat. deals with listing high scores at the main menu. 
     {
-        bool newBestGameScore = false;
+        bool newBestGameScore = false; // Bool used for UI control purposes
 
         if(CurrentGameSurvivalTime > BestSurvivalTime)
         {
