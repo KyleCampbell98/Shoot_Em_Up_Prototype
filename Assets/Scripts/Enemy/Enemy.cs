@@ -35,42 +35,18 @@ public abstract class Enemy : MonoBehaviour
     {
         if (enemyRb == null)
         {
-            if(gameObject.GetComponent<Rigidbody2D>() != null) 
-            { 
-                enemyRb = GetComponent<Rigidbody2D>();
-                //Debug.Log("Enemy rigidbody found in self.");
-            }
-            else 
-            { 
-                enemyRb = GetComponentInParent<Rigidbody2D>();
-                //Debug.Log("Enemy rigidbody found in parent game object.");
-
-            }
+            enemyRb = Static_Helper_Methods.FindComponentInGameObject<Rigidbody2D>(gameObject);
         }
+
         if (enemySpriteRenderer == null)
         {
-            if (gameObject.transform.parent.GetComponentInChildren<SpriteRenderer>() != null)
-            {
-                Debug.Log("Im reaching here at least");
-                enemySpriteRenderer = gameObject.transform.parent.GetComponentInChildren<SpriteRenderer>();
-            }
-            else
-            {
-                Debug.LogError("Enemy Script: No Sprite Renderer found in other Enemy child game objects. COuld not Cache Reference.");   
-            }
-            //Debug.Log("Enemy rigidbody found in self."); 
+            enemySpriteRenderer = Static_Helper_Methods.FindComponentInGameObject<SpriteRenderer>(gameObject);
+            
         }
+
         if(topMostParentGameObjRef == null)
         {
-            if(GetComponent<ParentObjectIndicator>() != null) 
-            { 
-                topMostParentGameObjRef = this.gameObject; 
-            }
-            else if(GetComponentInParent<ParentObjectIndicator>() != null)
-            {
-                topMostParentGameObjRef = GetComponentInParent<ParentObjectIndicator>().gameObject;
-            }
-            else { topMostParentGameObjRef = gameObject.transform.parent.GetComponentInChildren<ParentObjectIndicator>().gameObject; }
+           topMostParentGameObjRef = Static_Helper_Methods.FindComponentInGameObject<ParentObjectIndicator>(gameObject).gameObject;
         }
     }
 

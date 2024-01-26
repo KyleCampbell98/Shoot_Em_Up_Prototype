@@ -17,7 +17,8 @@ public class Player_Damage_Control : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       playerSpriteRenderer = FindComponentInGameObject<SpriteRenderer>();
+       playerSpriteRenderer = Static_Helper_Methods.FindComponentInGameObject<SpriteRenderer>(this.gameObject);
+        
     }
 
 
@@ -31,25 +32,6 @@ public class Player_Damage_Control : MonoBehaviour
         PlayerHP--;
     }
 
-    private T FindComponentInGameObject<T>() where T : Component // Needs to go into a static helper class
-    {
-       
-            Debug.Log("GENERIC METHOD STARTED");
-            if (GetComponent<T>() != null)
-            {
-                Debug.Log("GENERIC METHOD IS BEING CALLED: " + GetComponent<T>().GetType().ToString());
-                return GetComponent<T>();
-            }
-            else if (GetComponentInParent<T>() != null)
-            {
-                return GetComponentInParent<T>();
-            }
-            else if (GetComponentInChildren<T>() != null)
-            {
-                return GetComponentInChildren<T>();
-            }
-        return null;
+    
 
-        
-    }
 }
