@@ -10,8 +10,8 @@ public class Static_Helper_Methods : MonoBehaviour
     { // Method not suitable for finding multiple instances of the same component type on a game object
 
 
-        bool objectHasOneOfComponentType = CountNumberOfComponentInObject<T>(@object);
-        if(!objectHasOneOfComponentType) { return null; }
+       // bool objectHasOneOfComponentType = CountNumberOfComponentInObject<T>(@object);
+       // if(!objectHasOneOfComponentType) { return null; }
         
   
         if (@object.GetComponent<T>() != null)
@@ -40,6 +40,7 @@ public class Static_Helper_Methods : MonoBehaviour
     // Internal Script Logic
     private static bool CountNumberOfComponentInObject<T>(GameObject objectToCheck)
     {
+
         int numberOfComponentTypeInObject = objectToCheck.transform.parent.GetComponents<T>().Length;
         for (int i = 0; i < objectToCheck.transform.parent.childCount; i++)
         {

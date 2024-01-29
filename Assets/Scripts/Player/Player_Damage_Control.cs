@@ -26,7 +26,7 @@ public class Player_Damage_Control : MonoBehaviour
     {
         PlayerHP = healthStateSprites.Length - 1;
         Array.Reverse(healthStateSprites); // Array is reversed due to the order that the sprites were added to the array
-        playerSpriteRenderer = Static_Helper_Methods.FindComponentInGameObject<SpriteRenderer>(this.gameObject);
+        playerSpriteRenderer = Static_Helper_Methods.FindComponentInGameObject<SpriteRenderer>(gameObject);
         playerSpriteRenderer.sprite = healthStateSprites[healthStateSprites.Length - 1];
     }
 
