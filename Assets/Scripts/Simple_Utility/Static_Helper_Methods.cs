@@ -37,6 +37,7 @@ public class Static_Helper_Methods : MonoBehaviour
 
     }
 
+    // Internal Script Logic
     private static bool CountNumberOfComponentInObject<T>(GameObject objectToCheck)
     {
         int numberOfComponentTypeInObject = objectToCheck.transform.parent.GetComponents<T>().Length;
