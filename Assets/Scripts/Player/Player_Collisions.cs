@@ -7,8 +7,11 @@ public class Player_Collisions : MonoBehaviour
     // Cached Component References
     private Collider2D playerCollider;
 
+    // Internal Script logic
+    private bool canCollideWithEnemies = true;
+
     public delegate void PlayerTookDamage();
-    public static PlayerTookDamage playerTookDamage;
+    public static PlayerTookDamage m_playerTookDamage;
 
     private void Awake()
     {
@@ -17,10 +20,18 @@ public class Player_Collisions : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.GetComponent<Enemy_General_Collisions>()) 
-        { 
+        if (collision.collider.GetComponent<Enemy_General_Collisions>() && canCollideWithEnemies) 
+        {
+            canCollideWithEnemies = false;
             Debug.Log("Player detected an enemy upon collision.");
-            playerTookDamage();
+            m_playerTookDamage();
+            
         }
+    }
+
+    public void ReinstateCanTakeDamage()
+    {
+        Debug.LogError("REINSTATE DAMAGE CALLED");
+        canCollideWithEnemies = true;
     }
 }

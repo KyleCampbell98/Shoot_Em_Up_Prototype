@@ -9,11 +9,12 @@ public class SurvivalTimer : MonoBehaviour
 
     [SerializeField] private float timerDelay = 3;
     bool startSurvivalTimer = false;
-
+   
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(DelaySurvivalTimeStart(timerDelay));
+        
     }
 
     // Update is called once per frame

@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
 
     private void EventSubscriptions()
     {
-        Player_Collisions.playerTookDamage += OnPlayerHit;
+        Player_Collisions.m_playerTookDamage += OnPlayerHit;
     }
 
     private void OnPlayerHit()
