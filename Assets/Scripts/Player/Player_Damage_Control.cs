@@ -19,7 +19,7 @@ public class Player_Damage_Control : MonoBehaviour
     void Start()
     {
         SetupPlayerHealth();
-        Player_Collisions.playerTookDamage += PlayerTookDamage;
+        Player_Collisions.m_playerTookDamage += PlayerTookDamage;
     }
 
     private void SetupPlayerHealth()
@@ -38,7 +38,7 @@ public class Player_Damage_Control : MonoBehaviour
         PlayerHealthStateSprite();
 
 
-    }
+    } // Manages HP Count and Active Player Sprite
 
     private void PlayerHealthStateSprite()
     {
