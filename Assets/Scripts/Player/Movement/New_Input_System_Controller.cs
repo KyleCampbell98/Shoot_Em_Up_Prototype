@@ -65,7 +65,7 @@ public class New_Input_System_Controller : MonoBehaviour
     // Actions
     public void OnFire() 
     {
-        Debug.Log("PlayerFired");
+
          
         if (canFire)
         {

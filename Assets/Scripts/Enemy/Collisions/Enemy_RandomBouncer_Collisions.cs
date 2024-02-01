@@ -48,7 +48,7 @@ public class Enemy_RandomBouncer_Collisions : Enemy_General_Collisions
            
             // make a getComponent reference call
             thisEnemyCollider.isTrigger = false;
-           Debug.Log("Coll type: " + playAreaColl.GetType());
+          
         }
     }
 

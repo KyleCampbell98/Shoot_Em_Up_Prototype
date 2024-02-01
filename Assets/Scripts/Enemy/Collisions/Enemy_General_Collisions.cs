@@ -28,7 +28,7 @@ public class Enemy_General_Collisions : MonoBehaviour
             {
                 collisionWithPlayerProjectile(collision.gameObject.GetComponent<Player_Shape_Projectile_Logic>().ProjectilesShapeType, collision.gameObject);
             }
-            Debug.Log("BLAH BLAH BLAH");
+          
         }
     }
     protected virtual void OnCollisionEnter2D(Collision2D collision)

@@ -12,7 +12,7 @@ public class Player_Shape_Projectile_Logic : MonoBehaviour
     [SerializeField] private SpriteRenderer projectileSpriteRenderer; // Used to set sprite on each activation from the pool. 
     [SerializeField] private Transform projectileTransformParent; // Get in the player object pool script? So then the reference is only being retrieved once, then pass into each projectile
     // from the object pool. Otherwise, each object is going to be spawning on the object pool creation, and getting the same static reference for caching. 
-
+    [SerializeField] private Collider2D projectileCollider;
     // Timer attributes
     [SerializeField] private float timeBeforeActivatingDanger; // This is the amount of seconds after being placed that the danger to the player of their own projectile will be instated.
 
@@ -27,14 +27,16 @@ public class Player_Shape_Projectile_Logic : MonoBehaviour
     private void Awake()
     {
         projectileSpriteRenderer = GetComponent<SpriteRenderer>();
+        projectileCollider = GetComponent<Collider2D>();
         projectileTransformParent = gameObject.transform.parent;
+
        
     }
 
     private void OnEnable()
     {
         
-        callShapeSetupLogic = false;
+        callShapeSetupLogic = false; // Stops individual shape being overriden by the setup of other shapes in the object pool.
         StartCoroutine(ActivateDanger());
     }
 
@@ -62,6 +64,7 @@ public class Player_Shape_Projectile_Logic : MonoBehaviour
         projectileSpriteRenderer.sprite = null;
         projectileSpriteRenderer.color = Color.green;
         transform.position = gameObject.transform.parent.position;
+        projectileCollider.enabled = false;
 
     }
 
@@ -70,5 +73,6 @@ public class Player_Shape_Projectile_Logic : MonoBehaviour
         yield return new WaitForSeconds(timeBeforeActivatingDanger);
         canGameOverPlayer = true;
         projectileSpriteRenderer.color = Color.red;
+        projectileCollider.enabled = true;
     }
 }

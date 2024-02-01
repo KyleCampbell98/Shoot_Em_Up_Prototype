@@ -27,6 +27,16 @@ public class Player_Collisions : MonoBehaviour
             m_playerTookDamage();
             
         }
+
+     
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.GetComponent<Player_Shape_Projectile_Logic>())
+        {
+            Debug.Log("Player Collided with their own projectile.");
+        }
     }
 
     public void ReinstateCanTakeDamage()

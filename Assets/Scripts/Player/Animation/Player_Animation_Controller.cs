@@ -8,8 +8,9 @@ public class Player_Animation_Controller : MonoBehaviour
     [Header("Component Cache")]
     [SerializeField] private Animator playerAnimController;
 
-    [Header("Test Bool")]
-    [SerializeField] private bool testworks = true;
+    [Header("Animation Configs")]
+    [SerializeField] private float secondsBeforeInvulnerabilityEnds = 3;
+    
 
     // Animation Parameter Hash Values
     int playerIsDamagedParam_Hash;
@@ -17,6 +18,9 @@ public class Player_Animation_Controller : MonoBehaviour
 
     // Internal Properties
     private int triggerToSet;
+    // This is set every time an animation needs to play, and is then passed into the Animation Trigger Function
+    // A property is used for selecting which animation to trigger so that no methods needing to be subscribed to a delegate for coroutine passing will need matching parameters.
+  
     private int TriggerToSet { get { return triggerToSet; } set { triggerToSet = value;  }  }
 
     // Internal Delegates
@@ -34,26 +38,25 @@ public class Player_Animation_Controller : MonoBehaviour
    
     private void TriggerDamageAnim()
     {
-        Debug.LogError("TriggerDamageAnim triggered from Player Anim Controller");
         if(CoroutineFunction == null)
         {
             CoroutineFunction += AnimationTrigger;
         }
-        TriggerToSet = playerIsDamagedParam_Hash;
+
+        TriggerToSet = playerIsDamagedParam_Hash; // Stage one of Damage: Slow Flash Invulnerability
         AnimationTrigger();
+
         TriggerToSet = startInvulnerabilityEndParam_Hash;
-        StartCoroutine(TimeBeforeCodeExecution(3,  CoroutineFunction));
-        
-       
-            
+        StartCoroutine(TimeBeforeCodeExecution(secondsBeforeInvulnerabilityEnds, CoroutineFunction));
+               
     }
 
-    private void AnimationTrigger()
-    {
-        Debug.LogError("TRIGGER TO SET IS NOW: " + TriggerToSet.ToString());
-        playerAnimController.SetTrigger(TriggerToSet);
+    private void AnimationTrigger() => playerAnimController.SetTrigger(TriggerToSet);
 
-    }
+
+
+
+
 
     private IEnumerator TimeBeforeCodeExecution(float timeToWait, Action functionToDelay )
     {

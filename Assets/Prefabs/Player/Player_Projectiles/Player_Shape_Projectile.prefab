@@ -101,6 +101,7 @@ MonoBehaviour:
   callShapeSetupLogic: 1
   projectileSpriteRenderer: {fileID: 0}
   projectileTransformParent: {fileID: 0}
+  projectileCollider: {fileID: 0}
   timeBeforeActivatingDanger: 0.8
 --- !u!58 &5335170663391761614
 CircleCollider2D:
@@ -109,7 +110,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3650962757895598168}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
