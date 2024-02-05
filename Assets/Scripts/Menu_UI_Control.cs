@@ -12,7 +12,7 @@ public class Menu_UI_Control : MonoBehaviour
     
         if (buttonBeingClicked.GetComponent<Button_Utility>() != null) 
         {
-            if (buttonBeingClicked.GetComponent<Button_Utility>().IsQuitButton) { Debug.Log("Quitting Application..."); Application.Quit(); }
+            if (buttonBeingClicked.GetComponent<Button_Utility>().IsQuitButton) { Debug.Log("Quitting Application..."); Application.Quit(); return; }
 
             SceneManager.LoadScene(_Cache.ReturnConstSceneName(buttonBeingClicked.GetComponent<Button_Utility>().SceneAssociatedWithThisButton));
         }
