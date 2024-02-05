@@ -29,6 +29,7 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
         foreach(GameObject projectile in pooledObjects)
         {
             projectile.transform.position = pooledObjectParent.transform.position;
+            
             if(projectile.GetComponent<Player_Shape_Projectile_Logic>() != null)
             {
                 _passProjectileParameters += projectile.GetComponent<Player_Shape_Projectile_Logic>().SetupProjectile;
