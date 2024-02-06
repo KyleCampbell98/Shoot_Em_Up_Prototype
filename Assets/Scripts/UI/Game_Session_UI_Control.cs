@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEditor.UIElements;
+using System.Runtime.InteropServices;
 
 public class Game_Session_UI_Control : Menu_UI_Control
 {
@@ -11,11 +12,14 @@ public class Game_Session_UI_Control : Menu_UI_Control
 
     [Header("Text Mesh Refs")]
     [SerializeField] private TextMeshProUGUI survivalTimer_TMP;
+    [SerializeField] private TextMeshProUGUI newBestSurvivalTimeDisplay;
+    
 
     [Header("Canvas Refs")]
     [SerializeField] private GameObject in_Play_Panel;
     [SerializeField] private GameObject pause_Panel;
     [SerializeField] private GameObject game_Over_Panel;
+    [SerializeField] private GameObject newHighScoreDisplay;
 
     // Monobehaviour Methods
     private void Start()
@@ -24,18 +28,29 @@ public class Game_Session_UI_Control : Menu_UI_Control
         {
             Debug.Log("GM found!");
             GameManager.m_GameStateChanged += DisplayCanvas;
+            GameManager.a_GameOver += ResetScoringInfo;
         }
         else
         {
-            Debug.Log("Game Manager missing!");
+            Debug.LogError("Game Manager missing!");
         }
         SetPanelActiveStatus(inplay: true);
     }
+
+
 
     // Update is called once per frame
     void Update()
     {
         survivalTimer_TMP.text = currentGameSessionDetails.CurrentGameSurvivalTime.ToString("00.00");
+    }
+
+    private void ResetScoringInfo()
+    {
+        bool newBestSet = currentGameSessionDetails.CompareBestScores();
+        newBestSurvivalTimeDisplay.text = currentGameSessionDetails.BestSurvivalTime.ToString("00:00");
+        newHighScoreDisplay.SetActive(newBestSet);
+        
     }
 
     private void DisplayCanvas(GameManager.GameState state)
@@ -63,5 +78,12 @@ public class Game_Session_UI_Control : Menu_UI_Control
         in_Play_Panel.SetActive(inplay);
         pause_Panel.SetActive(pause);
         game_Over_Panel.SetActive(gameOver);
+    }
+
+    private void OnDisable()
+    {
+        Debug.Log("Test Called on scene reset");
+        GameManager.m_GameStateChanged -= DisplayCanvas;
+        GameManager.a_GameOver -= ResetScoringInfo;
     }
 }

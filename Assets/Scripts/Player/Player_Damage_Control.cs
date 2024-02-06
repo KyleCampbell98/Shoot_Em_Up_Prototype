@@ -33,7 +33,12 @@ public class Player_Damage_Control : MonoBehaviour
     private void PlayerTookDamage() 
     {
         Debug.Log("OnPlayerHit Called from game manager script");
-        if ((PlayerHP) <= 0) { Debug.Log(" Game End Scenario Code "); return; }
+        if ((PlayerHP) <= 0) 
+        {
+            GameManager.a_GameOver();
+            Debug.Log(" Game End Scenario Code "); 
+            return; 
+        }
         PlayerHP--;
         PlayerHealthStateSprite();
 
@@ -46,6 +51,11 @@ public class Player_Damage_Control : MonoBehaviour
         // Need to implement a check for the player being dead so that the index doesnt go out of bounds.
         playerSpriteRenderer.sprite = healthStateSprites[PlayerHP];
     }
-    
+
+    private void OnDisable()
+    {
+        Player_Collisions.m_playerTookDamage -= PlayerTookDamage;
+    }
+
 
 }

@@ -82,4 +82,9 @@ public class Player_Animation_Controller : MonoBehaviour
     {
         Player_Collisions.m_playerTookDamage += TriggerDamageAnim;
     }
+
+    private void OnDisable()
+    {
+        Player_Collisions.m_playerTookDamage -= TriggerDamageAnim;
+    }
 }

@@ -21,21 +21,25 @@ public class GameManager : MonoBehaviour
     // Events and Delegates
     public delegate void GameStateChanged(GameState newState);
     public static GameStateChanged m_GameStateChanged;
-    public static Action ActivatePause;
+    public static Action a_ActivatePause;
+    public static Action a_GameOver;
 
 
     private void Start()
     {
         InternalEventSubscriptions();
-
-
     }
 
     private void InternalEventSubscriptions()
     {
-        ActivatePause += PauseGame;
+        a_ActivatePause += PauseGame;
+        a_GameOver += GameOver;
     }
 
+    private void GameOver()
+    {
+        CurrentGameState = GameState.Game_Over;
+    }
     private void PauseGame()
     {
         switch (CurrentGameState)
