@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     private void GameOver()
     {
         CurrentGameState = GameState.Game_Over;
+        
     }
     private void PauseGame()
     {
@@ -46,10 +47,15 @@ public class GameManager : MonoBehaviour
         {
             case GameState.In_Play:
                 CurrentGameState = GameState.Paused;
+                Debug.Log("Game should now be paused");
+                Time.timeScale = 0;
+
                 break;
 
             case GameState.Paused:
                 CurrentGameState = GameState.In_Play;
+                Time.timeScale = 1;
+
                 break;
 
             default:
@@ -57,4 +63,11 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
+
+    private void OnDisable()
+    {
+        a_ActivatePause -= PauseGame;
+        a_GameOver -= GameOver;
+    }
+
 }

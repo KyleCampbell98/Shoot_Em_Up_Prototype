@@ -18,6 +18,11 @@ public class Player_Collisions : MonoBehaviour
         playerCollider = GetComponent<Collider2D>();
     }
 
+    private void Start()
+    {
+        GameManager.a_GameOver += StopCollisionsOnGameOver;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.GetComponent<Enemy_General_Collisions>() && canCollideWithEnemies) 
@@ -39,9 +44,19 @@ public class Player_Collisions : MonoBehaviour
         }
     }
 
-    public void ReinstateCanTakeDamage()
+    public void ReinstateCanTakeDamage() // Work needed as player can still collide, probably being overwritten by the end of the player animation which reinstates collision with eneimes. 
     {
         Debug.LogError("REINSTATE DAMAGE CALLED");
         canCollideWithEnemies = true;
+    }
+
+    private void StopCollisionsOnGameOver()
+    {
+        canCollideWithEnemies = false;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.a_GameOver -= StopCollisionsOnGameOver;
     }
 }

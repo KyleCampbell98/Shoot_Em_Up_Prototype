@@ -21,6 +21,7 @@ public class New_Input_System_Controller : MonoBehaviour
     // Fire Rate Control
     private float lastFireTime;
     bool canFire = true;
+    bool canMove = true;
 
     
     public event UnityAction OnFireHit;
@@ -31,6 +32,7 @@ public class New_Input_System_Controller : MonoBehaviour
     void Start()
     {
         playerRB = GetComponentInParent<Rigidbody2D>();
+        GameManager.a_GameOver += StopPlayerControl;
     }
 
     private void FixedUpdate()
@@ -50,6 +52,7 @@ public class New_Input_System_Controller : MonoBehaviour
     // Movement
     public void OnMove(InputValue value) // Input System Method
     {
+        if(!canMove) { return; }
         movementDirection = value.Get<Vector2>();
     }
 
@@ -84,7 +87,17 @@ public class New_Input_System_Controller : MonoBehaviour
        GameManager.a_ActivatePause();
     }
         
+    private void StopPlayerControl()
+    {
+        canMove = false;
     }
+
+    private void OnDisable()
+    {
+        GameManager.a_GameOver -= StopPlayerControl;
+    }
+
+}
 
     
     

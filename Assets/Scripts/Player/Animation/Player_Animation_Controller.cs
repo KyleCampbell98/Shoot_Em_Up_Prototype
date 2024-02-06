@@ -50,6 +50,7 @@ public class Player_Animation_Controller : MonoBehaviour
         StartCoroutine(TimeBeforeCodeExecution(secondsBeforeInvulnerabilityEnds, CoroutineFunction));
                
     }
+    // NEED TO IMPLEMENT LOGIC SO THAT THE DAMAGE ANIMATION DOESNT PLAY ONCE PLAYER IS ON ONE LAST HP POINT. THIS IS DUE TO THE ANIMATION OVERWRITTING COLLISION LOGIC ON THAT GAME OVER SCENARIO.
 
     private void AnimationTrigger() => playerAnimController.SetTrigger(TriggerToSet);
 
