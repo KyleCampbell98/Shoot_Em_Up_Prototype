@@ -42,7 +42,7 @@ public class Player_Shape_Projectile_Logic : MonoBehaviour
 
     public void SetupProjectile(Cutter_And_Enemy_Shape_Enums.ShapeType currentShapeType, Sprite currentPlayerSprite) // This needs to be subbed to an event in the projectile pool (fired when projectile activation is called)
     {
-        Debug.Log("Setup projectile called from projectile logic script");
+   
         if (!callShapeSetupLogic) { return; }
         thisProjectilesShapeType = currentShapeType;
         projectileSpriteRenderer.sprite = currentPlayerSprite;
@@ -57,7 +57,7 @@ public class Player_Shape_Projectile_Logic : MonoBehaviour
 
     private void ResetProjectile()
     {
-        Debug.Log("PROJECTILE RESET CALLED");
+
         transform.position = projectileTransformParent.position;
         callShapeSetupLogic = true;
         canGameOverPlayer = false;

@@ -37,6 +37,7 @@ public class Scene_Names_Cache : ScriptableObject
 
         return sceneToReturnForLoad;
     }
+    
 
     private void OnEnable()
     {

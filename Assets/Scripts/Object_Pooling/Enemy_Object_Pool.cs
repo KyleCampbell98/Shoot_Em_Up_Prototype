@@ -111,7 +111,7 @@ public class Enemy_Object_Pool : Object_Pool_Template
 
     private void InitializePoolSpawnPoints()
     {
-        Debug.Log(transform.childCount);
+       // Debug.Log(transform.childCount);
         for (int i = 0; i < transform.childCount; i++)
         {
             spawnPoints.Add(transform.GetChild(i).transform);

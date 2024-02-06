@@ -95,20 +95,20 @@ public class Enemy_RandomBouncer : Enemy
     }
     private void SetAreaTarget(out bool targetSuccessfullySet)
     {
-        Debug.Log("Enemy Bouncer: \"Set Target\" called.");
+       // Debug.Log("Enemy Bouncer: \"Set Target\" called.");
 
         if (playAreaBounds == null)
         {
             if (movementTarget.GetComponent<Collider2D>() == null)
             {
                 playAreaBounds = movementTarget.GetComponentInChildren<Collider2D>();
-                Debug.Log($"Random Bouncer: playAreaBounds set to : {playAreaBounds.name}.\nFound in child component.");
+               // Debug.Log($"Random Bouncer: playAreaBounds set to : {playAreaBounds.name}.\nFound in child component.");
 
             }
             else
             {
                 playAreaBounds = movementTarget.GetComponent<Collider2D>();
-                Debug.Log($"Random Bouncer: playAreaBounds set to : {playAreaBounds.name}.\nFound in parent component.");
+               // Debug.Log($"Random Bouncer: playAreaBounds set to : {playAreaBounds.name}.\nFound in parent component.");
 
             }
             targetSuccessfullySet = true;

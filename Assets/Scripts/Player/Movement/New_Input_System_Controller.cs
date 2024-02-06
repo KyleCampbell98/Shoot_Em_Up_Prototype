@@ -81,7 +81,9 @@ public class New_Input_System_Controller : MonoBehaviour
 
     public void OnPause_Unpause()
     {
-        GameManager.ActivatePause();
+       GameManager.ActivatePause();
+    }
+        
     }
 
     
@@ -91,4 +93,4 @@ public class New_Input_System_Controller : MonoBehaviour
 
 
 
-}
+

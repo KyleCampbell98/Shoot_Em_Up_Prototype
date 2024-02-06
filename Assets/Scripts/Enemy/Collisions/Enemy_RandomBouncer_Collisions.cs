@@ -35,7 +35,7 @@ public class Enemy_RandomBouncer_Collisions : Enemy_General_Collisions
        base.Awake();
         if (playAreaColl == null)
         {
-            Debug.Log("Play are collider assigned");
+           
             playAreaColl = PlayAreaRefManager.PlayAreaBounds.GetComponent<Collider2D>(); // Will find edge collider. Could pass this reference in from object pool spawner so that every enemy doesnt have to
             // NEEDS WORK, currently the enemies can be set as each others playareacoll if they collider before reaching the play area.
         }
