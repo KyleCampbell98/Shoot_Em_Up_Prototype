@@ -41,6 +41,12 @@ public class InPlay_Details : ScriptableObject
         return newBestGameScore;
     }
 
+    private void ResetHighScores()
+    {
+        BestEnemiesDefeated = 0;
+        BestSurvivalTime = 0f;
+    }
+
     private void OnDisable()
     {
         CurrentGameSurvivalTime = 0f;
