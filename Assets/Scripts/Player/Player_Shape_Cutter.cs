@@ -57,7 +57,7 @@ public class Player_Shape_Cutter : MonoBehaviour
                 Debug.LogWarning("Enum list contains more values than shape selector switch case has scenarios for. UPDATE \"OnCycleShapes\" method.");
                 break;
         }
-        Debug.Log($"Selected shape: {SelectedShape}");
+      //  Debug.Log($"Selected shape: {SelectedShape}");
     } // Logic for switching shape
 
     private void ArrayCycler()
@@ -79,10 +79,10 @@ public class Player_Shape_Cutter : MonoBehaviour
     private void ShapeCutterListSetup() // Initial player weapon setup.
     {
         SelectedShape = Cutter_And_Enemy_Shape_Enums.ShapeType.Circle;
-        Debug.Log($"Selected shape: {SelectedShape}");
+       // Debug.Log($"Selected shape: {SelectedShape}");
         arrayIterator = 0;
         numberOfPossibleShapes = Enum.GetNames(typeof(Cutter_And_Enemy_Shape_Enums.ShapeType)).Length;
-        Debug.Log($"Number of possible shapes: {numberOfPossibleShapes}");
+      //  Debug.Log($"Number of possible shapes: {numberOfPossibleShapes}");
     }
 
 }

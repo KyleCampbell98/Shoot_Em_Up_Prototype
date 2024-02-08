@@ -45,7 +45,7 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
     }
     private void SetCurrentShape(Cutter_And_Enemy_Shape_Enums.ShapeType currentShapeSelection)
     {
-        Debug.Log("SET CURRENT SHAPE CALLED");
+        //Debug.Log("SET CURRENT SHAPE CALLED");
         currentShapeType = currentShapeSelection;
 
         switch (currentShapeType)

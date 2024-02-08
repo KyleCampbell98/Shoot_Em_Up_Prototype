@@ -33,10 +33,18 @@ public class InPlay_Details : ScriptableObject
             BestSurvivalTime = CurrentGameSurvivalTime;
             BestEnemiesDefeated = CurrentGameEnemiesDefeated;
             newBestGameScore = true;
+            OnDisable();
             return newBestGameScore; // If returned true, popup will appear saying something like "New best!".
         }
+        OnDisable();
 
         return newBestGameScore;
+    }
+
+    public void ResetHighScores()
+    {
+        BestEnemiesDefeated = 0;
+        BestSurvivalTime = 0f;
     }
 
     private void OnDisable()

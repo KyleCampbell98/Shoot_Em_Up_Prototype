@@ -22,5 +22,12 @@ public class UI_Scoring_Control : MonoBehaviour
 
     }
 
+    public void ResetGameScores()
+    {
+        scoringCache.ResetHighScores();
+        bestEnemiesDefeated_TMP.text = scoringCache.BestEnemiesDefeated.ToString();
+        bestTimeSurvived_TMP.text = scoringCache.BestSurvivalTime.ToString();
+    }
+
 
 }
