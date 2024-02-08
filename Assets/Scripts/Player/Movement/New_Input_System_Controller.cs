@@ -52,7 +52,7 @@ public class New_Input_System_Controller : MonoBehaviour
     // Movement
     public void OnMove(InputValue value) // Input System Method
     {
-        if(!canMove) { return; }
+       
         movementDirection = value.Get<Vector2>();
     }
 
@@ -89,7 +89,7 @@ public class New_Input_System_Controller : MonoBehaviour
         
     private void StopPlayerControl()
     {
-        canMove = false;
+       movementSpeed = 0;
     }
 
     private void OnDisable()
