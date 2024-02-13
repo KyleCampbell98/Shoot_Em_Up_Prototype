@@ -11,6 +11,8 @@ public class InPlay_Details : ScriptableObject
     [SerializeField] private float bestSurvivalTime;
     [SerializeField] private int bestEnemiesDefeated; // This will always be the enemies defeated in the game with the best survival time, not the best overall enemies defeated regardless of survival
 
+    [Header("Player Information")]
+    [SerializeField] private int playerHP;
    
 
     // Scoring properties
@@ -20,7 +22,8 @@ public class InPlay_Details : ScriptableObject
     public float BestSurvivalTime { get { return bestSurvivalTime; } private set {  bestSurvivalTime = value; } } // This property set by internal method only
     public int BestEnemiesDefeated { get { return bestEnemiesDefeated; } private set { bestEnemiesDefeated= value; } } // This property set by internal method only
 
-  
+    // Player Info properties
+    public int PlayerHP { get { return playerHP; } set {  playerHP = value; } }
 
     // Internal Script Methods
 
@@ -51,6 +54,7 @@ public class InPlay_Details : ScriptableObject
     {
         CurrentGameSurvivalTime = 0f;
         CurrentGameEnemiesDefeated = 0;
+        PlayerHP = 3;
     }
 
 }

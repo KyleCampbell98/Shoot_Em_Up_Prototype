@@ -89,6 +89,7 @@ public class New_Input_System_Controller : MonoBehaviour
         
     private void StopPlayerControl()
     {
+        Debug.Log("Stop Player Control Called");
        movementSpeed = 0;
     }
 

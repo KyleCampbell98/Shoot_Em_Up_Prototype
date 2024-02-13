@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c18e14aa43997e54eb5cb8ef6a504ec7
+guid: c2f0b2982b36e0b40bc4ca050f1c7739
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: UFO_04_Shadow_V1_0
+      name: UFO_ Final_HP_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8076eebc6efa09f46a2128a0af96b937
-      internalID: 553317546
+      spriteID: c297399ba69ce5f4aa127ec2ec966a2f
+      internalID: -182794326
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UFO_04_Shadow_V1_1
+      name: UFO_ Final_HP_1
       rect:
         serializedVersion: 2
         x: 512
@@ -158,14 +158,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1df532fbac266f64b829dfc2de9fb370
-      internalID: 1982918285
+      spriteID: ee047285a25e5474aae65a2edf07f787
+      internalID: 847279251
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UFO_04_Shadow_V1_2
+      name: UFO_ Final_HP_2
       rect:
         serializedVersion: 2
         x: 1024
@@ -179,14 +179,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 20056b13e2ccbe54abb5df4111f5636a
-      internalID: 973740439
+      spriteID: 97edc6632571bb244995886fce78654f
+      internalID: -1048875649
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UFO_04_Shadow_V1_3
+      name: UFO_ Final_HP_3
       rect:
         serializedVersion: 2
         x: 1536
@@ -200,14 +200,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 32cb734a50322d9439ed86384f87476c
-      internalID: -1768122303
+      spriteID: 60dd11c47ad30a54ca81d753ea7b0157
+      internalID: 1166524811
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UFO_04_Shadow_V1_4
+      name: UFO_ Final_HP_4
       rect:
         serializedVersion: 2
         x: 0
@@ -221,14 +221,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e6efeaca430c0c0449c7f9b451b7ddd3
-      internalID: 1645142979
+      spriteID: 77fa333c4b5368d4a8e3cb9018efb3ff
+      internalID: 1430729700
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UFO_04_Shadow_V1_5
+      name: UFO_ Final_HP_5
       rect:
         serializedVersion: 2
         x: 512
@@ -242,14 +242,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b24f8c7f6604bc54982b714c9406fce6
-      internalID: 731850821
+      spriteID: 25a56c5109751084199e2c7f2974727f
+      internalID: -1576911723
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UFO_04_Shadow_V1_6
+      name: UFO_ Final_HP_6
       rect:
         serializedVersion: 2
         x: 1024
@@ -263,14 +263,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 33660d013ebe03542ae206cc2f5ad92d
-      internalID: 884561148
+      spriteID: c97427d7c970f9c478281854c046336d
+      internalID: -1703600313
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UFO_04_Shadow_V1_7
+      name: UFO_ Final_HP_7
       rect:
         serializedVersion: 2
         x: 1536
@@ -284,14 +284,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8182888cc7d81c3409d68eb8be36218d
-      internalID: 554931839
+      spriteID: 6122cace799be1445b76065f47c223f1
+      internalID: 1919303604
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UFO_04_Shadow_V1_8
+      name: UFO_ Final_HP_8
       rect:
         serializedVersion: 2
         x: 0
@@ -305,14 +305,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 07c659908d33a884394c179c5aba669d
-      internalID: 304756026
+      spriteID: 407fcc5ed6568fa4b86778e0422d1d68
+      internalID: -492583406
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UFO_04_Shadow_V1_9
+      name: UFO_ Final_HP_9
       rect:
         serializedVersion: 2
         x: 512
@@ -326,14 +326,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6cda6cc4a2463774aa5bc4d2db716f5a
-      internalID: 1149879003
+      spriteID: e5e0dc7fff0703a4c9cf1856a23846a6
+      internalID: 494753295
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UFO_04_Shadow_V1_10
+      name: UFO_ Final_HP_10
       rect:
         serializedVersion: 2
         x: 1024
@@ -347,14 +347,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5f3f50c286c804b42a911ca1a4bdebcf
-      internalID: 813257585
+      spriteID: e3e729e94bceb4d4582e1e5f6572c1ce
+      internalID: 1365182453
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UFO_04_Shadow_V1_11
+      name: UFO_ Final_HP_11
       rect:
         serializedVersion: 2
         x: 1536
@@ -368,14 +368,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5051a7c844c78194ca8662cadb88872d
-      internalID: -1722648268
+      spriteID: 210407f9eec66c94a8de6e4b0b2567f8
+      internalID: 1024647190
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UFO_04_Shadow_V1_12
+      name: UFO_ Final_HP_12
       rect:
         serializedVersion: 2
         x: 0
@@ -389,14 +389,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5ef31d0253e351249aa761a4a502de94
-      internalID: -730110701
+      spriteID: 28de8dd6c05ecfe4eb35fe5da5729d62
+      internalID: -922241286
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UFO_04_Shadow_V1_13
+      name: UFO_ Final_HP_13
       rect:
         serializedVersion: 2
         x: 512
@@ -410,14 +410,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2dc34f00a2c99cb4980645b51f613d66
-      internalID: 181732868
+      spriteID: 52e89fd9d79837347a81296eb9c09058
+      internalID: 1320258388
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UFO_04_Shadow_V1_14
+      name: UFO_ Final_HP_14
       rect:
         serializedVersion: 2
         x: 1024
@@ -431,8 +431,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f160ad92bb4f89b40864b376e0a4f222
-      internalID: -1278540186
+      spriteID: 2cb3372db3b55ba469cd21d2f7bbc661
+      internalID: 334853568
       vertices: []
       indices: 
       edges: []
@@ -448,21 +448,21 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      UFO_04_Shadow_V1_0: 553317546
-      UFO_04_Shadow_V1_1: 1982918285
-      UFO_04_Shadow_V1_10: 813257585
-      UFO_04_Shadow_V1_11: -1722648268
-      UFO_04_Shadow_V1_12: -730110701
-      UFO_04_Shadow_V1_13: 181732868
-      UFO_04_Shadow_V1_14: -1278540186
-      UFO_04_Shadow_V1_2: 973740439
-      UFO_04_Shadow_V1_3: -1768122303
-      UFO_04_Shadow_V1_4: 1645142979
-      UFO_04_Shadow_V1_5: 731850821
-      UFO_04_Shadow_V1_6: 884561148
-      UFO_04_Shadow_V1_7: 554931839
-      UFO_04_Shadow_V1_8: 304756026
-      UFO_04_Shadow_V1_9: 1149879003
+      UFO_ Final_HP_0: -182794326
+      UFO_ Final_HP_1: 847279251
+      UFO_ Final_HP_10: 1365182453
+      UFO_ Final_HP_11: 1024647190
+      UFO_ Final_HP_12: -922241286
+      UFO_ Final_HP_13: 1320258388
+      UFO_ Final_HP_14: 334853568
+      UFO_ Final_HP_2: -1048875649
+      UFO_ Final_HP_3: 1166524811
+      UFO_ Final_HP_4: 1430729700
+      UFO_ Final_HP_5: -1576911723
+      UFO_ Final_HP_6: -1703600313
+      UFO_ Final_HP_7: 1919303604
+      UFO_ Final_HP_8: -492583406
+      UFO_ Final_HP_9: 494753295
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

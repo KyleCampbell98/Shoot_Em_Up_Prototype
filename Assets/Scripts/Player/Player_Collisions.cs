@@ -54,6 +54,7 @@ public class Player_Collisions : MonoBehaviour
 
     private void StopCollisionsOnGameOver()
     {
+        Debug.Log("Stop Collision On Game Over called from PlayerCollisions");
         gameIsOver = true;
     }
 
