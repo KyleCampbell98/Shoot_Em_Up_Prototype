@@ -82,7 +82,6 @@ public class Game_Session_UI_Control : Menu_UI_Control
 
     private void OnDisable()
     {
-        Debug.Log("Test Called on scene reset");
         GameManager.m_GameStateChanged -= DisplayCanvas;
         GameManager.a_GameOver -= ResetScoringInfo;
     }

@@ -76,7 +76,7 @@ public class Enemy_Object_Pool : Object_Pool_Template
 
     private void InitialPoolSetup()
     {
-        objectToPool = enemyWaveData.EnemyToSpawn.gameObject;
+        objectToPool = enemyWaveData.EnemyToSpawn;
         objectPoolSize = enemyWaveData.EnemyPoolSize;
         spawnTimer = enemyWaveData.SpawnRate;
         SetObjectParentToSelf();

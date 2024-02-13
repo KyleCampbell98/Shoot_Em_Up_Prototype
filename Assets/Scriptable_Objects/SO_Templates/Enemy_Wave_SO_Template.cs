@@ -9,7 +9,7 @@ using UnityEngine;
 public class Enemy_Wave_SO_Template : ScriptableObject
 {
     [Header("Object References")]
-    [SerializeField] private Enemy enemyToSpawn;
+    [SerializeField] private GameObject enemyToSpawn;
     [SerializeField] private Shape_Info[] potentialShapes;
 
     [Header("Enemy Attributes")]
@@ -26,7 +26,7 @@ public class Enemy_Wave_SO_Template : ScriptableObject
 
 
     // Properties
-    public Enemy EnemyToSpawn { get { return enemyToSpawn; } }
+    public GameObject EnemyToSpawn { get { return enemyToSpawn; } }
     public Shape_Info EnemyShape { get { if (!allShapesRandom) { return potentialShapes[0]; } else  return potentialShapes[UnityEngine.Random.Range(0, potentialShapes.Length)]; } } 
     public int EnemyPoolSize { get { return enemyPoolSize; } }
     public float EnemySpeed { get { return enemySpeed; } }
@@ -34,5 +34,7 @@ public class Enemy_Wave_SO_Template : ScriptableObject
     public bool SpawnSequentially {  get { return spawnSequentially; } }
     public bool TargetPlayer { get {  return targetPlayer; } }
     public bool AllShapesRandom { get { return allShapesRandom; } }
+
     
+
 }
