@@ -12,10 +12,11 @@ public class Menu_UI_Control : MonoBehaviour
     // Button Methods
     public void OnButtonClicked(GameObject buttonBeingClicked)
     {
-    
+
         if (buttonBeingClicked.GetComponent<Button_Utility>() != null) 
         {
             if (buttonBeingClicked.GetComponent<Button_Utility>().IsQuitButton) { Debug.Log("Quitting Application..."); Application.Quit(); return; }
+            else if(buttonBeingClicked.GetComponent<Button_Utility>().IsContinueButton) { Debug.Log("Continuing Game"); GameManager.a_ActivatePause(); return; }
             
             SceneManager.LoadScene(_Cache.ReturnConstSceneName(buttonBeingClicked.GetComponent<Button_Utility>().SceneAssociatedWithThisButton));
         }

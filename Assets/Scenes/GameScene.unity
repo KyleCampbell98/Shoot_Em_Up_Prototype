@@ -1593,6 +1593,10 @@ PrefabInstance:
       propertyPath: testworks
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2687913378631488365, guid: 77f8e3781789d7248adfcfa645734cea, type: 3}
+      propertyPath: player_Session_Details
+      value: 
+      objectReference: {fileID: 11400000, guid: c706da2b1a39e144b820c17284ff0b34, type: 2}
     - target: {fileID: 4144081209192394543, guid: 77f8e3781789d7248adfcfa645734cea, type: 3}
       propertyPath: m_Size.x
       value: 4
@@ -1665,7 +1669,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_New_(Cutter)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 241899671415383062, guid: 77f8e3781789d7248adfcfa645734cea, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
