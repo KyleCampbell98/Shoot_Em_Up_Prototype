@@ -12,7 +12,6 @@ public class Player_Animation_Controller : MonoBehaviour
     [Header("Animation Configs")]
     [SerializeField] private float secondsBeforeInvulnerabilityEnds = 3;
     
-
     // Animation Parameter Hash Values
     int playerIsDamagedParam_Hash;
     int startInvulnerabilityEndParam_Hash;
@@ -26,9 +25,7 @@ public class Player_Animation_Controller : MonoBehaviour
     private int TriggerToSet { get { return triggerToSet; } set { triggerToSet = value;  }  }
 
     // Internal Delegates
-    private event Action CoroutineFunction;
-    
-    
+    private event Action CoroutineFunction;    
 
     void Start()
     {
@@ -36,16 +33,15 @@ public class Player_Animation_Controller : MonoBehaviour
         ConvertStringParamsToHash();
         EventSubscriptions();
     }
-
   
-   
     private void TriggerDamageAnim()
     {
         player_Session_Details.PlayerHP--;
-
-        if (player_Session_Details.PlayerHP <= 0)
+        playerAnimController.SetInteger(playerHpParam_Hash, player_Session_Details.PlayerHP);
+        if (player_Session_Details.PlayerHP < 0)
         {
             GameManager.a_GameOver();
+            return;
         }
 
       
