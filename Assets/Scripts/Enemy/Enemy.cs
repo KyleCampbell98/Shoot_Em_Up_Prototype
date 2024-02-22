@@ -11,6 +11,8 @@ public abstract class Enemy : MonoBehaviour
    [SerializeField] protected Rigidbody2D enemyRb;
    [SerializeField] protected SpriteRenderer enemySpriteRenderer;
    [SerializeField] protected GameObject topMostParentGameObjRef;
+    [SerializeField] protected Animator enemyAnimationController;
+    [SerializeField] private RuntimeAnimatorController enemycontrollertoassign;
     
    [Header("Generic Movement Configs")]
    [SerializeField] protected float movementSpeed;
@@ -57,11 +59,17 @@ public abstract class Enemy : MonoBehaviour
     
     public void SetUpEnemy(float waveMovementSpeed, Shape_Info shape_Info, GameObject enemyMovementTarget)
     {
+        Debug.Log("SETUP CALLED");
         movementSpeed = waveMovementSpeed;
         enemyShapeType = shape_Info.ShapeType;
-        enemySpriteRenderer.sprite = shape_Info.Sprite;
+     //   enemySpriteRenderer.sprite = shape_Info.Sprite;
         movementTarget = enemyMovementTarget;
 
+
+         enemyAnimationController = transform.parent.gameObject.AddComponent<Animator>();
+        enemyAnimationController.runtimeAnimatorController = enemycontrollertoassign;
+        enemyAnimationController.SetTrigger(shape_Info.ShapeType.ToString());
+        
         
     }
 
