@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shapeType: 1
   _sprite: {fileID: 7482667652216324306, guid: 660d4086801021e4ca8dcbf9068fa214, type: 3}
+  shapeAnimator: {fileID: 9100000, guid: 0b3445e6cb35e994e87ef79cd53f7b06, type: 2}

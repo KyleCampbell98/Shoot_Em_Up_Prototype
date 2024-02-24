@@ -19,7 +19,7 @@ public class Enemy_General_Collisions : MonoBehaviour
         thisEnemyCollider = GetComponent<Collider2D>();
     }
 
-    protected void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
        
         if (collision.gameObject.GetComponent<Player_Shape_Projectile_Logic>())
@@ -38,9 +38,8 @@ public class Enemy_General_Collisions : MonoBehaviour
          * Sound to play on collision
          * Affect player (Health, kickback, any potential interactive elements)
          */
-        
-
     }
+
     protected virtual void ResetCollisionLogic()
     {
         thisEnemyCollider.isTrigger = true;

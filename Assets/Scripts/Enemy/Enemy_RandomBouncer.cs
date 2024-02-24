@@ -9,10 +9,13 @@ using UnityEngine;
 
 public class Enemy_RandomBouncer : Enemy
 {
+    /// <summary>
+    /// Extends the base "Enemy" behaviour, and defines how an enemy Random Bouncer enemy will bahve uniquely. 
+    /// </summary>
+
     [Header("Movement Configs")]
     [SerializeField] private Vector2 movementDirection;
     [Header("Reference Cache")]
-    [SerializeField] private GameObject testInstantiator;
     [SerializeField] private Collider2D playAreaBounds;
     [SerializeField] private bool canMoveTowardsTarget;
     // Unity Methods
@@ -48,6 +51,7 @@ public class Enemy_RandomBouncer : Enemy
     }
     private void SwitchDirection()
     {
+        
         enemyRb.velocity = new Vector2(Mathf.Clamp(enemyRb.velocity.x, -movementSpeed, movementSpeed), Mathf.Clamp(enemyRb.velocity.y, -movementSpeed, movementSpeed));
 
         if (Math.Abs(enemyRb.velocity.y) <= 1)
@@ -75,23 +79,18 @@ public class Enemy_RandomBouncer : Enemy
     // Internal Script Utility
     protected override void EventSubscriptions()
     {
-
+        base.EventSubscriptions();
         Enemy_RandomBouncer_Collisions enemyRBCollisionComponent = null;
 
-        if (GetComponentInParent<Enemy_RandomBouncer>())
+        if (Static_Helper_Methods.FindComponentInGameObject<Enemy_RandomBouncer_Collisions>(gameObject) != null)
         {
-            enemyRBCollisionComponent = GetComponentInParent<Enemy_RandomBouncer_Collisions>();
-                
+            enemyRBCollisionComponent = Static_Helper_Methods.FindComponentInGameObject<Enemy_RandomBouncer_Collisions>(gameObject);
         }
-        else if (GetComponent<Enemy_RandomBouncer>())
-        {
-            enemyRBCollisionComponent = GetComponent<Enemy_RandomBouncer_Collisions>();
-        }
-        else { Debug.LogError("Component \"RandomBouncer Collisions\" not found within \"Random Bouncer Enemy\""); }
+       
+        else { Debug.LogError("Component \"RandomBouncer Collisions\" not found within \"Random Bouncer Enemy\". Static Helper Method could be missing it"); }
 
         enemyRBCollisionComponent.OnBounce += SwitchDirection;
-        enemyRBCollisionComponent.collisionWithPlayerProjectile += OnCollisionWithPlayerProjectile;
-        
+      
     }
     private void SetAreaTarget(out bool targetSuccessfullySet)
     {
@@ -125,11 +124,6 @@ public class Enemy_RandomBouncer : Enemy
 
         newTarget = new Vector2(UnityEngine.Random.Range(playAreaBounds.bounds.min.x, playAreaBounds.bounds.max.x),
             UnityEngine.Random.Range(playAreaBounds.bounds.min.y, playAreaBounds.bounds.max.y));
-
-        // Below code for debugging purpose only: Shows where is being targetted by the enemy with a visual aid. 
-       
-      //  Instantiate(testInstantiator, newTarget, Quaternion.identity);
-
         return newTarget;
     }
 

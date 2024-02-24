@@ -102,7 +102,7 @@ public class Enemy_Object_Pool : Object_Pool_Template
                 localEnemyScript = pooledObjects[i].GetComponent<Enemy>(); 
             }
 
-            localEnemyScript.SetUpEnemy(enemyWaveData.EnemySpeed, enemyWaveData.EnemyShape, waveTarget); // Changed this m,ethod to only call for the shape info once, as calliong for sprite and type 
+            localEnemyScript.SetUpEnemy(waveMovementSpeed : enemyWaveData.EnemySpeed, shape_Info: enemyWaveData.EnemyShape, enemyMovementTarget: waveTarget); // Changed this m,ethod to only call for the shape info once, as calliong for sprite and type 
             // separately was causing 2 random.range calculations, leading to mismatched data in each property call.  
             
             pooledObjects[i].SetActive(false);
@@ -110,11 +110,19 @@ public class Enemy_Object_Pool : Object_Pool_Template
     }
 
     private void InitializePoolSpawnPoints()
-    {
-       // Debug.Log(transform.childCount);
-        for (int i = 0; i < transform.childCount; i++)
+    {   
+        if (transform.childCount > 0)
         {
-            spawnPoints.Add(transform.GetChild(i).transform);
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                spawnPoints.Add(transform.GetChild(i).transform);
+            }
+        }
+        else 
+        { 
+            Debug.Log("Enemy Spawner contains no spawn points as children."); 
+            GameObject.Instantiate(new GameObject("SpawnPointCreated"), gameObject.transform); 
+            spawnPoints.Add(transform.GetChild(0)); 
         }
 
         canPopulatePool = true;
@@ -143,16 +151,8 @@ public class Enemy_Object_Pool : Object_Pool_Template
 
         }
     }
-
-    private IEnumerator SequentialEnemySpawner()
+    private void OnDisable()
     {
-
-       GetNextObject(arrayControl).SetActive(true);
-
-        yield return new WaitForSeconds(enemyWaveData.SpawnRate);
-        StartCoroutine(SequentialEnemySpawner());
-        Debug.Log("Reached here during coroutine.");
-    } // Initial enemy spawning test.
-
-  
+        SpawnTimerHitZero -= ActivateEnemyOnSpawnRate;
+    }
 }
