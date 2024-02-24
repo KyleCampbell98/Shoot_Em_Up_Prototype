@@ -74,7 +74,7 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
     {
         if (gameObject.GetComponentInParent<New_Input_System_Controller>() != null)
         {
-            this.GetComponentInParent<New_Input_System_Controller>().OnFireHit += ActivateBullets;         
+         //   this.GetComponentInParent<New_Input_System_Controller>().OnFireHit += ActivateBullets;         
         }
         else { Debug.LogError("PARENT OBJECT MISSING CONTROLLER SCRIPT"); }
 
@@ -84,9 +84,9 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
         }
     }
 
-    private void ActivateBullets()
+   /* private void ActivateBullets()
     {  
-        GameObject shapeProjectile = GetPooledObject();
+        GameObject shapeProjectile = GetNextObject();
         if(shapeProjectile != null)
         {
             _passProjectileParameters.Invoke(currentShapeType, currentShapeSelectionSprite);
@@ -95,7 +95,7 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
             shapeProjectile.SetActive(true);
         }
         else { Debug.LogWarning("Could not retrieve object to enable from pool."); }
-    }
+    }*/
 
     private void OnDisable()
     {

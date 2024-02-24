@@ -65,7 +65,8 @@ public class Enemy_Object_Pool : Object_Pool_Template
 
     private void ActivateEnemyOnSpawnRate()
     {
-        GameObject enemyToActivate = GetPooledObject();
+        GameObject enemyToActivate = GetNextObject(arrayControl, out int newIteratorValue);
+        arrayControl = newIteratorValue;
         enemyToActivate.transform.position = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Count)].position;
         enemyToActivate.SetActive(true);
         enemyToActivate = null;
@@ -129,6 +130,21 @@ public class Enemy_Object_Pool : Object_Pool_Template
     }
 
     // Internal Script Logic Methods
+
+   /* protected override GameObject GetNextObject()
+    {
+        GameObject returnedEnemy = pooledObjects[arrayControl];
+        if (arrayControl == pooledObjects.Length - 1)
+        {
+            arrayControl = 0;
+            return returnedEnemy;
+        }
+        else { 
+            arrayControl++; }
+        
+        
+        return returnedEnemy;
+    }*/
 
     private void EventSubscriptions()
     {

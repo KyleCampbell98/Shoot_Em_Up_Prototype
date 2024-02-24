@@ -48,14 +48,11 @@ MonoBehaviour:
   enemySpriteRenderer: {fileID: 0}
   topMostParentGameObjRef: {fileID: 0}
   enemyAnimationController: {fileID: 0}
-  enemycontrollertoassign: {fileID: 9100000, guid: e95cbf1718cab2a46b72d2ab1bb8b243, type: 2}
   movementSpeed: 10
   movementTarget: {fileID: 0}
-  collideWithPlayAreaBoundaries: 0
   enemyShapeType: 0
   originSpawnPoint: {x: 0, y: 0}
   movementDirection: {x: 1, y: 0}
-  testInstantiator: {fileID: 4955490249393583000, guid: f4a0e2696aad43a43ad09f937ebeadf6, type: 3}
   playAreaBounds: {fileID: 0}
   canMoveTowardsTarget: 0
 --- !u!1 &6472709418347385813
@@ -266,7 +263,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 4.000781, y: 4}
+  m_Size: {x: 4, y: 4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -295,7 +292,7 @@ Animator:
   m_GameObject: {fileID: 7964369208535161086}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e95cbf1718cab2a46b72d2ab1bb8b243, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
