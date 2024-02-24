@@ -7,6 +7,10 @@ using UnityEngine.InputSystem;
 
 public class Player_Shape_Cutter : MonoBehaviour
 {
+    /// <summary>
+    /// This class is used for setting the player projectile's shape. Firing is handled by a different script
+    /// </summary>
+
     private Cutter_And_Enemy_Shape_Enums.ShapeType selectedShape; // Currently selected shape based on iterator.
     private Cutter_And_Enemy_Shape_Enums.ShapeType SelectedShape { get { return selectedShape; } set { selectedShape = value; _selectedShapeEnum?.Invoke(value); } }
 

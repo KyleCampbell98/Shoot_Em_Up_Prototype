@@ -30,6 +30,7 @@ public class InPlay_Details : ScriptableObject
     // Player Info properties
     public int PlayerHP { get { return playerHP; } set {  playerHP = value; } }
     public int BombsRemaining { get {  return bombsRemaining; } set { if (value <= 0) { bombsRemaining = 0; } else { bombsRemaining = value; } } }
+    public int StartingPlayerBombs { get { return startingPlayerBombs;  } }
 
     // Internal Script Methods
 

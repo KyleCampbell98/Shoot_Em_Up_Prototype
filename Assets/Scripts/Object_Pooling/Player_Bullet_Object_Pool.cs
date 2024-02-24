@@ -22,12 +22,13 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
         SetTransformCachedVariables();
         SubscribeToFireEvent();
         PopulatePool(); // bullet pool
-        SetCurrentShape(Cutter_And_Enemy_Shape_Enums.ShapeType.Circle);
+        SetProjectileShapeDetails(Cutter_And_Enemy_Shape_Enums.ShapeType.Circle);
         
     }
 
     protected override void PopulatePool()
     {
+        objectPoolSize = game_Session.StartingPlayerBombs;
         base.PopulatePool();
         foreach(GameObject projectile in pooledObjects)
         {
@@ -46,7 +47,7 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
         pooledObjectParent = Player_Projectile_Parent.PlayerProjectileParentReference.transform;
         firePoint = gameObject.transform;
     }
-    private void SetCurrentShape(Cutter_And_Enemy_Shape_Enums.ShapeType currentShapeSelection)
+    private void SetProjectileShapeDetails(Cutter_And_Enemy_Shape_Enums.ShapeType currentShapeSelection)
     {
         //Debug.Log("SET CURRENT SHAPE CALLED");
         currentShapeType = currentShapeSelection;
@@ -72,7 +73,7 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
 
                 break;
         }
-    }
+    } // Passes into as projectile the: Shape enum so enemies can detect the projectile, and the sprite to use as a visual representation as to what the projectile actually is. 
     private void SubscribeToFireEvent()
     {
         if (gameObject.GetComponentInParent<New_Input_System_Controller>() != null)
@@ -83,13 +84,24 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
 
         if (gameObject.GetComponent<Player_Shape_Cutter>() != null)
         {
-            this.GetComponent<Player_Shape_Cutter>()._selectedShapeEnum += SetCurrentShape;
+            this.GetComponent<Player_Shape_Cutter>()._selectedShapeEnum += SetProjectileShapeDetails;
         }
+        else { Debug.LogError("PLAYER_SHAPE_CUTTER IS MISSING. PLAYER MUST HAVE THIS TO ASSIGN PROJECTILES SHAPE DATA."); }
     }
 
     private void ActivateBullets()
-    {  
-        GameObject shapeProjectile = GetNextObject(arrayControl);
+    {
+        GameObject shapeProjectile = null;
+
+        if (!CheckIfNeededObjectActive(arrayControl))
+        {
+            shapeProjectile = GetNextObject(arrayControl);
+        }
+        else
+        {
+             //conditionPlaceholder = arrayControl == (pooledObjects.Length - 1) ? arrayControl = 0 : arrayControl++;
+        }
+      
        
         var conditionPlaceholder = arrayControl == (pooledObjects.Length - 1) ? arrayControl = 0 : arrayControl++;
        
