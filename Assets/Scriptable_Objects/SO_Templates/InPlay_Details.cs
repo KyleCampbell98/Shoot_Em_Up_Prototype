@@ -19,6 +19,7 @@ public class InPlay_Details : ScriptableObject
     [SerializeField] private int startingPlayerHP;
     [SerializeField] private int startingPlayerBombs;
     [SerializeField] private int bombAmmoCap = 6; // Can be used later for increasing max ammo as an upgrade;
+
     // Scoring properties
     public float CurrentGameSurvivalTime { get { return currentGameSurvivalTime; } set { currentGameSurvivalTime = value; } } //Constantly Ticks upwards from game start
     public int CurrentGameEnemiesDefeated { get { return currentGameEnemiesDefeated; } set { currentGameEnemiesDefeated = value; } } // Updated upon defeating an enemy
