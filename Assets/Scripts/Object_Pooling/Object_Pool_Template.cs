@@ -39,23 +39,19 @@ public abstract class Object_Pool_Template : MonoBehaviour
         return null;
     }
 
-    protected virtual GameObject GetNextObject(int iterator, out int newIteratorValue) 
+    protected virtual GameObject GetNextObject(int indexer) 
     {
-        GameObject returnedObj = pooledObjects[iterator];
-        if (iterator == pooledObjects.Length - 1)
-        {
-            newIteratorValue = 0;
-            return returnedObj;
-        }
-        else
-        {
-            newIteratorValue = iterator++;
-        }
-
-
+        GameObject returnedObj = pooledObjects[indexer];
+       
+     
         return returnedObj;
+        
     } // All object pools must have a method of getting the next object from their pool in sequence
-    
+    protected bool CheckIfNeededObjectActive(int indexOfObjToCheck)
+    {
+        bool objectIsActive = pooledObjects[indexOfObjToCheck].activeSelf ? true : false;
+        return objectIsActive;
+    }
     protected void SetObjectParentToSelf()
     {
         pooledObjectParent = this.gameObject.transform;

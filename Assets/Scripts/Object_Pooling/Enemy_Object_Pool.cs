@@ -65,11 +65,13 @@ public class Enemy_Object_Pool : Object_Pool_Template
 
     private void ActivateEnemyOnSpawnRate()
     {
-        GameObject enemyToActivate = GetNextObject(arrayControl, out int newIteratorValue);
-        arrayControl = newIteratorValue;
+        GameObject enemyToActivate = GetNextObject(arrayControl);
+       var cond = arrayControl == (pooledObjects.Length - 1) ? arrayControl = 0 : arrayControl++;
+      
+
         enemyToActivate.transform.position = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Count)].position;
         enemyToActivate.SetActive(true);
-        enemyToActivate = null;
+
         spawnTimer = enemyWaveData.SpawnRate;
     }
 
