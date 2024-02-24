@@ -9,6 +9,7 @@ public class Player_Collisions : MonoBehaviour
 
     // Internal Script logic
     private bool canCollideWithEnemies = true;
+    private bool gameIsOver = false; // If true player can no longer collide with eneimes whilst the game plays behind the UI.
 
     public delegate void PlayerTookDamage();
     public static PlayerTookDamage m_playerTookDamage;
@@ -46,13 +47,15 @@ public class Player_Collisions : MonoBehaviour
 
     public void ReinstateCanTakeDamage() // Work needed as player can still collide, probably being overwritten by the end of the player animation which reinstates collision with eneimes. 
     {
-        Debug.LogError("REINSTATE DAMAGE CALLED");
+        if (gameIsOver) { return; }
+  
         canCollideWithEnemies = true;
     }
 
     private void StopCollisionsOnGameOver()
     {
-        canCollideWithEnemies = false;
+        Debug.Log("Stop Collision On Game Over called from PlayerCollisions");
+        gameIsOver = true;
     }
 
     private void OnDisable()

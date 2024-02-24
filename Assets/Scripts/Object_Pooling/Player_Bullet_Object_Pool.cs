@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Player_Bullet_Object_Pool : Object_Pool_Template
 {
+    [Header("Scriptable Objects for setup/UI use")]
+    [SerializeField] private InPlay_Details game_Session;
+
     [SerializeField] private Transform firePoint;
     private delegate void PassProjectileParameters(Cutter_And_Enemy_Shape_Enums.ShapeType shapeOfProj, Sprite spriteOfProj);
     private PassProjectileParameters _passProjectileParameters;
@@ -86,8 +89,11 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
 
     private void ActivateBullets()
     {  
-        GameObject shapeProjectile = GetPooledObject();
-        if(shapeProjectile != null)
+        GameObject shapeProjectile = GetNextObject(arrayControl);
+       
+        var conditionPlaceholder = arrayControl == (pooledObjects.Length - 1) ? arrayControl = 0 : arrayControl++;
+       
+        if (shapeProjectile != null)
         {
             _passProjectileParameters.Invoke(currentShapeType, currentShapeSelectionSprite);
             shapeProjectile.transform.SetPositionAndRotation(firePoint.transform.position, transform.rotation.normalized);

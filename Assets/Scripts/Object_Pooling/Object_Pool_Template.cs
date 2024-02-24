@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Object_Pool_Template : MonoBehaviour
+public abstract class Object_Pool_Template : MonoBehaviour
 {
     [Header("Object Pool Configs")]
     [SerializeField] protected GameObject objectToPool;
@@ -39,13 +39,19 @@ public class Object_Pool_Template : MonoBehaviour
         return null;
     }
 
-    protected GameObject GetNextObject(int indexOfRequiredObject)
+    protected virtual GameObject GetNextObject(int indexer) 
     {
-        if (indexOfRequiredObject > pooledObjects.Length - 1) { indexOfRequiredObject = 0; }
-        else { indexOfRequiredObject++; }
-        return pooledObjects[indexOfRequiredObject];
+        GameObject returnedObj = pooledObjects[indexer];
+       
+     
+        return returnedObj;
+        
+    } // All object pools must have a method of getting the next object from their pool in sequence
+    protected bool CheckIfNeededObjectActive(int indexOfObjToCheck)
+    {
+        bool objectIsActive = pooledObjects[indexOfObjToCheck].activeSelf ? true : false;
+        return objectIsActive;
     }
-
     protected void SetObjectParentToSelf()
     {
         pooledObjectParent = this.gameObject.transform;

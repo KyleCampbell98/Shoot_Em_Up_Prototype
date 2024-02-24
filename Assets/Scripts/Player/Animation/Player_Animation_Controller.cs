@@ -7,14 +7,15 @@ public class Player_Animation_Controller : MonoBehaviour
 {
     [Header("Component Cache")]
     [SerializeField] private Animator playerAnimController;
+    [SerializeField] private InPlay_Details player_Session_Details; 
 
     [Header("Animation Configs")]
     [SerializeField] private float secondsBeforeInvulnerabilityEnds = 3;
     
-
     // Animation Parameter Hash Values
     int playerIsDamagedParam_Hash;
     int startInvulnerabilityEndParam_Hash;
+    int playerHpParam_Hash;
 
     // Internal Properties
     private int triggerToSet;
@@ -24,8 +25,7 @@ public class Player_Animation_Controller : MonoBehaviour
     private int TriggerToSet { get { return triggerToSet; } set { triggerToSet = value;  }  }
 
     // Internal Delegates
-    private event Action CoroutineFunction;
-    
+    private event Action CoroutineFunction;    
 
     void Start()
     {
@@ -33,19 +33,27 @@ public class Player_Animation_Controller : MonoBehaviour
         ConvertStringParamsToHash();
         EventSubscriptions();
     }
-
   
-   
     private void TriggerDamageAnim()
     {
-        if(CoroutineFunction == null)
+        player_Session_Details.PlayerHP--;
+        playerAnimController.SetInteger(playerHpParam_Hash, player_Session_Details.PlayerHP);
+        if (player_Session_Details.PlayerHP < 0)
+        {
+            GameManager.a_GameOver();
+            return;
+        }
+
+      
+        playerAnimController.SetInteger(playerHpParam_Hash, player_Session_Details.PlayerHP);
+        if (CoroutineFunction == null)
         {
             CoroutineFunction += AnimationTrigger;
         }
 
         TriggerToSet = playerIsDamagedParam_Hash; // Stage one of Damage: Slow Flash Invulnerability
         AnimationTrigger();
-
+      
         TriggerToSet = startInvulnerabilityEndParam_Hash;
         StartCoroutine(TimeBeforeCodeExecution(secondsBeforeInvulnerabilityEnds, CoroutineFunction));
                
@@ -75,6 +83,7 @@ public class Player_Animation_Controller : MonoBehaviour
 
     private void ConvertStringParamsToHash()
     {
+        playerHpParam_Hash = Animator.StringToHash("PlayerHP");
         playerIsDamagedParam_Hash = Animator.StringToHash("PlayerIsDamaged");
         startInvulnerabilityEndParam_Hash = Animator.StringToHash("StartInvulnerabilityEnd");
     }

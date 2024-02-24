@@ -8,8 +8,14 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Enemy Wave SO")]
 public class Enemy_Wave_SO_Template : ScriptableObject
 {
+    /// <summary>
+    ///  This template controls aspects of the enemies within a wave. These are essentially the external modifiers to an enemy's defined behaviour
+    ///  For example, this template defines the speed of enemy movement, not the actual movement behaviour itself. 
+    ///  The wave will also define an identity for each enemy within it through the list of provided "Potential Shapes" (Shape Info SOs).
+    /// </summary>
+
     [Header("Object References")]
-    [SerializeField] private Enemy enemyToSpawn;
+    [SerializeField] private GameObject enemyToSpawn;
     [SerializeField] private Shape_Info[] potentialShapes;
 
     [Header("Enemy Attributes")]
@@ -26,13 +32,15 @@ public class Enemy_Wave_SO_Template : ScriptableObject
 
 
     // Properties
-    public Enemy EnemyToSpawn { get { return enemyToSpawn; } }
+    public GameObject EnemyToSpawn { get { return enemyToSpawn; } }
     public Shape_Info EnemyShape { get { if (!allShapesRandom) { return potentialShapes[0]; } else  return potentialShapes[UnityEngine.Random.Range(0, potentialShapes.Length)]; } } 
     public int EnemyPoolSize { get { return enemyPoolSize; } }
     public float EnemySpeed { get { return enemySpeed; } }
-    public float SpawnRate { get { if (SpawnSequentially) { return spawnRate; } else { Debug.Log("No spawn rate returned, enemy wave type doesn't support spawn rates"); return 0; } } } 
+    public float SpawnRate { get { if (SpawnSequentially) { return spawnRate; } else { Debug.LogError("No spawn rate returned, enemy wave type doesn't support spawn rates"); return 0; } } } 
     public bool SpawnSequentially {  get { return spawnSequentially; } }
     public bool TargetPlayer { get {  return targetPlayer; } }
     public bool AllShapesRandom { get { return allShapesRandom; } }
+
     
+
 }

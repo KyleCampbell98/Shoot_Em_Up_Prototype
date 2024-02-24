@@ -65,10 +65,13 @@ public class Enemy_Object_Pool : Object_Pool_Template
 
     private void ActivateEnemyOnSpawnRate()
     {
-        GameObject enemyToActivate = GetPooledObject();
+        GameObject enemyToActivate = GetNextObject(arrayControl);
+       var cond = arrayControl == (pooledObjects.Length - 1) ? arrayControl = 0 : arrayControl++;
+      
+
         enemyToActivate.transform.position = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Count)].position;
         enemyToActivate.SetActive(true);
-        enemyToActivate = null;
+
         spawnTimer = enemyWaveData.SpawnRate;
     }
 
@@ -76,7 +79,7 @@ public class Enemy_Object_Pool : Object_Pool_Template
 
     private void InitialPoolSetup()
     {
-        objectToPool = enemyWaveData.EnemyToSpawn.gameObject;
+        objectToPool = enemyWaveData.EnemyToSpawn;
         objectPoolSize = enemyWaveData.EnemyPoolSize;
         spawnTimer = enemyWaveData.SpawnRate;
         SetObjectParentToSelf();
@@ -102,7 +105,7 @@ public class Enemy_Object_Pool : Object_Pool_Template
                 localEnemyScript = pooledObjects[i].GetComponent<Enemy>(); 
             }
 
-            localEnemyScript.SetUpEnemy(enemyWaveData.EnemySpeed, enemyWaveData.EnemyShape, waveTarget); // Changed this m,ethod to only call for the shape info once, as calliong for sprite and type 
+            localEnemyScript.SetUpEnemy(waveMovementSpeed : enemyWaveData.EnemySpeed, shape_Info: enemyWaveData.EnemyShape, enemyMovementTarget: waveTarget); // Changed this m,ethod to only call for the shape info once, as calliong for sprite and type 
             // separately was causing 2 random.range calculations, leading to mismatched data in each property call.  
             
             pooledObjects[i].SetActive(false);
@@ -110,17 +113,40 @@ public class Enemy_Object_Pool : Object_Pool_Template
     }
 
     private void InitializePoolSpawnPoints()
-    {
-       // Debug.Log(transform.childCount);
-        for (int i = 0; i < transform.childCount; i++)
+    {   
+        if (transform.childCount > 0)
         {
-            spawnPoints.Add(transform.GetChild(i).transform);
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                spawnPoints.Add(transform.GetChild(i).transform);
+            }
+        }
+        else 
+        { 
+            Debug.Log("Enemy Spawner contains no spawn points as children."); 
+            GameObject.Instantiate(new GameObject("SpawnPointCreated"), gameObject.transform); 
+            spawnPoints.Add(transform.GetChild(0)); 
         }
 
         canPopulatePool = true;
     }
 
     // Internal Script Logic Methods
+
+   /* protected override GameObject GetNextObject()
+    {
+        GameObject returnedEnemy = pooledObjects[arrayControl];
+        if (arrayControl == pooledObjects.Length - 1)
+        {
+            arrayControl = 0;
+            return returnedEnemy;
+        }
+        else { 
+            arrayControl++; }
+        
+        
+        return returnedEnemy;
+    }*/
 
     private void EventSubscriptions()
     {
@@ -143,16 +169,8 @@ public class Enemy_Object_Pool : Object_Pool_Template
 
         }
     }
-
-    private IEnumerator SequentialEnemySpawner()
+    private void OnDisable()
     {
-
-       GetNextObject(arrayControl).SetActive(true);
-
-        yield return new WaitForSeconds(enemyWaveData.SpawnRate);
-        StartCoroutine(SequentialEnemySpawner());
-        Debug.Log("Reached here during coroutine.");
-    } // Initial enemy spawning test.
-
-  
+        SpawnTimerHitZero -= ActivateEnemyOnSpawnRate;
+    }
 }

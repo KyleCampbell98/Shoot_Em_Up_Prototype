@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41b9ed13b76715a4ea1f95197a80eb5c, type: 3}
   m_Name: Game_Session_SO
   m_EditorClassIdentifier: 
-  survivalTime: 86.0328
-  enemiesDefeated: 0
-  playerHP: -10
+  currentGameSurvivalTime: 0
+  currentGameEnemiesDefeated: 0
+  bestSurvivalTime: 9.854627
+  bestEnemiesDefeated: 0
+  playerHP: 3
