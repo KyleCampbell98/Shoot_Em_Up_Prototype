@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEditor.UIElements;
 using System.Runtime.InteropServices;
+using UnityEngine.Events;
 
 public class Game_Session_UI_Control : Menu_UI_Control
 {
@@ -12,6 +13,8 @@ public class Game_Session_UI_Control : Menu_UI_Control
 
     [Header("Text Mesh Refs")]
     [SerializeField] private TextMeshProUGUI survivalTimer_TMP;
+    [SerializeField] private TextMeshProUGUI bombCounter_TMP;
+    [SerializeField] private TextMeshProUGUI playerHP_TMP;
     [SerializeField] private TextMeshProUGUI newBestSurvivalTimeDisplay;
     
 
@@ -21,14 +24,17 @@ public class Game_Session_UI_Control : Menu_UI_Control
     [SerializeField] private GameObject game_Over_Panel;
     [SerializeField] private GameObject newHighScoreDisplay;
 
+    
     // Monobehaviour Methods
     private void Start()
     {
+        UpdateOnScreenUI(); 
         if (FindObjectOfType<GameManager>() != null)
         {
             Debug.Log("GM found!");
             GameManager.m_GameStateChanged += DisplayCanvas;
             GameManager.a_GameOver += ResetScoringInfo;
+            GameManager.a_playerValuesUpdated += UpdateOnScreenUI;
         }
         else
         {
@@ -80,9 +86,18 @@ public class Game_Session_UI_Control : Menu_UI_Control
         game_Over_Panel.SetActive(gameOver);
     }
 
+    private void UpdateOnScreenUI()
+    {
+        bombCounter_TMP.text = "Bombs: " + currentGameSessionDetails.BombsRemaining.ToString();
+        playerHP_TMP.text = "Health: " + currentGameSessionDetails.PlayerHP.ToString();
+
+
+    }
+
     private void OnDisable()
     {
         GameManager.m_GameStateChanged -= DisplayCanvas;
         GameManager.a_GameOver -= ResetScoringInfo;
+        GameManager.a_playerValuesUpdated -= UpdateOnScreenUI;
     }
 }

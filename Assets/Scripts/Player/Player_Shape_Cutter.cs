@@ -87,6 +87,7 @@ public class Player_Shape_Cutter : MonoBehaviour
         arrayIterator = 0;
         numberOfPossibleShapes = Enum.GetNames(typeof(Cutter_And_Enemy_Shape_Enums.ShapeType)).Length;
       //  Debug.Log($"Number of possible shapes: {numberOfPossibleShapes}");
+      
     }
 
 }

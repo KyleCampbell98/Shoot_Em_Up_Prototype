@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     public static Action a_ActivatePause;
     public static Action a_GameOver;
 
+    public static Action a_playerValuesUpdated;
+
 
     private void Start()
     {

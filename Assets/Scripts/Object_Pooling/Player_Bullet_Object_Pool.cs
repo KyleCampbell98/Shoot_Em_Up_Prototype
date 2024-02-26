@@ -107,6 +107,8 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
             shapeProjectile.transform.SetPositionAndRotation(firePoint.transform.position, transform.rotation.normalized);
             
             shapeProjectile.SetActive(true);
+            game_Session.BombsRemaining--;
+            GameManager.a_playerValuesUpdated();
         }
         else { Debug.LogWarning("Could not retrieve object to enable from pool."); }
     }
