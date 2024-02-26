@@ -52,6 +52,7 @@ public abstract class Object_Pool_Template : MonoBehaviour
         bool objectIsActive = pooledObjects[indexOfObjToCheck].activeSelf ? true : false;
         return objectIsActive;
     }
+  
     protected void SetObjectParentToSelf()
     {
         pooledObjectParent = this.gameObject.transform;

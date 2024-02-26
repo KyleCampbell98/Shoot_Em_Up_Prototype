@@ -93,18 +93,14 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
     {
         GameObject shapeProjectile = null;
 
-        if (!CheckIfNeededObjectActive(arrayControl))
+        shapeProjectile = Array.Find(pooledObjects, gameObject => gameObject.activeSelf == false);
+        if(shapeProjectile == null)
         {
-            shapeProjectile = GetNextObject(arrayControl);
-        }
-        else
-        {
-             //conditionPlaceholder = arrayControl == (pooledObjects.Length - 1) ? arrayControl = 0 : arrayControl++;
+            Debug.Log("No Ammo left!");
+            return;
         }
       
-       
-        var conditionPlaceholder = arrayControl == (pooledObjects.Length - 1) ? arrayControl = 0 : arrayControl++;
-       
+
         if (shapeProjectile != null)
         {
             _passProjectileParameters.Invoke(currentShapeType, currentShapeSelectionSprite);

@@ -17,3 +17,7 @@ MonoBehaviour:
   bestSurvivalTime: 9.854627
   bestEnemiesDefeated: 0
   playerHP: 3
+  bombsRemaining: 6
+  startingPlayerHP: 3
+  startingPlayerBombs: 6
+  bombAmmoCap: 6
