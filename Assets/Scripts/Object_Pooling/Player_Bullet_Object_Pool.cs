@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Player_Bullet_Object_Pool : Object_Pool_Template
 {
@@ -11,12 +12,15 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
     [SerializeField] private Transform firePoint;
     private delegate void PassProjectileParameters(Cutter_And_Enemy_Shape_Enums.ShapeType shapeOfProj, Sprite spriteOfProj);
     private PassProjectileParameters _passProjectileParameters;
+    public delegate void SelectedProjectileChanged(Sprite spriteOfNewlySelectedObj);
+    public static SelectedProjectileChanged OnSelectedProjectileChanged;
 
     private Cutter_And_Enemy_Shape_Enums.ShapeType currentShapeType;
     [SerializeField] private Sprite currentShapeSelectionSprite;
 
     [SerializeField] private Sprite[] sprites = new Sprite[Enum.GetNames(typeof(Cutter_And_Enemy_Shape_Enums.ShapeType)).Length];
 
+   
     private void Start()
     {
         SetTransformCachedVariables();
@@ -58,18 +62,23 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
 
                 currentShapeType = Cutter_And_Enemy_Shape_Enums.ShapeType.Circle;
                 currentShapeSelectionSprite = sprites[0];
+                OnSelectedProjectileChanged.Invoke(currentShapeSelectionSprite);
 
                 break;
             case Cutter_And_Enemy_Shape_Enums.ShapeType.Triangle:
 
                 currentShapeType = Cutter_And_Enemy_Shape_Enums.ShapeType.Triangle;
                 currentShapeSelectionSprite = sprites[1];
+                OnSelectedProjectileChanged.Invoke(currentShapeSelectionSprite);
+
 
                 break;
             case Cutter_And_Enemy_Shape_Enums.ShapeType.Square:
 
                 currentShapeType = Cutter_And_Enemy_Shape_Enums.ShapeType.Square;
                 currentShapeSelectionSprite = sprites[2];
+                OnSelectedProjectileChanged.Invoke(currentShapeSelectionSprite);
+
 
                 break;
         }
