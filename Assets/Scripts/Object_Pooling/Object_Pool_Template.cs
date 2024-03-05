@@ -11,8 +11,8 @@ public abstract class Object_Pool_Template : MonoBehaviour
     [SerializeField] protected GameObject[] pooledObjects;
     [SerializeField] protected Transform pooledObjectParent;
 
-    [Header("Pool Object Control")]
-    [SerializeField] protected int arrayControl = 0;
+    // Pool Object Control
+   protected int arrayControl = 0;
 
     protected virtual void PopulatePool()
     {

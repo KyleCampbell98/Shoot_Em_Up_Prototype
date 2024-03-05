@@ -10,6 +10,8 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
     [SerializeField] private InPlay_Details game_Session;
 
     [SerializeField] private Transform firePoint;
+
+    // Events/Delegates
     private delegate void PassProjectileParameters(Cutter_And_Enemy_Shape_Enums.ShapeType shapeOfProj, Sprite spriteOfProj);
     private PassProjectileParameters _passProjectileParameters;
     public delegate void SelectedProjectileChanged(Sprite spriteOfNewlySelectedObj);
@@ -18,9 +20,12 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
     private Cutter_And_Enemy_Shape_Enums.ShapeType currentShapeType;
     [SerializeField] private Sprite currentShapeSelectionSprite;
 
+    [Header("Possible Sprites For Assignment")]
     [SerializeField] private Sprite[] sprites = new Sprite[Enum.GetNames(typeof(Cutter_And_Enemy_Shape_Enums.ShapeType)).Length];
 
-   
+
+    private Player_Shape_Projectile_Logic[] logicScripts;
+
     private void Start()
     {
         SetTransformCachedVariables();
@@ -32,6 +37,7 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
 
     protected override void PopulatePool()
     {
+        logicScripts = new Player_Shape_Projectile_Logic[game_Session.StartingPlayerBombs];
         objectPoolSize = game_Session.StartingPlayerBombs;
         base.PopulatePool();
         foreach(GameObject projectile in pooledObjects)
@@ -40,8 +46,7 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
             
             if(projectile.GetComponent<Player_Shape_Projectile_Logic>() != null)
             {
-                _passProjectileParameters += projectile.GetComponent<Player_Shape_Projectile_Logic>().SetupProjectile;
-               
+                _passProjectileParameters += projectile.GetComponent<Player_Shape_Projectile_Logic>().SetupProjectile;    
             }
         }
     }
@@ -51,9 +56,9 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
         pooledObjectParent = Player_Projectile_Parent.PlayerProjectileParentReference.transform;
         firePoint = gameObject.transform;
     }
+
     private void SetProjectileShapeDetails(Cutter_And_Enemy_Shape_Enums.ShapeType currentShapeSelection)
     {
-        //Debug.Log("SET CURRENT SHAPE CALLED");
         currentShapeType = currentShapeSelection;
 
         switch (currentShapeType)
@@ -109,9 +114,9 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
             return;
         }
       
-
         if (shapeProjectile != null)
         {
+            
             _passProjectileParameters.Invoke(currentShapeType, currentShapeSelectionSprite);
             shapeProjectile.transform.SetPositionAndRotation(firePoint.transform.position, transform.rotation.normalized);
             
