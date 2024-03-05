@@ -24,7 +24,7 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
     [SerializeField] private Sprite[] sprites = new Sprite[Enum.GetNames(typeof(Cutter_And_Enemy_Shape_Enums.ShapeType)).Length];
 
 
-    private Player_Shape_Projectile_Logic[] logicScripts;
+ //  [SerializeField] private Player_Shape_Projectile_Logic[] logicScripts;
 
     private void Start()
     {
@@ -40,6 +40,11 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
         logicScripts = new Player_Shape_Projectile_Logic[game_Session.StartingPlayerBombs];
         objectPoolSize = game_Session.StartingPlayerBombs;
         base.PopulatePool();
+       /* for(int i = 0; i < logicScripts.Length; i++)
+        {
+            logicScripts[i] = pooledObjects[i].GetComponent<Player_Shape_Projectile_Logic>();
+            pooledObjects[i].transform.position = pooledObjectParent.transform.position;
+        }*/
         foreach(GameObject projectile in pooledObjects)
         {
             projectile.transform.position = pooledObjectParent.transform.position;
