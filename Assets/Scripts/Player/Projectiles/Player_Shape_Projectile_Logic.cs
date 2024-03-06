@@ -73,4 +73,10 @@ public class Player_Shape_Projectile_Logic : MonoBehaviour
         // Need Logic for triggering the activation animation for the player's bomb
         projectileCollider.enabled = true;
     }
+
+    public void test()
+    {
+        Debug.Log("Test called on projectile: " + gameObject.name);
+        gameObject.SetActive(true);
+    }
 }

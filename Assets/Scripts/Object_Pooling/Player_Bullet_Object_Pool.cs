@@ -24,7 +24,7 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
     [SerializeField] private Sprite[] sprites = new Sprite[Enum.GetNames(typeof(Cutter_And_Enemy_Shape_Enums.ShapeType)).Length];
 
 
- //  [SerializeField] private Player_Shape_Projectile_Logic[] logicScripts;
+   [SerializeField] private Player_Shape_Projectile_Logic[] logicScripts;
 
     private void Start()
     {
@@ -40,12 +40,12 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
         logicScripts = new Player_Shape_Projectile_Logic[game_Session.StartingPlayerBombs];
         objectPoolSize = game_Session.StartingPlayerBombs;
         base.PopulatePool();
-       /* for(int i = 0; i < logicScripts.Length; i++)
+        for(int i = 0; i < logicScripts.Length; i++)
         {
             logicScripts[i] = pooledObjects[i].GetComponent<Player_Shape_Projectile_Logic>();
             pooledObjects[i].transform.position = pooledObjectParent.transform.position;
-        }*/
-        foreach(GameObject projectile in pooledObjects)
+        }
+      /*  foreach(GameObject projectile in pooledObjects)
         {
             projectile.transform.position = pooledObjectParent.transform.position;
             
@@ -53,7 +53,7 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
             {
                 _passProjectileParameters += projectile.GetComponent<Player_Shape_Projectile_Logic>().SetupProjectile;    
             }
-        }
+        }*/
     }
     
     private void SetTransformCachedVariables()
@@ -110,9 +110,9 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
 
     private void ActivateBullets()
     {
-        GameObject shapeProjectile = null;
+        Player_Shape_Projectile_Logic shapeProjectile = null;
 
-        shapeProjectile = Array.Find(pooledObjects, gameObject => gameObject.activeSelf == false);
+        shapeProjectile = Array.Find(logicScripts, Player_Shape_Projectile_Logic => Player_Shape_Projectile_Logic.gameObject.activeSelf == false);
         if(shapeProjectile == null)
         {
             Debug.Log("No Ammo left!");
@@ -122,10 +122,10 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
         if (shapeProjectile != null)
         {
             
-            _passProjectileParameters.Invoke(currentShapeType, currentShapeSelectionSprite);
+           // _passProjectileParameters.Invoke(currentShapeType, currentShapeSelectionSprite);
             shapeProjectile.transform.SetPositionAndRotation(firePoint.transform.position, transform.rotation.normalized);
-            
-            shapeProjectile.SetActive(true);
+            shapeProjectile.test();
+          //  shapeProjectile.SetActive(true);
             game_Session.BombsRemaining--;
             GameManager.a_playerValuesUpdated();
         }

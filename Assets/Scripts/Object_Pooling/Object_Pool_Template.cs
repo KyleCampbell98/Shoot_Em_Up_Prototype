@@ -22,6 +22,7 @@ public abstract class Object_Pool_Template : MonoBehaviour
         for (int i = 0; i < objectPoolSize; i++)
         {
             pooledObjects[i] = Instantiate(objectToPool, transform.position, Quaternion.identity, pooledObjectParent);
+            pooledObjects[i].name = objectToPool.name + " " + i.ToString();
             pooledObjects[i].SetActive(false);
         }
     }
