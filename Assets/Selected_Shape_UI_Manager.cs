@@ -5,15 +5,22 @@ using UnityEngine.UI;
 
 public class Selected_Shape_UI_Manager : MonoBehaviour
 {
-    private Image currently_Selected_Bomb_Sprite;
+    [SerializeField] private Image currently_Selected_Bomb_Sprite;
+    [SerializeField] private Sprite defaultDisplaySprite;
+
+    private void Awake()
+    {
+        currently_Selected_Bomb_Sprite = GetComponent<Image>();
+    }
+
 
     // Start is called before the first frame update
     void Start()
     {
         Player_Bullet_Object_Pool.OnSelectedProjectileChanged += UpdateImage;
-        currently_Selected_Bomb_Sprite = GetComponent<Image>();
-    }
+        currently_Selected_Bomb_Sprite.sprite = defaultDisplaySprite;
 
+    }
     private void UpdateImage(Sprite newImage)
     {
         currently_Selected_Bomb_Sprite.sprite = newImage;

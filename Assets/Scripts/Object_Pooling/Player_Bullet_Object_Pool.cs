@@ -21,18 +21,24 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
     [SerializeField] private Sprite currentShapeSelectionSprite;
 
     [Header("Possible Sprites For Assignment")]
-    [SerializeField] private Sprite[] sprites = new Sprite[Enum.GetNames(typeof(Cutter_And_Enemy_Shape_Enums.ShapeType)).Length];
+    [SerializeField] private Sprite[] sprites; //= new Sprite[Enum.GetNames(typeof(Cutter_And_Enemy_Shape_Enums.ShapeType)).Length];
 
 
-   [SerializeField] private Player_Shape_Projectile_Logic[] logicScripts;
+    [SerializeField] private Player_Shape_Projectile_Logic[] logicScripts;
 
     private void Start()
     {
         SetTransformCachedVariables();
         SubscribeToFireEvent();
         PopulatePool(); // bullet pool
-        SetProjectileShapeDetails(Cutter_And_Enemy_Shape_Enums.ShapeType.Circle);
+        SetupDefaultPlayerState();
         
+    }
+
+    private void SetupDefaultPlayerState()
+    {
+        currentShapeType = Cutter_And_Enemy_Shape_Enums.ShapeType.Circle;
+        currentShapeSelectionSprite = sprites[0];
     }
 
     protected override void PopulatePool()
@@ -72,7 +78,7 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
 
                 currentShapeType = Cutter_And_Enemy_Shape_Enums.ShapeType.Circle;
                 currentShapeSelectionSprite = sprites[0];
-                OnSelectedProjectileChanged.Invoke(currentShapeSelectionSprite);
+                OnSelectedProjectileChanged?.Invoke(currentShapeSelectionSprite);
 
                 break;
             case Cutter_And_Enemy_Shape_Enums.ShapeType.Triangle:
