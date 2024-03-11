@@ -6,10 +6,10 @@ using UnityEngine.Events;
 
 public class Player_Bullet_Object_Pool : Object_Pool_Template
 {
+    [SerializeField] private Transform firePoint;
+
     [Header("Scriptable Objects for setup/UI use")]
     [SerializeField] private InPlay_Details game_Session;
-
-    [SerializeField] private Transform firePoint;
 
     // Events/Delegates
     private delegate void PassProjectileParameters(Cutter_And_Enemy_Shape_Enums.ShapeType shapeOfProj, Sprite spriteOfProj);
@@ -17,14 +17,13 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
     public delegate void SelectedProjectileChanged(Sprite spriteOfNewlySelectedObj);
     public static SelectedProjectileChanged OnSelectedProjectileChanged;
 
-    private Cutter_And_Enemy_Shape_Enums.ShapeType currentShapeType;
+    [Header("Shape Selection Attributes")]
+    [SerializeField] private Cutter_And_Enemy_Shape_Enums.ShapeType currentShapeType;
     [SerializeField] private Sprite currentShapeSelectionSprite;
 
     [Header("Possible Sprites For Assignment")]
     [SerializeField] private Sprite[] sprites; //= new Sprite[Enum.GetNames(typeof(Cutter_And_Enemy_Shape_Enums.ShapeType)).Length];
 
-
-    [SerializeField] private Player_Shape_Projectile_Logic[] logicScripts;
 
     private void Start()
     {
@@ -43,15 +42,10 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
 
     protected override void PopulatePool()
     {
-        logicScripts = new Player_Shape_Projectile_Logic[game_Session.StartingPlayerBombs];
+     
         objectPoolSize = game_Session.StartingPlayerBombs;
         base.PopulatePool();
-        for(int i = 0; i < logicScripts.Length; i++)
-        {
-            logicScripts[i] = pooledObjects[i].GetComponent<Player_Shape_Projectile_Logic>();
-            pooledObjects[i].transform.position = pooledObjectParent.transform.position;
-        }
-      /*  foreach(GameObject projectile in pooledObjects)
+        foreach(GameObject projectile in pooledObjects)
         {
             projectile.transform.position = pooledObjectParent.transform.position;
             
@@ -59,7 +53,7 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
             {
                 _passProjectileParameters += projectile.GetComponent<Player_Shape_Projectile_Logic>().SetupProjectile;    
             }
-        }*/
+        }
     }
     
     private void SetTransformCachedVariables()
@@ -116,9 +110,9 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
 
     private void ActivateBullets()
     {
-        Player_Shape_Projectile_Logic shapeProjectile = null;
+        GameObject shapeProjectile = null;
 
-        shapeProjectile = Array.Find(logicScripts, Player_Shape_Projectile_Logic => Player_Shape_Projectile_Logic.gameObject.activeSelf == false);
+        shapeProjectile = Array.Find(pooledObjects, gameObject => gameObject.activeSelf == false);
         if(shapeProjectile == null)
         {
             Debug.Log("No Ammo left!");
@@ -128,10 +122,9 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
         if (shapeProjectile != null)
         {
             
-           // _passProjectileParameters.Invoke(currentShapeType, currentShapeSelectionSprite);
+            _passProjectileParameters.Invoke(currentShapeType, currentShapeSelectionSprite);
             shapeProjectile.transform.SetPositionAndRotation(firePoint.transform.position, transform.rotation.normalized);
-            shapeProjectile.test();
-          //  shapeProjectile.SetActive(true);
+            shapeProjectile.SetActive(true);
             game_Session.BombsRemaining--;
             GameManager.a_playerValuesUpdated();
         }

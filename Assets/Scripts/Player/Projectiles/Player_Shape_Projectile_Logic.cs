@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Player_Shape_Projectile_Logic : MonoBehaviour
 {
-    // Object Control Attributes
-    private Cutter_And_Enemy_Shape_Enums.ShapeType? thisProjectilesShapeType; // sets shape type on each activation from the pool.
+    [Header("Object Control Attributes")]
+    [SerializeField] private Cutter_And_Enemy_Shape_Enums.ShapeType thisProjectilesShapeType; // sets shape type on each activation from the pool.
+    [SerializeField] private Sprite thisObjectsSpriteShape;
     private bool canGameOverPlayer = false; // Should be false upon placing the projectile, could be done through a trigger behaviour, or a timer?
     [SerializeField] private bool callShapeSetupLogic = true;
 
-    // Component References
+    [Header("Component References")]
     [SerializeField] private SpriteRenderer projectileSpriteRenderer; // Used to set sprite on each activation from the pool. 
     [SerializeField] private Animator projectileAnimController;
     [SerializeField] private Collider2D projectileCollider;
@@ -18,9 +19,9 @@ public class Player_Shape_Projectile_Logic : MonoBehaviour
    
     // Timer attributes
     [SerializeField] private float timeBeforeActivatingDanger; // This is the amount of seconds after being placed that the danger to the player of their own projectile will be instated.
-
+    private const string activatedBombStringConst = "_Activated";
     // Object Control Properties
-    public Cutter_And_Enemy_Shape_Enums.ShapeType? ProjectilesShapeType { get { return thisProjectilesShapeType; } 
+    public Cutter_And_Enemy_Shape_Enums.ShapeType ProjectilesShapeType { get { return thisProjectilesShapeType; } 
         set 
         { // Need To ensure this is only called on the projectile's activation. 
             thisProjectilesShapeType = value; 
@@ -37,7 +38,7 @@ public class Player_Shape_Projectile_Logic : MonoBehaviour
 
     private void OnEnable()
     {
-        callShapeSetupLogic = false; // Stops individual shape being overriden by the setup of other shapes in the object pool.
+        OnEnableLogic();
         StartCoroutine(ActivateDanger());
     }
 
@@ -45,9 +46,11 @@ public class Player_Shape_Projectile_Logic : MonoBehaviour
     {
         if (!callShapeSetupLogic) { return; }
         thisProjectilesShapeType = currentShapeType;
-        Debug.Log("PROJECTILE SETTING ANIM TRIGGER OF: " + currentShapeType.ToString());
-        projectileAnimController.SetTrigger(currentShapeType.ToString());
-        projectileSpriteRenderer.sprite = currentPlayerSprite;  
+        thisObjectsSpriteShape = currentPlayerSprite;
+        Debug.Log("PROJECTILE SETTING ANIM TRIGGER OF: " + thisProjectilesShapeType.ToString());
+        
+        
+        
     }
 
     private void OnDisable()
@@ -70,13 +73,18 @@ public class Player_Shape_Projectile_Logic : MonoBehaviour
     {
         yield return new WaitForSeconds(timeBeforeActivatingDanger);
         canGameOverPlayer = true;
+        projectileAnimController.SetTrigger(thisProjectilesShapeType.ToString() + activatedBombStringConst);
+        Debug.Log(thisProjectilesShapeType + activatedBombStringConst);
         // Need Logic for triggering the activation animation for the player's bomb
         projectileCollider.enabled = true;
     }
 
-    public void test()
+    private void OnEnableLogic()
     {
-        Debug.Log("Test called on projectile: " + gameObject.name);
-        gameObject.SetActive(true);
+        callShapeSetupLogic = false; // Stops individual shape being overriden by the setup of other shapes in the object pool.
+        
+        projectileSpriteRenderer.sprite = thisObjectsSpriteShape;
+        projectileAnimController.SetBool(thisProjectilesShapeType.ToString(), true);
+        projectileAnimController.Play("Decider_State");
     }
 }
