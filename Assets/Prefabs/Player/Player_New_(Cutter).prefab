@@ -61,14 +61,14 @@ MonoBehaviour:
   objectPoolSize: 10
   pooledObjects: []
   pooledObjectParent: {fileID: 0}
-  arrayControl: 0
   game_Session: {fileID: 11400000, guid: c706da2b1a39e144b820c17284ff0b34, type: 2}
   firePoint: {fileID: 0}
   currentShapeSelectionSprite: {fileID: 0}
   sprites:
-  - {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  - {fileID: 7482667652216324306, guid: ec50dfb5ec36e9a40b0820515ef258a4, type: 3}
-  - {fileID: 7482667652216324306, guid: 660d4086801021e4ca8dcbf9068fa214, type: 3}
+  - {fileID: 21300000, guid: 34387f0ab7fec2a4ebdcc894cb0a3456, type: 3}
+  - {fileID: 21300000, guid: d5b53ef80d3523f4b89feb349a929d5d, type: 3}
+  - {fileID: 21300000, guid: 5f0e0c7c12b90b04db0ed92fafc8fbbc, type: 3}
+  logicScripts: []
 --- !u!1 &7262216977243650642
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,7 +238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementDirection: {x: 0, y: 0}
-  movementSpeed: 10
+  movementSpeed: 15
   speedToAddOnBoost: 20
   fireRateDelay: 0.193
   playerRB: {fileID: 0}
@@ -340,7 +340,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8448465659896168220}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -367,7 +367,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.7
+  m_Radius: 1.5
 --- !u!95 &114236566737876290
 Animator:
   serializedVersion: 5

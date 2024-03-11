@@ -6,10 +6,10 @@ using UnityEngine.Events;
 
 public class Player_Bullet_Object_Pool : Object_Pool_Template
 {
+    [SerializeField] private Transform firePoint;
+
     [Header("Scriptable Objects for setup/UI use")]
     [SerializeField] private InPlay_Details game_Session;
-
-    [SerializeField] private Transform firePoint;
 
     // Events/Delegates
     private delegate void PassProjectileParameters(Cutter_And_Enemy_Shape_Enums.ShapeType shapeOfProj, Sprite spriteOfProj);
@@ -17,27 +17,32 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
     public delegate void SelectedProjectileChanged(Sprite spriteOfNewlySelectedObj);
     public static SelectedProjectileChanged OnSelectedProjectileChanged;
 
-    private Cutter_And_Enemy_Shape_Enums.ShapeType currentShapeType;
+    [Header("Shape Selection Attributes")]
+    [SerializeField] private Cutter_And_Enemy_Shape_Enums.ShapeType currentShapeType;
     [SerializeField] private Sprite currentShapeSelectionSprite;
 
     [Header("Possible Sprites For Assignment")]
-    [SerializeField] private Sprite[] sprites = new Sprite[Enum.GetNames(typeof(Cutter_And_Enemy_Shape_Enums.ShapeType)).Length];
+    [SerializeField] private Sprite[] sprites; //= new Sprite[Enum.GetNames(typeof(Cutter_And_Enemy_Shape_Enums.ShapeType)).Length];
 
-
-    private Player_Shape_Projectile_Logic[] logicScripts;
 
     private void Start()
     {
         SetTransformCachedVariables();
         SubscribeToFireEvent();
         PopulatePool(); // bullet pool
-        SetProjectileShapeDetails(Cutter_And_Enemy_Shape_Enums.ShapeType.Circle);
+        SetupDefaultPlayerState();
         
+    }
+
+    private void SetupDefaultPlayerState()
+    {
+        currentShapeType = Cutter_And_Enemy_Shape_Enums.ShapeType.Circle;
+        currentShapeSelectionSprite = sprites[0];
     }
 
     protected override void PopulatePool()
     {
-        logicScripts = new Player_Shape_Projectile_Logic[game_Session.StartingPlayerBombs];
+     
         objectPoolSize = game_Session.StartingPlayerBombs;
         base.PopulatePool();
         foreach(GameObject projectile in pooledObjects)
@@ -67,7 +72,7 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
 
                 currentShapeType = Cutter_And_Enemy_Shape_Enums.ShapeType.Circle;
                 currentShapeSelectionSprite = sprites[0];
-                OnSelectedProjectileChanged.Invoke(currentShapeSelectionSprite);
+                OnSelectedProjectileChanged?.Invoke(currentShapeSelectionSprite);
 
                 break;
             case Cutter_And_Enemy_Shape_Enums.ShapeType.Triangle:
@@ -119,7 +124,6 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
             
             _passProjectileParameters.Invoke(currentShapeType, currentShapeSelectionSprite);
             shapeProjectile.transform.SetPositionAndRotation(firePoint.transform.position, transform.rotation.normalized);
-            
             shapeProjectile.SetActive(true);
             game_Session.BombsRemaining--;
             GameManager.a_playerValuesUpdated();

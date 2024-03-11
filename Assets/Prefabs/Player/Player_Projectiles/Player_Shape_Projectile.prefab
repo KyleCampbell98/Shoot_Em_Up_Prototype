@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
-  m_Color: {r: 0.0025007725, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -99,11 +99,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50149daf82be459469fcdce16efde4c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  thisProjectilesShapeType: 0
+  thisObjectsSpriteShape: {fileID: 0}
   callShapeSetupLogic: 1
   projectileSpriteRenderer: {fileID: 0}
   projectileAnimController: {fileID: 0}
-  projectileTransformParent: {fileID: 0}
   projectileCollider: {fileID: 0}
+  projectileTransformParent: {fileID: 0}
   timeBeforeActivatingDanger: 0.8
 --- !u!58 &5335170663391761614
 CircleCollider2D:
