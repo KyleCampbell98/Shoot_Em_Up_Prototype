@@ -37,6 +37,7 @@ public class Player_Animation_Controller : MonoBehaviour
     private void TriggerDamageAnim()
     {
         player_Session_Details.PlayerHP--;
+        GameManager.a_playerValuesUpdated();
         playerAnimController.SetInteger(playerHpParam_Hash, player_Session_Details.PlayerHP);
         if (player_Session_Details.PlayerHP < 0)
         {
@@ -44,8 +45,6 @@ public class Player_Animation_Controller : MonoBehaviour
             return;
         }
 
-      
-        playerAnimController.SetInteger(playerHpParam_Hash, player_Session_Details.PlayerHP);
         if (CoroutineFunction == null)
         {
             CoroutineFunction += AnimationTrigger;
@@ -54,18 +53,12 @@ public class Player_Animation_Controller : MonoBehaviour
         TriggerToSet = playerIsDamagedParam_Hash; // Stage one of Damage: Slow Flash Invulnerability
         AnimationTrigger();
       
-        TriggerToSet = startInvulnerabilityEndParam_Hash;
-        StartCoroutine(TimeBeforeCodeExecution(secondsBeforeInvulnerabilityEnds, CoroutineFunction));
+        TriggerToSet = startInvulnerabilityEndParam_Hash; // Assigns the ending of invulnerability as the next trigger to set
+        StartCoroutine(TimeBeforeCodeExecution(secondsBeforeInvulnerabilityEnds, CoroutineFunction)); // Starts the ending of invulnerability through a delayed coroutine. 
                
     }
-    // NEED TO IMPLEMENT LOGIC SO THAT THE DAMAGE ANIMATION DOESNT PLAY ONCE PLAYER IS ON ONE LAST HP POINT. THIS IS DUE TO THE ANIMATION OVERWRITTING COLLISION LOGIC ON THAT GAME OVER SCENARIO.
 
     private void AnimationTrigger() => playerAnimController.SetTrigger(TriggerToSet);
-
-
-
-
-
 
     private IEnumerator TimeBeforeCodeExecution(float timeToWait, Action functionToDelay )
     {

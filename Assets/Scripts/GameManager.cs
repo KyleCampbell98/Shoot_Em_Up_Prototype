@@ -29,7 +29,11 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("START CALLED)");
         InternalEventSubscriptions();
+       if(currentGameState == GameState.Paused) {
+            PauseGame();
+        }
     }
 
     private void InternalEventSubscriptions()

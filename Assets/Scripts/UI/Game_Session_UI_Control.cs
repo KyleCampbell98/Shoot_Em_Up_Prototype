@@ -89,7 +89,7 @@ public class Game_Session_UI_Control : Menu_UI_Control
     private void UpdateOnScreenUI()
     {
         bombCounter_TMP.text = "Bombs: " + currentGameSessionDetails.BombsRemaining.ToString();
-        playerHP_TMP.text = "Health: " + currentGameSessionDetails.PlayerHP.ToString();
+        playerHP_TMP.text = "Health: " + (currentGameSessionDetails.PlayerHP + 1).ToString();
 
 
     }
