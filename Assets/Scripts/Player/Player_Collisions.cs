@@ -30,11 +30,8 @@ public class Player_Collisions : MonoBehaviour
         {
             canCollideWithEnemies = false;
             Debug.Log("Player detected an enemy upon collision.");
-            m_playerTookDamage();
-            
+            m_playerTookDamage();   
         }
-
-     
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
