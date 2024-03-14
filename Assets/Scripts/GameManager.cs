@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public enum GameState { In_Play, Paused, At_Menu, Game_Over }
 
     private static GameState currentGameState;
-    public static GameState CurrentGameState { get { return currentGameState; } private set { currentGameState = value; m_GameStateChanged(currentGameState); } }
+    public static GameState CurrentGameState { get { return currentGameState; } private set { currentGameState = value; m_GameStateChanged?.Invoke(currentGameState); } } // null check here so that the delegate isnt called in the starting of a new session before other scripts have had chance to sub to this delegate. 
     // Theory that once changed, the Property will inform all subscribers through a triggered delegate that the state has changed.
     // All elements that need to change the state will call the static delegate with the new required state, then all elements that need to know the new state will be informed
     // through the property event call.
@@ -26,14 +26,21 @@ public class GameManager : MonoBehaviour
 
     public static Action a_playerValuesUpdated;
 
-
     private void Start()
     {
-        Debug.Log("START CALLED)");
         InternalEventSubscriptions();
-       if(currentGameState == GameState.Paused) {
-            PauseGame();
+        StartNewGame();
+    }
+
+    private void StartNewGame()
+    {
+        Debug.Log("Game Manager: New Game Started");
+        
+        if (currentGameState == GameState.Paused)
+        {
+            PauseGame(); // Unpauses game if it has loaded in a paused state.
         }
+        currentGameSession.ResetGameSession();
     }
 
     private void InternalEventSubscriptions()
@@ -44,9 +51,9 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
-        CurrentGameState = GameState.Game_Over;
-        
+        CurrentGameState = GameState.Game_Over;     
     }
+
     private void PauseGame()
     {
         switch (CurrentGameState)
@@ -72,6 +79,7 @@ public class GameManager : MonoBehaviour
 
     private void OnDisable()
     {
+        Debug.Log("On Disable called from GameManager");
         a_ActivatePause -= PauseGame;
         a_GameOver -= GameOver;
     }

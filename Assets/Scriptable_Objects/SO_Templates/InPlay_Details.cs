@@ -57,12 +57,17 @@ public class InPlay_Details : ScriptableObject
         BestSurvivalTime = 0f;
     }
 
-    private void OnDisable()
+    public void ResetGameSession()
     {
         CurrentGameSurvivalTime = 0f;
         CurrentGameEnemiesDefeated = 0;
         PlayerHP = startingPlayerHP;
         BombsRemaining = startingPlayerBombs;
+    }
+
+    private void OnDisable()
+    {
+        ResetGameSession();
     }
 
 }
