@@ -28,6 +28,7 @@ public class InPlay_Details : ScriptableObject
     public int BestEnemiesDefeated { get { return bestEnemiesDefeated; } private set { bestEnemiesDefeated= value; } } // This property set by internal method only
 
     // Player Info properties
+    public int StartingPlayerHP { get { return startingPlayerHP; } }
     public int PlayerHP { get { return playerHP; } set {  playerHP = value; } }
     public int BombsRemaining { get {  return bombsRemaining; } set { if (value <= 0) { bombsRemaining = 0; } else { bombsRemaining = value; } } }
     public int StartingPlayerBombs { get { return startingPlayerBombs;  } }

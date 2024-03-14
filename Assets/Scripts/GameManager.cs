@@ -18,13 +18,19 @@ public class GameManager : MonoBehaviour
     // All elements that need to change the state will call the static delegate with the new required state, then all elements that need to know the new state will be informed
     // through the property event call.
 
+    [Header("Game Element Control")]
+    [SerializeField] private int enemyDefeatsNeededForNextHPDrop;
+    [SerializeField] private int currentEnemyDefeatProgress;
+    [SerializeField] private bool canDropHPPickup;
+
     // Events and Delegates
     public delegate void GameStateChanged(GameState newState);
     public static GameStateChanged m_GameStateChanged;
     public static Action a_ActivatePause;
     public static Action a_GameOver;
-
-    public static Action a_playerValuesUpdated;
+    public static Action a_PlayerDefeatedEnemy; // Called every time an enemy is killed by a bomb
+    public static Action a_PlayerValuesUpdated;
+    public static Action a_ReleaseHPPickupDrop; // Called from within the script once the player has defeated enough enemies. 
 
     private void Start()
     {
@@ -47,6 +53,7 @@ public class GameManager : MonoBehaviour
     {
         a_ActivatePause += PauseGame;
         a_GameOver += GameOver;
+        a_PlayerDefeatedEnemy += PlayerDefeatedEnemy;
     }
 
     private void GameOver()
@@ -75,6 +82,23 @@ public class GameManager : MonoBehaviour
                 Debug.LogError("Dead or At menu. Cannot Pause Right Now."); // Handles other states such as being at the menu or already dead. 
                 break;
         }
+    }
+    private void PlayerDefeatedEnemy()
+    {
+        currentGameSession.CurrentGameEnemiesDefeated++;
+        if(currentEnemyDefeatProgress >= enemyDefeatsNeededForNextHPDrop )
+        {
+            if (currentGameSession.PlayerHP < currentGameSession.StartingPlayerHP)
+            {
+                a_ReleaseHPPickupDrop?.Invoke();
+            }
+            else
+            {
+                // Add logic for increasing player score instead
+            }
+
+        }
+        a_PlayerValuesUpdated?.Invoke();
     }
 
     private void OnDisable()

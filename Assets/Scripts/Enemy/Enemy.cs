@@ -93,6 +93,7 @@ public class Enemy : MonoBehaviour
         if (collisionShapeType == enemyShapeType)
         {
             Debug.Log("Upon Collision, both the enemy and player had matching enum types. ");
+            GameManager.a_PlayerDefeatedEnemy();
             projectileCollidedWith.SetActive(false);
             topMostParentGameObjRef.SetActive(false);
 

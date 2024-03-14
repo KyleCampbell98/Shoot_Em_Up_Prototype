@@ -34,7 +34,7 @@ public class Game_Session_UI_Control : Menu_UI_Control
             Debug.Log("GM found!");
             GameManager.m_GameStateChanged += DisplayCanvas;
             GameManager.a_GameOver += ResetScoringInfo;
-            GameManager.a_playerValuesUpdated += UpdateOnScreenUI;
+            GameManager.a_PlayerValuesUpdated += UpdateOnScreenUI;
         }
         else
         {
@@ -98,6 +98,6 @@ public class Game_Session_UI_Control : Menu_UI_Control
     {
         GameManager.m_GameStateChanged -= DisplayCanvas;
         GameManager.a_GameOver -= ResetScoringInfo;
-        GameManager.a_playerValuesUpdated -= UpdateOnScreenUI;
+        GameManager.a_PlayerValuesUpdated -= UpdateOnScreenUI;
     }
 }

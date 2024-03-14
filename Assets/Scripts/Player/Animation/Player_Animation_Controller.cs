@@ -37,7 +37,7 @@ public class Player_Animation_Controller : MonoBehaviour
     private void TriggerDamageAnim()
     {
         player_Session_Details.PlayerHP--;
-        GameManager.a_playerValuesUpdated();
+        GameManager.a_PlayerValuesUpdated();
         playerAnimController.SetInteger(playerHpParam_Hash, player_Session_Details.PlayerHP);
         if (player_Session_Details.PlayerHP < 0)
         {
