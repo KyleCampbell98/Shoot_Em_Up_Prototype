@@ -79,7 +79,6 @@ public class Player_Animation_Controller : MonoBehaviour
     private void AddHealthEvent()
     {
        
-     //   GameManager.a_PlayerValuesUpdated();
         playerAnimController.SetInteger(playerHpParam_Hash, player_Session_Details.PlayerHP);   
     }
 

@@ -474,6 +474,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_Shape_Projectile
       objectReference: {fileID: 0}
+    - target: {fileID: 3650962757895598168, guid: bb62d025c25747e4e96a9bf057b93a2e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1989,7 +1993,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentGameSession: {fileID: 11400000, guid: c706da2b1a39e144b820c17284ff0b34, type: 2}
-  enemyDefeatsNeededForNextHPDrop: 0
+  enemyDefeatsNeededForNextHPDrop: 3
   currentEnemyDefeatProgress: 0
   canDropHPPickup: 0
 --- !u!114 &818360921
@@ -6113,7 +6117,7 @@ Transform:
   m_GameObject: {fileID: 2056323524}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -80.7, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

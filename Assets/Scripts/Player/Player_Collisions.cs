@@ -13,7 +13,7 @@ public class Player_Collisions : MonoBehaviour
     private bool gameIsOver = false; // If true player can no longer collide with eneimes whilst the game plays behind the UI.
 
     public delegate void PlayerCollsionsEvent(bool damaged);
-    public static PlayerCollsionsEvent m_playerCollisionsEvent;
+    public static PlayerCollsionsEvent m_playerCollisionsEvent; // Mainly handles player animations
     public UnityEvent m_playerTookDamageEvent;
 
     private void Awake()
@@ -33,6 +33,7 @@ public class Player_Collisions : MonoBehaviour
         {
             canCollideWithEnemies = false;
             Debug.Log("Player Collisions: Player detected an enemy upon collision.");
+     
             m_playerCollisionsEvent(damaged : true);   
         }
     }

@@ -13,14 +13,13 @@ GameObject:
   - component: {fileID: 8778221418248582695}
   - component: {fileID: 7444615899568778340}
   - component: {fileID: 8570383033968688324}
-  - component: {fileID: 6223152605965803829}
   m_Layer: 0
   m_Name: Player_Health_Pickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &558080146633486284
 Transform:
   m_ObjectHideFlags: 0
@@ -154,17 +153,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d72333ad4b78e364c9ebd407f9fe72c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6223152605965803829
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 691954813355709727}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b23524fbd70e9c84986b300d88eb1147, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
