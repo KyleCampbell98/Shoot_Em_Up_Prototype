@@ -87,7 +87,7 @@ public class Enemy_RandomBouncer : Enemy
             enemyRBCollisionComponent = Static_Helper_Methods.FindComponentInGameObject<Enemy_RandomBouncer_Collisions>(gameObject);
         }
        
-        else { Debug.LogError("Component \"RandomBouncer Collisions\" not found within \"Random Bouncer Enemy\". Static Helper Method could be missing it"); }
+        else { Debug.LogError("Enemy Random Bouncer: Component \"RandomBouncer Collisions\" not found within \"Random Bouncer Enemy\". Static Helper Method could be missing it"); }
 
         enemyRBCollisionComponent.OnBounce += SwitchDirection;
       

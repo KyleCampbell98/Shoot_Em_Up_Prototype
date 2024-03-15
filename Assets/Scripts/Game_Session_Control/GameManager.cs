@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     public static Action a_PlayerDefeatedEnemy; // Called every time an enemy is killed by a bomb
     public static Action a_PlayerValuesUpdated;
     public static Action a_ReleaseHPPickupDrop; // Called from within the script once the player has defeated enough enemies. 
+    public static Action<bool> a_PlayerCollectedPickup;
 
     private void Start()
     {
@@ -54,6 +55,7 @@ public class GameManager : MonoBehaviour
         a_ActivatePause += PauseGame;
         a_GameOver += GameOver;
         a_PlayerDefeatedEnemy += PlayerDefeatedEnemy;
+        a_PlayerCollectedPickup += EditPlayerStatus;
     }
 
     private void GameOver()
@@ -67,43 +69,66 @@ public class GameManager : MonoBehaviour
         {
             case GameState.In_Play:
                 CurrentGameState = GameState.Paused;
-                Debug.Log("Game should now be paused");
+                Debug.Log("Game Manager: Game should now be paused");
                 Time.timeScale = 0;
 
                 break;
 
             case GameState.Paused:
                 CurrentGameState = GameState.In_Play;
+                Debug.Log("Game Manager: Game should now NOT be paused");
                 Time.timeScale = 1;
 
                 break;
 
             default:
-                Debug.LogError("Dead or At menu. Cannot Pause Right Now."); // Handles other states such as being at the menu or already dead. 
+                Debug.LogError("Game Manager: Dead or At menu. Cannot Pause Right Now."); // Handles other states such as being at the menu or already dead. 
                 break;
         }
     }
     private void PlayerDefeatedEnemy()
     {
+        Debug.Log("Game Manager: Player Defeated Enemy Called");
         currentGameSession.CurrentGameEnemiesDefeated++;
+        currentEnemyDefeatProgress++;
         if(currentEnemyDefeatProgress >= enemyDefeatsNeededForNextHPDrop )
         {
             if (currentGameSession.PlayerHP < currentGameSession.StartingPlayerHP)
             {
-                a_ReleaseHPPickupDrop?.Invoke();
+              
+                a_ReleaseHPPickupDrop?.Invoke();   
             }
             else
             {
                 // Add logic for increasing player score instead
             }
-
+            currentEnemyDefeatProgress = 0;
         }
         a_PlayerValuesUpdated?.Invoke();
+    }
+    private void EditPlayerStatus(bool giveHealth)
+    {
+        switch (giveHealth)
+        {
+            case false:
+                currentGameSession.BombsRemaining++;
+                a_PlayerValuesUpdated?.Invoke();
+                break;
+
+                case true:
+                currentGameSession.PlayerHP++;
+                a_PlayerValuesUpdated?.Invoke();
+                break;
+            default:
+            Debug.LogError("Triggered a player pickup collision, but no pickup was associated with the event trigger. ");
+                break;
+        }
     }
 
     private void OnDisable()
     {
-        Debug.Log("On Disable called from GameManager");
+        currentEnemyDefeatProgress = 0;
+        Debug.Log("Game Manager: On Disable called");
         a_ActivatePause -= PauseGame;
         a_GameOver -= GameOver;
     }

@@ -47,10 +47,6 @@ public class Player_Shape_Projectile_Logic : MonoBehaviour
         if (!callShapeSetupLogic) { return; }
         thisProjectilesShapeType = currentShapeType;
         thisObjectsSpriteShape = currentPlayerSprite;
-        Debug.Log("PROJECTILE SETTING ANIM TRIGGER OF: " + thisProjectilesShapeType.ToString());
-        
-        
-        
     }
 
     private void OnDisable()

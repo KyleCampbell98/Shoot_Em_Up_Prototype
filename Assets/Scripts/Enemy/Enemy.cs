@@ -61,7 +61,6 @@ public class Enemy : MonoBehaviour
    
     public void SetUpEnemy(float waveMovementSpeed, Shape_Info shape_Info, GameObject enemyMovementTarget)
     {
-        Debug.Log("SETUP CALLED");
         movementSpeed = waveMovementSpeed;
         enemyShapeType = shape_Info.ShapeType;
         enemySpriteRenderer.sprite = shape_Info.Sprite;
@@ -92,7 +91,7 @@ public class Enemy : MonoBehaviour
     {
         if (collisionShapeType == enemyShapeType)
         {
-            Debug.Log("Upon Collision, both the enemy and player had matching enum types. ");
+            Debug.Log("Enemy: Upon Collision, both the enemy and player had matching enum types. ");
             GameManager.a_PlayerDefeatedEnemy();
             projectileCollidedWith.SetActive(false);
             topMostParentGameObjRef.SetActive(false);
@@ -100,7 +99,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            Debug.Log("Collision logged, but shape types were mismatched");
+            Debug.Log("Enemy: Collision logged, but shape types were mismatched");
         }
     } // This should really be in the "General Collisions" script, however that script currently has no access to shape type parameters.
 

@@ -31,14 +31,14 @@ public class Game_Session_UI_Control : Menu_UI_Control
         UpdateOnScreenUI(); 
         if (FindObjectOfType<GameManager>() != null)
         {
-            Debug.Log("GM found!");
+            Debug.Log("Game Session UI Controller: Game Manager found");
             GameManager.m_GameStateChanged += DisplayCanvas;
             GameManager.a_GameOver += ResetScoringInfo;
             GameManager.a_PlayerValuesUpdated += UpdateOnScreenUI;
         }
         else
         {
-            Debug.LogError("Game Manager missing!");
+            Debug.LogError("Game Session UI Controller: Game Manager missing!");
         }
         SetPanelActiveStatus(inplay: true);
     }
