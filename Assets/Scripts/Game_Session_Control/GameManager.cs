@@ -88,19 +88,20 @@ public class GameManager : MonoBehaviour
     }
     private void PlayerDefeatedEnemy()
     {
-        Debug.Log("Game Manager: Player Defeated Enemy Called");
+        Debug.Log("Game Manager: Player Defeated Enemy Called.");
         currentGameSession.CurrentGameEnemiesDefeated++;
         currentEnemyDefeatProgress++;
         if(currentEnemyDefeatProgress >= enemyDefeatsNeededForNextHPDrop )
         {
             if (currentGameSession.PlayerHP < currentGameSession.StartingPlayerHP)
             {
-              
+                Debug.Log("Game Manager: Dropping HP pickup.");
                 a_ReleaseHPPickupDrop?.Invoke();   
             }
             else
             {
-                // Add logic for increasing player score instead
+                Debug.Log("Game Manager: Adding bonus points to player score.");
+
             }
             currentEnemyDefeatProgress = 0;
         }
@@ -111,16 +112,18 @@ public class GameManager : MonoBehaviour
         switch (giveHealth)
         {
             case false:
+                Debug.Log("Game Manager: Increasing Player Bombs");
                 currentGameSession.BombsRemaining++;
                 a_PlayerValuesUpdated?.Invoke();
                 break;
 
                 case true:
+                Debug.Log("Game Manager: Increasing Player Health");
                 currentGameSession.PlayerHP++;
                 a_PlayerValuesUpdated?.Invoke();
                 break;
             default:
-            Debug.LogError("Triggered a player pickup collision, but no pickup was associated with the event trigger. ");
+            Debug.LogError("Game Manager: Triggered a player pickup collision, but no pickup was associated with the event trigger. ");
                 break;
         }
     }

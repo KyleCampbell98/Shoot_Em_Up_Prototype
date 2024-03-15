@@ -34,7 +34,27 @@ public class Player_Animation_Controller : MonoBehaviour
         EventSubscriptions();
     }
   
-    private void TriggerDamageAnim()
+    private void TriggerHealthStateAnim_EventHandler(bool tookDamage)
+    {
+        switch (tookDamage)
+        {
+            case true:
+                TookDamageAnimEvent();
+                Debug.Log("Player Animation Controller: Damage Taken Anim event fired");
+
+                break;
+
+                case false:
+                Debug.Log("Player Animation Controller: Health Added Anim event fired");
+                AddHealthEvent();
+                break;
+        }
+
+        
+               
+    }
+
+    private void TookDamageAnimEvent()
     {
         player_Session_Details.PlayerHP--;
         GameManager.a_PlayerValuesUpdated();
@@ -52,10 +72,15 @@ public class Player_Animation_Controller : MonoBehaviour
 
         TriggerToSet = playerIsDamagedParam_Hash; // Stage one of Damage: Slow Flash Invulnerability
         AnimationTrigger();
-      
+
         TriggerToSet = startInvulnerabilityEndParam_Hash; // Assigns the ending of invulnerability as the next trigger to set
         StartCoroutine(TimeBeforeCodeExecution(secondsBeforeInvulnerabilityEnds, CoroutineFunction)); // Starts the ending of invulnerability through a delayed coroutine. 
-               
+    }
+    private void AddHealthEvent()
+    {
+       
+     //   GameManager.a_PlayerValuesUpdated();
+        playerAnimController.SetInteger(playerHpParam_Hash, player_Session_Details.PlayerHP);   
     }
 
     private void AnimationTrigger() => playerAnimController.SetTrigger(TriggerToSet);
@@ -83,11 +108,11 @@ public class Player_Animation_Controller : MonoBehaviour
 
     private void EventSubscriptions()
     {
-        Player_Collisions.m_playerTookDamage += TriggerDamageAnim;
+        Player_Collisions.m_playerCollisionsEvent += TriggerHealthStateAnim_EventHandler;
     }
 
     private void OnDisable()
     {
-        Player_Collisions.m_playerTookDamage -= TriggerDamageAnim;
+        Player_Collisions.m_playerCollisionsEvent -= TriggerHealthStateAnim_EventHandler;
     }
 }

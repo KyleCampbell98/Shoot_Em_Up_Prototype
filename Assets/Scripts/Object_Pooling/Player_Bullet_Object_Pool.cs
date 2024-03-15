@@ -113,7 +113,7 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
         GameObject shapeProjectile = null;
 
         shapeProjectile = Array.Find(pooledObjects, gameObject => gameObject.activeSelf == false);
-        if(shapeProjectile == null)
+        if (shapeProjectile == null || game_Session.BombsRemaining <= 0)
         {
             Debug.Log("No Ammo left!");
             return;
