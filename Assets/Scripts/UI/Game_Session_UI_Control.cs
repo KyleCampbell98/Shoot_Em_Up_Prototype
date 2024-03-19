@@ -48,7 +48,13 @@ public class Game_Session_UI_Control : Menu_UI_Control
     // Update is called once per frame
     void Update()
     {
-        survivalTimer_TMP.text = currentGameSessionDetails.CurrentGameSurvivalTime.ToString("00.00");
+       // NEED TO WORK OUT LOGIC TO THIS ON PAPER
+        int minutes = Mathf.FloorToInt(currentGameSessionDetails.CurrentGameSurvivalTime / 60F);
+        int seconds = Mathf.FloorToInt(currentGameSessionDetails.CurrentGameSurvivalTime - minutes * 60);
+        int milliseconds = Mathf.FloorToInt((currentGameSessionDetails.CurrentGameSurvivalTime * 100f) % 100f);
+
+        string niceTime = string.Format("{0:0}:{1:00}:{2:00}", minutes, seconds, milliseconds);
+        survivalTimer_TMP.text = niceTime;
     }
 
     private void ResetScoringInfo()
