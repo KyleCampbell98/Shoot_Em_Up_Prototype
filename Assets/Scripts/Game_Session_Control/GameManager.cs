@@ -18,10 +18,13 @@ public class GameManager : MonoBehaviour
     // All elements that need to change the state will call the static delegate with the new required state, then all elements that need to know the new state will be informed
     // through the property event call.
 
-    [Header("Game Element Control")]
-    [SerializeField] private int enemyDefeatsNeededForNextHPDrop;
-    [SerializeField] private int currentEnemyDefeatProgress;
-    [SerializeField] private bool canDropHPPickup;
+    // Game Element Control
+    private static int enemyDefeatsNeededForNextHPDrop = 4;
+    private static int currentEnemyDefeatProgress;
+    private static int amountToIncreaseEnemyDefeatRequirementBy = 1; // Every time a health pickup is dropped, the next pickup is made more difficult to obtain due to this value. 
+
+    public static int EnemyDefeatsNeededForNextHPDrop { get { return enemyDefeatsNeededForNextHPDrop; } }
+  //  public static int AmountToIncreaseEnemyDefeatRequirementBy { get { return amountToIncreaseEnemyDefeatRequirementBy; } } Really this shouldnt be needed by the slider as it should be updated as a value overall, and then that value used to set the slider max value.
 
     // Events and Delegates
     public delegate void GameStateChanged(GameState newState);
@@ -32,6 +35,8 @@ public class GameManager : MonoBehaviour
     public static Action a_PlayerValuesUpdated;
     public static Action a_ReleaseHPPickupDrop; // Called from within the script once the player has defeated enough enemies. 
     public static Action<bool> a_PlayerCollectedPickup;
+
+    public static bool health_Pickup_Is_Active = false;
 
     private void Start()
     {
@@ -95,11 +100,16 @@ public class GameManager : MonoBehaviour
         {
             if (currentGameSession.PlayerHP < currentGameSession.StartingPlayerHP)
             {
+                if (health_Pickup_Is_Active) { Debug.Log("Game Manager: Health Pickup already on field. No Pickup Activated"); return; }
                 Debug.Log("Game Manager: Dropping HP pickup.");
-                a_ReleaseHPPickupDrop?.Invoke();   
+                enemyDefeatsNeededForNextHPDrop += amountToIncreaseEnemyDefeatRequirementBy;
+                a_ReleaseHPPickupDrop?.Invoke();
+                health_Pickup_Is_Active = true;
             }
             else
             {
+                Pickup_Slider_Controller.a_ResetSlider();
+                // TO DO: ADD CODE FOR BONUS POINT INCREASE
                 Debug.Log("Game Manager: Adding bonus points to player score.");
 
             }

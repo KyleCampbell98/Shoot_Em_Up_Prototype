@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEditor.UIElements;
 using System.Runtime.InteropServices;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class Game_Session_UI_Control : Menu_UI_Control
 {
@@ -17,7 +18,6 @@ public class Game_Session_UI_Control : Menu_UI_Control
     [SerializeField] private TextMeshProUGUI playerHP_TMP;
     [SerializeField] private TextMeshProUGUI newBestSurvivalTimeDisplay;
     
-
     [Header("Canvas Refs")]
     [SerializeField] private GameObject in_Play_Panel;
     [SerializeField] private GameObject pause_Panel;
@@ -90,6 +90,7 @@ public class Game_Session_UI_Control : Menu_UI_Control
     {
         bombCounter_TMP.text = "Bombs: " + currentGameSessionDetails.BombsRemaining.ToString();
         playerHP_TMP.text = "Health: " + (currentGameSessionDetails.PlayerHP + 1).ToString();
+        
 
 
     }
