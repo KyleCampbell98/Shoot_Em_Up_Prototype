@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class Player_Bullet_Object_Pool : Object_Pool_Template
 {
     [SerializeField] private Transform firePoint;
+    [SerializeField] private float bulletResetDelay = 3;
 
     [Header("Scriptable Objects for setup/UI use")]
     [SerializeField] private InPlay_Details game_Session;
@@ -23,6 +24,7 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
 
     [Header("Possible Sprites For Assignment")]
     [SerializeField] private Sprite[] sprites; //= new Sprite[Enum.GetNames(typeof(Cutter_And_Enemy_Shape_Enums.ShapeType)).Length];
+    
 
 
     private void Start()
@@ -51,7 +53,10 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
             
             if(projectile.GetComponent<Player_Shape_Projectile_Logic>() != null)
             {
-                _passProjectileParameters += projectile.GetComponent<Player_Shape_Projectile_Logic>().SetupProjectile;    
+                var logicComp = projectile.GetComponent<Player_Shape_Projectile_Logic>();
+                _passProjectileParameters += logicComp.SetupProjectile;
+                logicComp.a_ResetBullet += ReloadABullet;
+
             }
         }
     }
@@ -129,6 +134,20 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
             GameManager.a_PlayerValuesUpdated();
         }
         else { Debug.LogWarning("Could not retrieve object to enable from pool."); }
+    }
+
+    private void ReloadABullet()
+    {
+        Debug.Log("Player Bullet Object Pool: Reload a bullet called.");
+        Invoke(nameof(BulletReset), bulletResetDelay);
+    }
+
+    private void BulletReset()
+    {
+        Debug.Log($"Player Bullet Object Pool: Bullet Reset called after {bulletResetDelay} seconds.");
+
+        game_Session.BombsRemaining++;
+        GameManager.a_PlayerValuesUpdated();
     }
 
     private void OnDisable()

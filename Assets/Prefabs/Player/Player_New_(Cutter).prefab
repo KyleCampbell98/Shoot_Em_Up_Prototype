@@ -61,14 +61,15 @@ MonoBehaviour:
   objectPoolSize: 10
   pooledObjects: []
   pooledObjectParent: {fileID: 0}
-  game_Session: {fileID: 11400000, guid: c706da2b1a39e144b820c17284ff0b34, type: 2}
   firePoint: {fileID: 0}
+  bulletResetDelay: 3
+  game_Session: {fileID: 11400000, guid: c706da2b1a39e144b820c17284ff0b34, type: 2}
+  currentShapeType: 0
   currentShapeSelectionSprite: {fileID: 0}
   sprites:
   - {fileID: 21300000, guid: 34387f0ab7fec2a4ebdcc894cb0a3456, type: 3}
   - {fileID: 21300000, guid: d5b53ef80d3523f4b89feb349a929d5d, type: 3}
   - {fileID: 21300000, guid: 5f0e0c7c12b90b04db0ed92fafc8fbbc, type: 3}
-  logicScripts: []
 --- !u!1 &7262216977243650642
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,7 +241,7 @@ MonoBehaviour:
   movementDirection: {x: 0, y: 0}
   movementSpeed: 15
   speedToAddOnBoost: 20
-  fireRateDelay: 0.193
+  fireRateDelay: 0.5
   playerRB: {fileID: 0}
 --- !u!1 &8448465659896168220
 GameObject:
@@ -333,6 +334,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63137e67ec4f24e4d89c45605f62b0b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_playerTookDamageEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!58 &7508913475906543941
 CircleCollider2D:
   m_ObjectHideFlags: 0

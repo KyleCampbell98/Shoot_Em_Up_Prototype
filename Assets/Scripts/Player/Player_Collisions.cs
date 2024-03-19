@@ -45,7 +45,9 @@ public class Player_Collisions : MonoBehaviour
         {
             if (collision.GetComponent<Player_Shape_Projectile_Logic>())
             {
-                Debug.Log("Player Collisions: Player Collided with their own projectile.");
+                canCollideWithEnemies = false;
+                m_playerCollisionsEvent(damaged: true);
+                
             }
             else if (collision.GetComponent<Health_Pickup_Ref>())
             {

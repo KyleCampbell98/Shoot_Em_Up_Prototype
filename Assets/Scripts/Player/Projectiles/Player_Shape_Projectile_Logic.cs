@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,6 +28,8 @@ public class Player_Shape_Projectile_Logic : MonoBehaviour
             thisProjectilesShapeType = value; 
         } 
     }
+
+    public Action a_ResetBullet;
 
     private void Awake()
     {
@@ -63,6 +66,7 @@ public class Player_Shape_Projectile_Logic : MonoBehaviour
         // Need to reset chain of animations so that projectile returns to unactivated state
         transform.position = gameObject.transform.parent.position;
         projectileCollider.enabled = false;
+        a_ResetBullet?.Invoke();
     }
 
     private IEnumerator ActivateDanger()
