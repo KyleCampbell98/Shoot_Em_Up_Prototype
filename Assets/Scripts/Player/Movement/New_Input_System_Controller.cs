@@ -11,7 +11,7 @@ public class New_Input_System_Controller : MonoBehaviour
     [SerializeField] private Vector2 movementDirection;
     [SerializeField] private float movementSpeed;
     [SerializeField] private float speedToAddOnBoost;
-    [Range(0f, 1f)][SerializeField] private float fireRateDelay = 0.1f;
+    [Range(0f, 1f)][SerializeField] private float fireRateDelay = 0.5f;
     private float boostValue = 0;
 
     [Header("Player Component Cache")]
@@ -67,9 +67,7 @@ public class New_Input_System_Controller : MonoBehaviour
 
     // Actions
     public void OnFire() 
-    {
-
-         
+    {     
         if (canFire)
         {
            float timeSinceLastFire = Time.time - lastFireTime;
