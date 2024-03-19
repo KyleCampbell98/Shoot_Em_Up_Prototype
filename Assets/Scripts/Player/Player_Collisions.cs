@@ -47,7 +47,8 @@ public class Player_Collisions : MonoBehaviour
             {
                 canCollideWithEnemies = false;
                 m_playerCollisionsEvent(damaged: true);
-                
+                collision.gameObject.SetActive(false);
+
             }
             else if (collision.GetComponent<Health_Pickup_Ref>())
             {
@@ -55,14 +56,16 @@ public class Player_Collisions : MonoBehaviour
 
                 GameManager.a_PlayerCollectedPickup(pickupIsHealth);
                 m_playerCollisionsEvent(damaged: false);
+                collision.gameObject.SetActive(false);
             }
             else if (collision.GetComponent<Bomb_Pickup_Ref>())
             {
                 pickupIsHealth = false;
                 GameManager.a_PlayerCollectedPickup(pickupIsHealth);
+                collision.gameObject.SetActive(false);
             }
 
-            collision.gameObject.SetActive(false);
+            
         }
     }
 
