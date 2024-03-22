@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 
 
-public class UI_Scoring_Control : MonoBehaviour
+public class UI_Scoring_Control : Menu_UI_Control
 {
     [Header("Scoring Cached Storage")]
     [SerializeField] private InPlay_Details scoringCache;
@@ -18,15 +18,14 @@ public class UI_Scoring_Control : MonoBehaviour
     {
         Debug.Log("Scene Load call test");
         bestEnemiesDefeated_TMP.text = scoringCache.BestEnemiesDefeated.ToString();
-        bestTimeSurvived_TMP.text = scoringCache.BestSurvivalTime.ToString();
-
+        bestTimeSurvived_TMP.text = FormatRawTime(scoringCache.BestSurvivalTime);
     }
 
     public void ResetGameScores()
     {
         scoringCache.ResetHighScores();
         bestEnemiesDefeated_TMP.text = scoringCache.BestEnemiesDefeated.ToString();
-        bestTimeSurvived_TMP.text = scoringCache.BestSurvivalTime.ToString();
+        bestTimeSurvived_TMP.text = FormatRawTime(scoringCache.BestSurvivalTime);
     }
 
 

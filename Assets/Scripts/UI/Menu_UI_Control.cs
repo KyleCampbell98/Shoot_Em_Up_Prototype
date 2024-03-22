@@ -27,4 +27,12 @@ public class Menu_UI_Control : MonoBehaviour
     {
 
     }
+
+    protected string FormatRawTime(float rawTimeData)
+    {
+        int minutes = Mathf.FloorToInt(rawTimeData / 60F);
+        int seconds = Mathf.FloorToInt(rawTimeData - (minutes * 60));
+
+        return string.Format("{0:00}:{1:00}", minutes, seconds); // COPY PASTE CODE
+    }
 }
