@@ -23,6 +23,8 @@ public class New_Input_System_Controller : MonoBehaviour
     bool canFire = true;
     bool canMove = true;
 
+    // Emergency Wave Push Control
+
     
     public event UnityAction OnFireHit;
 
