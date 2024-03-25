@@ -12,6 +12,7 @@ public class New_Input_System_Controller : MonoBehaviour
     [SerializeField] private float movementSpeed;
     [SerializeField] private float speedToAddOnBoost;
     [Range(0f, 1f)][SerializeField] private float fireRateDelay = 0.5f;
+    [Range(10f, 30f)][SerializeField] private float emergencyPulseUseDelay = 20f; // Could potetnially add a UI element to tell players when the emergency pulse has cooled down. 
     private float boostValue = 0;
 
     [Header("Player Component Cache")]
@@ -20,13 +21,16 @@ public class New_Input_System_Controller : MonoBehaviour
 
     // Fire Rate Control
     private float lastFireTime;
+    private float lastEmergencyPulseTime;
     bool canFire = true;
     bool canMove = true;
+  [SerializeField]  bool canEmergencyPulse = true;
 
     // Emergency Wave Push Control
 
     
     public event UnityAction OnFireHit;
+    public event UnityAction OnEmergencyPulseActivated;
 
 
 
@@ -81,6 +85,21 @@ public class New_Input_System_Controller : MonoBehaviour
            
         }
     } // Input System Method
+
+    public void OnEmergencyPulse()
+    {
+        Debug.Log("On Emergency Pulse Top Level call");
+
+        if (canEmergencyPulse)
+        {
+            float timeSinceLastPulse = Time.time - lastEmergencyPulseTime;
+            if(timeSinceLastPulse >= emergencyPulseUseDelay)
+            {
+                OnEmergencyPulse();
+                lastEmergencyPulseTime = Time.time;
+            }
+        }
+    }
 
     public void OnPause_Unpause()
     {

@@ -7,6 +7,7 @@ public class Player_Particle_Controller : MonoBehaviour
 {
     [SerializeField] private ParticleSystem playerDamagedSparks_Particle;
     [SerializeField] private ParticleSystem playerEmergencyWave_Particle;
+    [SerializeField] private New_Input_System_Controller playerLogicScript;
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +17,10 @@ public class Player_Particle_Controller : MonoBehaviour
 
     private void EventSubscriptions()
     {
-        Player_Collisions.m_playerCollisionsEvent += TriggerDamagedEffect; }
+        Player_Collisions.m_playerCollisionsEvent += TriggerDamagedEffect;
+        playerLogicScript = Static_Helper_Methods.FindComponentInGameObject<New_Input_System_Controller>(gameObject);
+        playerLogicScript.OnEmergencyPulseActivated += TriggerEmergencyPulseEffect;
+    }
 
     private void TriggerDamagedEffect(bool damaged)
     {
@@ -26,9 +30,15 @@ public class Player_Particle_Controller : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void TriggerEmergencyPulseEffect()
     {
-        
+        playerDamagedSparks_Particle.Play();
+    }
+
+    private void OnDisable()
+    {
+        Player_Collisions.m_playerCollisionsEvent -= TriggerDamagedEffect;
+        playerLogicScript.OnEmergencyPulseActivated -= TriggerEmergencyPulseEffect;
+
     }
 }

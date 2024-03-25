@@ -67,5 +67,6 @@ public class Pickup_Slider_Controller : MonoBehaviour
     private void OnDisable()
     {
         GameManager.a_PlayerDefeatedEnemy -= UpdateSliderOnEnemyKill;
+        a_ResetSlider -= ResetSlider;
     }
 }

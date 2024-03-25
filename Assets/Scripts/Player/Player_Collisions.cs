@@ -29,12 +29,16 @@ public class Player_Collisions : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.GetComponent<Enemy_General_Collisions>() && canCollideWithEnemies) 
+        if (collision.otherCollider == playerCollider)
         {
-            canCollideWithEnemies = false;
-            Debug.Log("Player Collisions: Player detected an enemy upon collision.");
-     
-            m_playerCollisionsEvent(damaged : true);   
+
+            if (collision.collider.GetComponent<Enemy_General_Collisions>() && canCollideWithEnemies)
+            {
+                canCollideWithEnemies = false;
+                Debug.Log("Player Collisions: Player detected an enemy upon collision.");
+
+                m_playerCollisionsEvent(damaged: true);
+            }
         }
     }
 
