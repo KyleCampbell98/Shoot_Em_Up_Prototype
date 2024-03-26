@@ -15,10 +15,6 @@ public class Player_Wave_Push : MonoBehaviour
     [SerializeField] private float leprDuration;
     [SerializeField] private float maxWaveSize; // What the push circle will be by the end of the attack (in collider diameter)
 
-
-    // Script Logic Control
-    [SerializeField] private bool isWavePushActive = false;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +23,11 @@ public class Player_Wave_Push : MonoBehaviour
 
         wavePush_Collider.radius = 0;
         ColliderPhysicsSetup();
+
+    }
+
+    private void EventSubscriptions()
+
     }
 
     private void EventSubscriptions()
@@ -48,15 +49,17 @@ public class Player_Wave_Push : MonoBehaviour
     }
 
     private void Update()
+
     {
-        if (isWavePushActive)
-        {
-            WavePushAttack(); // Needs to be called in update due to being a Lerp.
-        }
+        playerLogicScript.OnEmergencyPulseActivated += EnableWavePush;
     }
 
-    private void WavePushAttack() // Aid with this method's functionality came from https://discussions.unity.com/t/how-to-prevent-lerp-from-slowing-down/57065/3
+    private void ColliderPhysicsSetup()
     {
+
+        Physics2D.IgnoreCollision(wavePush_Collider, PlayAreaRefManager.PlayAreaBounds.GetComponent<Collider2D>());
+        Physics2D.IgnoreCollision(player_Collider, wavePush_Collider);
+
         Debug.Log("Wave Push Attack Called");
         if (Mathf.Approximately(maxWaveSize, wavePush_Collider.radius)) 
         {
@@ -65,11 +68,23 @@ public class Player_Wave_Push : MonoBehaviour
         }
         leprDuration += Time.deltaTime;
         wavePush_Collider.radius = Mathf.Lerp(wavePush_Collider.radius, maxWaveSize,  leprDuration / wavePushSpeed); // Further Lerping Study Required: https://gamedevbeginner.com/the-right-way-to-lerp-in-unity-with-examples/#how_to_use_lerp_in_unity
+
     }
+
+    private void GetReferences()
+    {
+        wavePush_Collider = GetComponent<CircleCollider2D>();
+        playerLogicScript = Static_Helper_Methods.FindComponentInGameObject<New_Input_System_Controller>(gameObject);
+        if (playerLogicScript == null) { Debug.Log("Player Wave Push: Player logic script not found"); }
+    }
+
 
     private void EnableWavePush()
     {
+
+
         // isWavePushActive = true;
+
         StartCoroutine(WavePushEG());
     }
 
@@ -78,7 +93,29 @@ public class Player_Wave_Push : MonoBehaviour
         Debug.Log("Player Wave Push: Reset Wave Push Called");
         
         wavePush_Collider.radius = 0;
-        isWavePushActive = false;
+    }
+
+    /// <summary>
+    /// Aid with this method's functionality came from https://discussions.unity.com/t/how-to-prevent-lerp-from-slowing-down/57065/3
+    /// Further Lerping Study Required: https://gamedevbeginner.com/the-right-way-to-lerp-in-unity-with-examples/#how_to_use_lerp_in_unity
+    /// </summary>
+    /// <returns></returns>
+    
+
+    private IEnumerator WavePushEG() 
+    {
+        float timeElapsed = 0;
+
+        while (timeElapsed < leprDuration && !Mathf.Approximately(maxWaveSize, wavePush_Collider.radius))
+        {
+            Debug.Log("Coroutine actually ran");
+            wavePush_Collider.radius = Mathf.Lerp(wavePush_Collider.radius, maxWaveSize, timeElapsed /  wavePushSpeed);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+
+       
+        ResetWavePush();
     }
 
     private void OnDisable()
@@ -86,6 +123,8 @@ public class Player_Wave_Push : MonoBehaviour
         playerLogicScript.OnEmergencyPulseActivated -= EnableWavePush;
 
     }
+
+
 
    private IEnumerator WavePushEG()
     {
@@ -102,4 +141,5 @@ public class Player_Wave_Push : MonoBehaviour
        
         ResetWavePush();
     }
+
 }
