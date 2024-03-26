@@ -32,7 +32,7 @@ public class Player_Particle_Controller : MonoBehaviour
 
     private void TriggerEmergencyPulseEffect()
     {
-        playerDamagedSparks_Particle.Play();
+        playerEmergencyWave_Particle.Play();
     }
 
     private void OnDisable()

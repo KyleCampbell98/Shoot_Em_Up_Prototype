@@ -5588,6 +5588,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_Collider: {fileID: 1705299811}
+  playerLogicScript: {fileID: 0}
   wavePushSpeed: 4
   maxWaveSize: 6
   isWavePushActive: 0
