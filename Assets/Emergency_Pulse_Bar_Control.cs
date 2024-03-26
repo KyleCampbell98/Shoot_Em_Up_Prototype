@@ -6,33 +6,30 @@ using UnityEngine.UI;
 
 public class Emergency_Pulse_Bar_Control : MonoBehaviour
 {
+    [Header("Script References")]
+    [SerializeField] private New_Input_System_Controller playerInputController_Script;
 
-    [SerializeField] private New_Input_System_Controller player_Input_Controller_Script;
-    [SerializeField] private Slider emergency_Pulse_Slider;
+    [Header("Component References")]
+    [SerializeField] private Slider emergencyPulse_Slider;
+    [SerializeField] private Animator empProgressBar_Animator;
 
-    private float bar_Total_divider; // The number that the overall bar total will be divided by. EG: Bar takes 20 seconds to reacharge, divider = 20; 
+    // Progress Bar Configs
+    private float barTotaldivider; // The number that the overall bar total will be divided by. EG: Bar takes 20 seconds to reacharge, divider = 20; 
 
     // Start is called before the first frame update
     void Start()
     {
-
         GetReferences();
-        player_Input_Controller_Script.OnEmergencyPulseActivated += UpdateRechargeBar;
-        bar_Total_divider = player_Input_Controller_Script.EmergencyPulseUseDelay;
+        EventSubscriptions();
+        InitialBarSetup();
     }
 
-    private void GetReferences()
-    {
-        player_Input_Controller_Script = FindObjectOfType<New_Input_System_Controller>();
-
-
-        emergency_Pulse_Slider = GetComponent<Slider>();
-    }
+   
 
     private void UpdateRechargeBar()
     {
 
-        emergency_Pulse_Slider.value = 0;
+        emergencyPulse_Slider.value = 0;
 
 
         StartCoroutine(RechargeBar());
@@ -42,23 +39,43 @@ public class Emergency_Pulse_Bar_Control : MonoBehaviour
     {
 
         float timeElasped = 0f;
-
-        while(timeElasped < bar_Total_divider)
+        empProgressBar_Animator.SetBool("Enemy_Goal_Hit", false);
+        while (timeElasped < barTotaldivider)
         {
             Debug.Log("Emergency_Pulse_Slider_Control: Recharge Bar Coroutine Activated");
-            emergency_Pulse_Slider.value = Mathf.Lerp(emergency_Pulse_Slider.minValue, emergency_Pulse_Slider.maxValue, timeElasped / bar_Total_divider);
+            emergencyPulse_Slider.value = Mathf.Lerp(emergencyPulse_Slider.minValue, emergencyPulse_Slider.maxValue, timeElasped / barTotaldivider);
             timeElasped += Time.deltaTime;
             yield return null;
         }
-      
+
+        empProgressBar_Animator.SetBool("Enemy_Goal_Hit", true);
+
+    }
+
+    // Internal Script Logic
+    private void EventSubscriptions()
+    {
+        playerInputController_Script.OnEmergencyPulseActivated += UpdateRechargeBar;
+    }
+
+    private void InitialBarSetup()
+    {
+        barTotaldivider = playerInputController_Script.EmergencyPulseUseDelay;
+        emergencyPulse_Slider.value = emergencyPulse_Slider.maxValue;
+        empProgressBar_Animator.SetBool("Enemy_Goal_Hit", true);
+    }
+
+    private void GetReferences()
+    {
+        playerInputController_Script = FindObjectOfType<New_Input_System_Controller>();
+        empProgressBar_Animator = GetComponent<Animator>();
+
+        emergencyPulse_Slider = GetComponent<Slider>();
     }
 
     private void OnDisable()
     {
-        player_Input_Controller_Script.OnEmergencyPulseActivated -= UpdateRechargeBar;
-
-
-
+        playerInputController_Script.OnEmergencyPulseActivated -= UpdateRechargeBar;
     }
 
 }
