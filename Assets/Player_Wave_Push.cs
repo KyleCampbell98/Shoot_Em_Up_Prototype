@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Player_Wave_Push : MonoBehaviour
@@ -34,7 +35,7 @@ public class Player_Wave_Push : MonoBehaviour
     {
         if (isWavePushActive)
         {
-            WavePushAttack();
+            WavePushAttack(); // Needs to be called in update due to being a Lerp.
         }
     }
 
@@ -69,4 +70,5 @@ public class Player_Wave_Push : MonoBehaviour
 
     }
 
+   
 }
