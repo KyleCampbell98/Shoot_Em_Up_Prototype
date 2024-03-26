@@ -42,18 +42,11 @@ public class Player_Wave_Push : MonoBehaviour
     {
         wavePush_Collider = GetComponent<CircleCollider2D>();
         playerLogicScript = Static_Helper_Methods.FindComponentInGameObject<New_Input_System_Controller>(gameObject);
-        if (playerLogicScript == null) { Debug.Log("Player Wave Push: Player logic script not found"); }
+        if (playerLogicScript == null)
+        {
+            Debug.Log("Player Wave Push: Player logic script not found");
+        }
     }
-
-    private void Update()
-
-    {
-        playerLogicScript.OnEmergencyPulseActivated += EnableWavePush;
-    }
-
-   
-
-   
 
 
     private void EnableWavePush()
