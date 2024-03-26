@@ -10,13 +10,7 @@ public class Emergency_Pulse_Bar_Control : MonoBehaviour
     [SerializeField] private New_Input_System_Controller player_Input_Controller_Script;
     [SerializeField] private Slider emergency_Pulse_Slider;
 
-    private float bar_Total_divider; // The number that the overall bar total will be divided by. EG: Bar takes 20 seconds to reacharge, divider = 20;
-
-    [SerializeField] private Slider emergency_Pulse_Slider;
-    private float bar_Total_divider; // The number that the overall bar total will be divided by. EG: Bar takes 20 seconds to reacharge, divider = 20;
-
-
-    private bool updateBar; // if false, the update operation lerp wont run. 
+    private float bar_Total_divider; // The number that the overall bar total will be divided by. EG: Bar takes 20 seconds to reacharge, divider = 20; 
 
     // Start is called before the first frame update
     void Start()
@@ -33,15 +27,6 @@ public class Emergency_Pulse_Bar_Control : MonoBehaviour
 
 
         emergency_Pulse_Slider = GetComponent<Slider>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (updateBar)
-        {
-          //  Mathf.Lerp(emergency_Pulse_Slider.minValue, emergency_Pulse_Slider.maxValue, )
-        }
     }
 
     private void UpdateRechargeBar()
@@ -73,7 +58,6 @@ public class Emergency_Pulse_Bar_Control : MonoBehaviour
         player_Input_Controller_Script.OnEmergencyPulseActivated -= UpdateRechargeBar;
 
 
-        yield return new WaitUntil(() => emergency_Pulse_Slider.value == emergency_Pulse_Slider.maxValue);
 
     }
 

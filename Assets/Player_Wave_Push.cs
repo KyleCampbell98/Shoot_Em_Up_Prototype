@@ -26,10 +26,7 @@ public class Player_Wave_Push : MonoBehaviour
 
     }
 
-    private void EventSubscriptions()
-
-    }
-
+   
     private void EventSubscriptions()
     {
         playerLogicScript.OnEmergencyPulseActivated += EnableWavePush;
@@ -54,29 +51,9 @@ public class Player_Wave_Push : MonoBehaviour
         playerLogicScript.OnEmergencyPulseActivated += EnableWavePush;
     }
 
-    private void ColliderPhysicsSetup()
-    {
+   
 
-        Physics2D.IgnoreCollision(wavePush_Collider, PlayAreaRefManager.PlayAreaBounds.GetComponent<Collider2D>());
-        Physics2D.IgnoreCollision(player_Collider, wavePush_Collider);
-
-        Debug.Log("Wave Push Attack Called");
-        if (Mathf.Approximately(maxWaveSize, wavePush_Collider.radius)) 
-        {
-            ResetWavePush();
-            return;
-        }
-        leprDuration += Time.deltaTime;
-        wavePush_Collider.radius = Mathf.Lerp(wavePush_Collider.radius, maxWaveSize,  leprDuration / wavePushSpeed); // Further Lerping Study Required: https://gamedevbeginner.com/the-right-way-to-lerp-in-unity-with-examples/#how_to_use_lerp_in_unity
-
-    }
-
-    private void GetReferences()
-    {
-        wavePush_Collider = GetComponent<CircleCollider2D>();
-        playerLogicScript = Static_Helper_Methods.FindComponentInGameObject<New_Input_System_Controller>(gameObject);
-        if (playerLogicScript == null) { Debug.Log("Player Wave Push: Player logic script not found"); }
-    }
+   
 
 
     private void EnableWavePush()
@@ -102,21 +79,7 @@ public class Player_Wave_Push : MonoBehaviour
     /// <returns></returns>
     
 
-    private IEnumerator WavePushEG() 
-    {
-        float timeElapsed = 0;
-
-        while (timeElapsed < leprDuration && !Mathf.Approximately(maxWaveSize, wavePush_Collider.radius))
-        {
-            Debug.Log("Coroutine actually ran");
-            wavePush_Collider.radius = Mathf.Lerp(wavePush_Collider.radius, maxWaveSize, timeElapsed /  wavePushSpeed);
-            timeElapsed += Time.deltaTime;
-            yield return null;
-        }
-
-       
-        ResetWavePush();
-    }
+   
 
     private void OnDisable()
     {
