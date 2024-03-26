@@ -5,9 +5,10 @@ using UnityEngine;
 public class Generic_Pickup_Behaviour : MonoBehaviour
 {
     [SerializeField] protected float pickupLifespan; // How long the pickup has before despawning.
-
+    [SerializeField] ParticleSystem idleParticleEffect;
     private void Start()
     {
+       idleParticleEffect.Play();
         Invoke("DisablePickup", pickupLifespan);
     }
 
