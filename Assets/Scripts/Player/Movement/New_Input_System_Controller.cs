@@ -18,6 +18,8 @@ public class New_Input_System_Controller : MonoBehaviour
     [Header("Player Component Cache")]
     [SerializeField] private Rigidbody2D playerRB;
 
+    public float EmergencyPulseUseDelay { get { return emergencyPulseUseDelay; } }
+
 
     // Fire Rate Control
     private float lastFireTime;
