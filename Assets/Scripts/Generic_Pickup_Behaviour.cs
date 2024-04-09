@@ -22,14 +22,10 @@ public class Generic_Pickup_Behaviour : MonoBehaviour
     private void OnDisable()
     {
         
-       
+       Pickup_Slider_Controller.a_ResetSlider();
     }
 
-    protected void OnParticleSystemStopped()
-    {
-        Debug.Log("PARTICLE STOPPED");
-        idleEffect_Particle.Play();
-    }
+    
 
     protected virtual void DisablePickup()
     {
