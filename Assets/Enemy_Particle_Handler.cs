@@ -26,7 +26,7 @@ public class Enemy_Particle_Handler : MonoBehaviour
 
     private void OnDisable()
     {
-        Debug.Log("");
+      
         enemy_Destroyed_Particle.Play();
 
     }
