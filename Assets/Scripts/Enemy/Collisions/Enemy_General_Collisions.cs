@@ -40,10 +40,6 @@ public class Enemy_General_Collisions : MonoBehaviour
          */
     }
 
-    protected virtual void DeathAnimLogic()
-    {
-        
-    }
 
     protected virtual void ResetCollisionLogic()
     {

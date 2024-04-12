@@ -130,6 +130,7 @@ public class GameManager : MonoBehaviour
                 case true:
                 Debug.Log("Game Manager: Increasing Player Health");
                 currentGameSession.PlayerHP++;
+                
                 a_PlayerValuesUpdated?.Invoke();
                 break;
             default:

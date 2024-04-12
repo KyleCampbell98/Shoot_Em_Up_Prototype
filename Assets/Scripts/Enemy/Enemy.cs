@@ -20,8 +20,10 @@ public class Enemy : MonoBehaviour
    [SerializeField] protected SpriteRenderer enemySpriteRenderer;
    [SerializeField] protected GameObject topMostParentGameObjRef;
    [SerializeField] protected Animator enemyAnimationController;
-   
-   [Header("Generic Movement Configs")]
+   [SerializeField] private Enemy_General_Collisions enemy_General_Collisions;
+    [SerializeField] private Enemy_Particle_Handler enemy_Particle_Handler;
+
+  [Header("Generic Movement Configs")]
    [SerializeField] protected float movementSpeed;
    [SerializeField] protected GameObject movementTarget;
 
@@ -57,7 +59,13 @@ public class Enemy : MonoBehaviour
         {
             enemyAnimationController = Static_Helper_Methods.FindComponentInGameObject<Animator>(gameObject);
         }
+
+        if(enemy_Particle_Handler == null)
+        {
+            enemy_Particle_Handler = Static_Helper_Methods.FindComponentInGameObject<Enemy_Particle_Handler>(gameObject);
+        }
     }
+    
    
     public void SetUpEnemy(float waveMovementSpeed, Shape_Info shape_Info, GameObject enemyMovementTarget)
     {
@@ -72,8 +80,8 @@ public class Enemy : MonoBehaviour
 
     protected virtual void EventSubscriptions() // Every enemy subclass must define its own set of Event subscriptions in order to function  
     {
-        Enemy_General_Collisions egCollisionsComponent = Static_Helper_Methods.FindComponentInGameObject<Enemy_General_Collisions>(gameObject);
-        egCollisionsComponent.collisionWithPlayerProjectile += OnCollisionWithPlayerProjectile; // Every enemy needs to have the ability to collide with a player projectile
+        enemy_General_Collisions = Static_Helper_Methods.FindComponentInGameObject<Enemy_General_Collisions>(gameObject);
+        enemy_General_Collisions.collisionWithPlayerProjectile += OnCollisionWithPlayerProjectile; // Every enemy needs to have the ability to collide with a player projectile
     }
     protected void OnDisable()
     {
@@ -92,6 +100,8 @@ public class Enemy : MonoBehaviour
         if (collisionShapeType == enemyShapeType)
         {
             Debug.Log("Enemy: Upon Collision, both the enemy and player had matching enum types. ");
+
+            enemy_Particle_Handler.SpawnDeathParticle();
             GameManager.a_PlayerDefeatedEnemy();
             projectileCollidedWith.SetActive(false);
             topMostParentGameObjRef.SetActive(false);
@@ -103,4 +113,10 @@ public class Enemy : MonoBehaviour
         }
     } // This should really be in the "General Collisions" script, however that script currently has no access to shape type parameters.
 
+    private void OnDestroy()
+    {
+        enemy_General_Collisions.collisionWithPlayerProjectile -= OnCollisionWithPlayerProjectile; // Every enemy needs to have the ability to collide with a player projectile
+    }
 }
+
+
