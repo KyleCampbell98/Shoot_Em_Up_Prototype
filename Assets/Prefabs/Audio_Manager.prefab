@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6328429286854243749
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6220711289098658893}
+  - component: {fileID: 2533175158152503742}
+  m_Layer: 0
+  m_Name: Audio_Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6220711289098658893
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6328429286854243749}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2533175158152503742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6328429286854243749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7f6d1d59f04d8d41b99c8db1c391c69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundClips:
+  - soundName: UI Button Click
+    soundClip: {fileID: 8300000, guid: 371dd98c0c0de644e9dc693642321f21, type: 3}
+    volume: 0.331
+    pitch: 1.014
+  - soundName: Bomb Active
+    soundClip: {fileID: 8300000, guid: 9f2c7e8f5f9857d4e82f0fab71b527de, type: 3}
+    volume: 0.165
+    pitch: 1.014
+  - soundName: Health Collected
+    soundClip: {fileID: 8300000, guid: b32506bdd2753874895a7f332ee8c0a1, type: 3}
+    volume: 0.165
+    pitch: 1.014
+  - soundName: Enemy Killed
+    soundClip: {fileID: 8300000, guid: 29984be688a57ed44ac81ad6a92af6df, type: 3}
+    volume: 0.165
+    pitch: 1.014
+  - soundName: Player Hit
+    soundClip: {fileID: 8300000, guid: 091bf51101e17fa478dcead31bed47d9, type: 3}
+    volume: 0.165
+    pitch: 1.014
+  - soundName: EMP
+    soundClip: {fileID: 8300000, guid: 27dfe799a6276e749b8e7ba4f935878b, type: 3}
+    volume: 0.165
+    pitch: 1.014
+  - soundName: Health Low
+    soundClip: {fileID: 8300000, guid: f95dc3902a2e2434d8fde1ae647c8f06, type: 3}
+    volume: 0.165
+    pitch: 1.014
