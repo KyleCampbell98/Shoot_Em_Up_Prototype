@@ -54,7 +54,7 @@ public class Player_Wave_Push : MonoBehaviour
 
 
         // isWavePushActive = true;
-        Audio_Manager.PlaySoundStatic("EMP");
+        Audio_Manager.PlaySoundStatic(Audio_Manager.SoundNames.emp);
         StartCoroutine(WavePushEG());
     }
 

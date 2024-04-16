@@ -2647,6 +2647,10 @@ PrefabInstance:
       value: 0.165
       objectReference: {fileID: 0}
     - target: {fileID: 2533175158152503742, guid: e64821422eba9f04f941738b67003f1a, type: 3}
+      propertyPath: soundClips.Array.data[1].soundName
+      value: Bomb Active
+      objectReference: {fileID: 0}
+    - target: {fileID: 2533175158152503742, guid: e64821422eba9f04f941738b67003f1a, type: 3}
       propertyPath: soundClips.Array.data[7].soundClip
       value: 
       objectReference: {fileID: 8300000, guid: 27dfe799a6276e749b8e7ba4f935878b, type: 3}

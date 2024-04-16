@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine.Audio;
 using UnityEngine;
 using System;
+using System.Linq;
 using System.Reflection.Emit;
 
 public class Audio_Manager : MonoBehaviour
 {
-    [SerializeField] private  Sound[] soundClips;
-    public enum SoundNames { }
+    [SerializeField] private Sound[] soundClips;
+  [Serializable]  public enum SoundNames { ui_button_click, bomb_active, health_collected, enemy_killed, player_hit, emp, health_low}
 
     private static Audio_Manager instance;
 
@@ -37,8 +38,30 @@ public class Audio_Manager : MonoBehaviour
             s.AudioSource.clip = s.Clip;
             s.AudioSource.pitch = s.Pitch;
             s.AudioSource.volume = s.Volume;
+
+            string formattedSoundName;
+            formattedSoundName = s.SoundName.Trim();
+            formattedSoundName = s.SoundName.Replace(" ", "_");
+        
             
+            //formattedSoundName = string.Concat(s.SoundName.Where(c => !char.IsWhiteSpace(c)));
+            formattedSoundName = formattedSoundName.ToLower();
+            s.SoundName = formattedSoundName;
+            if (Enum.IsDefined(typeof(SoundNames), formattedSoundName))
+            {
+                Debug.Log(String.Format("Enum name match found for: {0}", s.SoundName) );
+            }
+            else
+            {
+                throw new Exception("Missing Enum Value. Either Enum list needs updating, or Sound Clips in Audio Manager are incorrectly named");
+            }
         }
+
+       
+               
+                
+        
+
     }
 
     public  void PlaySound(string nameOfSoundToPlay)
@@ -47,7 +70,7 @@ public class Audio_Manager : MonoBehaviour
         soundToPlay.AudioSource.PlayOneShot(soundToPlay.AudioSource.clip);
     }
 
-    public static void PlaySoundStatic(string nameOfSoundToPlay)
+    public static void PlaySoundStatic(SoundNames nameOfSoundToPlay)
     {
         if(instance == null)
         {
@@ -55,6 +78,6 @@ public class Audio_Manager : MonoBehaviour
             return;
         }
 
-        instance.PlaySound(nameOfSoundToPlay);
+        instance.PlaySound(nameOfSoundToPlay.ToString());
     }
 }
