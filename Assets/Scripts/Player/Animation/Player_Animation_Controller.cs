@@ -48,16 +48,16 @@ public class Player_Animation_Controller : MonoBehaviour
                 Debug.Log("Player Animation Controller: Health Added Anim event fired");
                 AddHealthEvent();
                 break;
-        }
-
-        
-               
+        }        
     }
 
     private void TookDamageAnimEvent()
     {
-        player_Session_Details.PlayerHP--;
+        Audio_Manager.PlaySoundStatic(Audio_Manager.SoundNames.player_hit); 
         GameManager.a_PlayerValuesUpdated();
+
+        player_Session_Details.PlayerHP--;
+        
         playerAnimController.SetInteger(playerHpParam_Hash, player_Session_Details.PlayerHP);
         if (player_Session_Details.PlayerHP < 0)
         {
@@ -81,15 +81,17 @@ public class Player_Animation_Controller : MonoBehaviour
        
         playerAnimController.SetInteger(playerHpParam_Hash, player_Session_Details.PlayerHP);   
     }
+    private void FinalHealthAudioAnimTrigger() // Triggers from animation event in the player's final health stage. Doing it this way makes it less dependent on integer values (player HP)
+    {
+        Audio_Manager.PlaySoundStatic(Audio_Manager.SoundNames.health_low);
+    }
 
     private void AnimationTrigger() => playerAnimController.SetTrigger(TriggerToSet);
-
+    
     private IEnumerator TimeBeforeCodeExecution(float timeToWait, Action functionToDelay )
     {
         yield return new WaitForSeconds(timeToWait);
-        functionToDelay.Invoke();
-     
-      
+        functionToDelay.Invoke();  
     }
 
     // Internal Script Logic

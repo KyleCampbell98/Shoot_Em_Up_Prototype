@@ -14,7 +14,7 @@ public class Player_Collisions : MonoBehaviour
 
     public delegate void PlayerCollsionsEvent(bool damaged);
     public static PlayerCollsionsEvent m_playerCollisionsEvent; // Mainly handles player animations
-    public UnityEvent m_playerTookDamageEvent;
+  //  public UnityEvent m_playerTookDamageEvent;
 
     private void Awake()
     {
@@ -36,7 +36,7 @@ public class Player_Collisions : MonoBehaviour
             {
                 canCollideWithEnemies = false;
                 Debug.Log("Player Collisions: Player detected an enemy upon collision.");
-
+             
                 m_playerCollisionsEvent(damaged: true);
             }
         }
@@ -49,6 +49,7 @@ public class Player_Collisions : MonoBehaviour
         {
             if (collision.GetComponent<Player_Shape_Projectile_Logic>())
             {
+
                 canCollideWithEnemies = false;
                 m_playerCollisionsEvent(damaged: true);
                 collision.gameObject.SetActive(false);
@@ -57,7 +58,7 @@ public class Player_Collisions : MonoBehaviour
             else if (collision.GetComponent<Health_Pickup_Ref>())
             {
                 pickupIsHealth = true;
-
+                Audio_Manager.PlaySoundStatic(Audio_Manager.SoundNames.health_collected);
                 GameManager.a_PlayerCollectedPickup(pickupIsHealth);
                 m_playerCollisionsEvent(damaged: false);
                 collision.gameObject.SetActive(false);

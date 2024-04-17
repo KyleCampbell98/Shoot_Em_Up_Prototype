@@ -9,7 +9,7 @@ using System.Reflection.Emit;
 public class Audio_Manager : MonoBehaviour
 {
     [SerializeField] private Sound[] soundClips;
-  [Serializable]  public enum SoundNames { ui_button_click, bomb_active, health_collected, enemy_killed, player_hit, emp, health_low}
+    [Serializable]  public enum SoundNames { ui_button_click, bomb_active, health_collected, enemy_killed, player_hit, emp, health_low}
 
     private static Audio_Manager instance;
 
@@ -39,17 +39,12 @@ public class Audio_Manager : MonoBehaviour
             s.AudioSource.pitch = s.Pitch;
             s.AudioSource.volume = s.Volume;
 
-            string formattedSoundName;
-            formattedSoundName = s.SoundName.Trim();
-            formattedSoundName = s.SoundName.Replace(" ", "_");
-        
+            string formattedSoundName = FormatAudioName(s.SoundName);
             
-            //formattedSoundName = string.Concat(s.SoundName.Where(c => !char.IsWhiteSpace(c)));
-            formattedSoundName = formattedSoundName.ToLower();
-            s.SoundName = formattedSoundName;
+            //s.SoundName = formattedSoundName;
             if (Enum.IsDefined(typeof(SoundNames), formattedSoundName))
             {
-                Debug.Log(String.Format("Enum name match found for: {0}", s.SoundName) );
+                Debug.Log(String.Format("Enum name match found for: {0}. Enum Equivelant is: {1}.", s.SoundName, formattedSoundName) );
             }
             else
             {
@@ -66,7 +61,7 @@ public class Audio_Manager : MonoBehaviour
 
     public  void PlaySound(string nameOfSoundToPlay)
     {
-        Sound soundToPlay = Array.Find(soundClips, sound => sound.SoundName == nameOfSoundToPlay);
+        Sound soundToPlay = Array.Find(soundClips, sound => FormatAudioName(sound.SoundName) == nameOfSoundToPlay);
         soundToPlay.AudioSource.PlayOneShot(soundToPlay.AudioSource.clip);
     }
 
@@ -79,5 +74,17 @@ public class Audio_Manager : MonoBehaviour
         }
 
         instance.PlaySound(nameOfSoundToPlay.ToString());
+    }
+
+
+    // Audio Naming Utility
+    private string FormatAudioName(string stringToFormat)
+    {
+        string formattedAudioName;
+        formattedAudioName = stringToFormat.Trim();
+        formattedAudioName = formattedAudioName.Replace(" ", "_");
+
+        formattedAudioName = formattedAudioName.ToLower();
+        return formattedAudioName;
     }
 }
