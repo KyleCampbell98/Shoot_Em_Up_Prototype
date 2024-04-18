@@ -73,6 +73,7 @@ public class Player_Shape_Projectile_Logic : MonoBehaviour
     {
         yield return new WaitForSeconds(timeBeforeActivatingDanger);
         canGameOverPlayer = true;
+        Audio_Manager.PlaySoundStatic(Audio_Manager.SoundNames.bomb_active);
         projectileAnimController.SetTrigger(thisProjectilesShapeType.ToString() + activatedBombStringConst);
         Debug.Log(thisProjectilesShapeType + activatedBombStringConst);
         // Need Logic for triggering the activation animation for the player's bomb

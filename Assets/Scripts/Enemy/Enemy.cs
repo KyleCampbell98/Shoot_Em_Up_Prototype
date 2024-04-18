@@ -103,6 +103,7 @@ public class Enemy : MonoBehaviour
 
             enemy_Particle_Handler.SpawnDeathParticle();
             GameManager.a_PlayerDefeatedEnemy();
+            Audio_Manager.PlaySoundStatic(Audio_Manager.SoundNames.enemy_killed);
             projectileCollidedWith.SetActive(false);
             topMostParentGameObjRef.SetActive(false);
 

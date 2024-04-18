@@ -126,7 +126,7 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
       
         if (shapeProjectile != null)
         {
-            
+            Audio_Manager.PlaySoundStatic(Audio_Manager.SoundNames.bomb_placed);
             _passProjectileParameters.Invoke(currentShapeType, currentShapeSelectionSprite);
             shapeProjectile.transform.SetPositionAndRotation(firePoint.transform.position, transform.rotation.normalized);
             shapeProjectile.SetActive(true);

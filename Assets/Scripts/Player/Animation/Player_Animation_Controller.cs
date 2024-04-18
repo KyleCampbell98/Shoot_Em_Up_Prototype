@@ -19,6 +19,7 @@ public class Player_Animation_Controller : MonoBehaviour
 
     // Internal Properties
     private int triggerToSet;
+    private bool playedHealthLowAudio = false;
     // This is set every time an animation needs to play, and is then passed into the Animation Trigger Function
     // A property is used for selecting which animation to trigger so that no methods needing to be subscribed to a delegate for coroutine passing will need matching parameters.
   
@@ -46,6 +47,7 @@ public class Player_Animation_Controller : MonoBehaviour
 
                 case false:
                 Debug.Log("Player Animation Controller: Health Added Anim event fired");
+                
                 AddHealthEvent();
                 break;
         }        
@@ -78,12 +80,16 @@ public class Player_Animation_Controller : MonoBehaviour
     }
     private void AddHealthEvent()
     {
-       
+        if (playedHealthLowAudio) { playedHealthLowAudio = false; }
         playerAnimController.SetInteger(playerHpParam_Hash, player_Session_Details.PlayerHP);   
     }
     private void FinalHealthAudioAnimTrigger() // Triggers from animation event in the player's final health stage. Doing it this way makes it less dependent on integer values (player HP)
     {
-        Audio_Manager.PlaySoundStatic(Audio_Manager.SoundNames.health_low);
+        if (!playedHealthLowAudio)
+        {
+            playedHealthLowAudio = true;
+            Audio_Manager.PlaySoundStatic(Audio_Manager.SoundNames.health_low);
+        }
     }
 
     private void AnimationTrigger() => playerAnimController.SetTrigger(TriggerToSet);

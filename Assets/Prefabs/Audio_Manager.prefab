@@ -67,9 +67,13 @@ MonoBehaviour:
     pitch: 1.014
   - soundName: EMP
     soundClip: {fileID: 8300000, guid: 27dfe799a6276e749b8e7ba4f935878b, type: 3}
-    volume: 0.165
+    volume: 0.693
     pitch: 1.014
   - soundName: Health Low
     soundClip: {fileID: 8300000, guid: f95dc3902a2e2434d8fde1ae647c8f06, type: 3}
-    volume: 0.165
+    volume: 0.463
+    pitch: 0.79
+  - soundName: Bomb Placed
+    soundClip: {fileID: 8300000, guid: 5ec0a71068e916244b36ccd4f76be152, type: 3}
+    volume: 0.102
     pitch: 1.014
