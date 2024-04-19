@@ -13,6 +13,8 @@ public class Audio_Manager : MonoBehaviour
 
     private static Audio_Manager instance;
 
+    // Monobehaviour scripts
+
     private void Awake()
     {
         if (instance == null)
@@ -65,7 +67,7 @@ public class Audio_Manager : MonoBehaviour
 
     }
 
-    public void PlaySound(Audio_Manager.SoundNames nameOfSoundToPlay, bool isShortClip)
+    private void PlaySound(SoundNames nameOfSoundToPlay, bool isShortClip)
     {
         Sound soundToPlay = Array.Find(soundClips, sound => FormatAudioName(sound.SoundName) == nameOfSoundToPlay.ToString());
         if (isShortClip) { 
