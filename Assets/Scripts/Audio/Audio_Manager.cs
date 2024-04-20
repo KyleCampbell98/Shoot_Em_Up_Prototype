@@ -85,6 +85,7 @@ public class Audio_Manager : MonoBehaviour
 
     public static void PlaySoundStatic(SoundNames nameOfSoundToPlay)
     {
+
         if(instance == null)
         {
             Debug.LogWarning("Cannot play sound from static method. No Audio Manager Instance detected.");

@@ -5,13 +5,37 @@ using UnityEngine;
 
 public class Enemy_Pool_Manager : MonoBehaviour
 {
+    [Header("Enemy Spawners")]
+    [SerializeField] private List<Enemy_Object_Pool> enemySpawners;
+    [SerializeField] private Enemy_Object_Pool currentlyActivePool;
+
     // Spawning Parameters
-    private List<Transform> spawnPoints = new List<Transform>();
+    [SerializeField] private List<Transform> spawnPoints = new List<Transform>();
+    public List<Transform> SpawnPoints { get { return spawnPoints; } }
+    private bool canSpawnEnemies;
+
+    public bool CanSpawnEnemies { get { return canSpawnEnemies; } }
+
+    // Events/Delegates
+    //public delegate void OnSpawnPointsInitialized();
+    public event Action SpawnPointsInitialized;
 
     // Start is called before the first frame update
     void Start()
     {
         InitializeSpawnPoints();
+        FindEnemySpawners();
+    }
+
+    private void FindEnemySpawners()
+    {
+        foreach(Transform t in transform)
+        {  
+            if(t.TryGetComponent(out Enemy_Object_Pool pool))
+            {
+                enemySpawners.Add(pool);
+            }
+        }
     }
 
     private void InitializeSpawnPoints()
@@ -21,11 +45,10 @@ public class Enemy_Pool_Manager : MonoBehaviour
         {
             spawnPoints.Add(p.gameObject.transform);
         }
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
+        SpawnPointsInitialized?.Invoke();
         
     }
+
+    
 }

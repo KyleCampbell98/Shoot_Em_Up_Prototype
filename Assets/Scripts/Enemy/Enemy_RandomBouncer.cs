@@ -129,6 +129,7 @@ public class Enemy_RandomBouncer : Enemy
 
     protected override void ResetEnemyOnDisable()
     {
+        Debug.Log("Reset Collision Called from Inherited script");
         base.ResetEnemyOnDisable();
         enemyRb.velocity = Vector3.zero;
         

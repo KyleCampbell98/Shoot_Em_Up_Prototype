@@ -58,6 +58,7 @@ public class Player_Collisions : MonoBehaviour
             else if (collision.GetComponent<Health_Pickup_Ref>())
             {
                 pickupIsHealth = true;
+                
                 Audio_Manager.PlaySoundStatic(Audio_Manager.SoundNames.health_collected);
                 GameManager.a_PlayerCollectedPickup(pickupIsHealth);
                 m_playerCollisionsEvent(damaged: false);
