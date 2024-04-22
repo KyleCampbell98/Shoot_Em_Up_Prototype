@@ -43,7 +43,7 @@ public class Enemy_Pool_Manager : MonoBehaviour
     {
         Debug.Log($"{CurrentlyActivePool.gameObject.name} pool has been shut down.");
         CurrentlyActivePool.SpawnTimerActive = false;
-      //  ApplyDifficultyScaling(CurrentlyActivePool);
+        ApplyDifficultyScaling(CurrentlyActivePool);
         CurrentlyActivePool = SetNewCurrentActivePool();
         CurrentlyActivePool.SpawnTimerActive = true;
     }
@@ -54,7 +54,8 @@ public class Enemy_Pool_Manager : MonoBehaviour
         
         foreach(GameObject enemy in CurrentlyActivePool.EnemyPool)
         {
-            enemy.GetComponent<Enemy>().SetUpEnemy(movementMultiplier);
+            Debug.Log("Apply difficulty settings SUCCESS");
+            enemy.GetComponentInChildren<Enemy>().SetUpEnemy(movementMultiplier);
         }
       //  enemy_Object_Pool.enemyWaveData.EnemySpeed *= 1.25f;
     }

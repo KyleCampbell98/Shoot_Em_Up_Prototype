@@ -24,6 +24,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Enemy_Particle_Handler enemy_Particle_Handler;
 
     [Header("Generic Movement Configs")]
+    [SerializeField] protected float uneditedMovemenSpeed;
    [SerializeField] protected float movementSpeed;
    [SerializeField] protected GameObject movementTarget;
 
@@ -70,6 +71,7 @@ public class Enemy : MonoBehaviour
     public void SetUpEnemy(float waveMovementSpeed, Shape_Info shape_Info, GameObject enemyMovementTarget)
     {
         movementSpeed = waveMovementSpeed;
+        uneditedMovemenSpeed = movementSpeed;
         enemyShapeType = shape_Info.ShapeType;
         enemySpriteRenderer.sprite = shape_Info.Sprite;
         movementTarget = enemyMovementTarget;
@@ -80,7 +82,7 @@ public class Enemy : MonoBehaviour
     
     public void SetUpEnemy(float waveMovementSpeedMultiplier)
     {
-       
+       movementSpeed = uneditedMovemenSpeed * waveMovementSpeedMultiplier;
     }
 
     protected virtual void EventSubscriptions() // Every enemy subclass must define its own set of Event subscriptions in order to function  

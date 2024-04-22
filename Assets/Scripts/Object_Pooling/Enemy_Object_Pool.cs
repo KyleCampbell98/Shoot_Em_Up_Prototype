@@ -124,6 +124,7 @@ public class Enemy_Object_Pool : Object_Pool_Template
             // separately was causing 2 random.range calculations, leading to mismatched data in each property call.  
             
             pooledObjects[i].SetActive(false);
+           
         }
     }
 

@@ -182,6 +182,17 @@
                 },
                 {
                     "name": "",
+                    "id": "48bd0794-0310-4a92-b9da-3e7b9d19139d",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Boost",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "a87067f2-0aed-4cc5-8824-416505c818aa",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "Press(behavior=1)",
