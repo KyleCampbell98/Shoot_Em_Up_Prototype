@@ -52,7 +52,7 @@ public class Audio_Manager : MonoBehaviour
             //s.SoundName = formattedSoundName;
             if (Enum.IsDefined(typeof(SoundNames), formattedSoundName))
             {
-                Debug.Log(String.Format("Enum name match found for: {0}. Enum Equivelant is: {1}.", s.SoundName, formattedSoundName));
+               // Debug.Log(String.Format("Enum name match found for: {0}. Enum Equivelant is: {1}.", s.SoundName, formattedSoundName));
             }
             else
             {

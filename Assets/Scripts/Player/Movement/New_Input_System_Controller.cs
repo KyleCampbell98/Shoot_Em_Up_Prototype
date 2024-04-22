@@ -9,7 +9,10 @@ public class New_Input_System_Controller : MonoBehaviour
 {
     [Header("Player Character Configs")]
     [SerializeField] private Vector2 movementDirection;
+    [SerializeField] private float originalMovementSpeed;
     [SerializeField] private float movementSpeed;
+    [SerializeField] private float movementMultiplier = 1.25f;
+    [SerializeField] private float movementMultiplierIncrement = 0.2f;
     [SerializeField] private float speedToAddOnBoost;
     [Range(0f, 1f)][SerializeField] private float fireRateDelay = 0.5f;
     [Range(2f, 30f)][SerializeField] private float emergencyPulseUseDelay = 20f; // Could potetnially add a UI element to tell players when the emergency pulse has cooled down. 
@@ -41,7 +44,9 @@ public class New_Input_System_Controller : MonoBehaviour
     {
         playerRB = GetComponentInParent<Rigidbody2D>();
         GameManager.a_GameOver += StopPlayerControl;
+        GameManager.a_spawnerRoundComplete += IncrementMovementSpeed;
         lastEmergencyPulseTime -= emergencyPulseUseDelay;
+        originalMovementSpeed = movementSpeed;
     }
 
     private void FixedUpdate()
@@ -53,6 +58,12 @@ public class New_Input_System_Controller : MonoBehaviour
     {
         // Should probably move this into a separate script. Have THIS script as a means to purley capture input, to which a separate script would subscribe to an event to implement the input.
         playerRB.velocity = new Vector2(movementDirection.x * (movementSpeed + boostValue), movementDirection.y * (movementSpeed + boostValue)); // Setting velocity directly causes rigid movement, tight for the purpose of this game as twitch movement is needed.
+    }
+
+    private void IncrementMovementSpeed()
+    {
+        movementSpeed = originalMovementSpeed * movementMultiplier;
+        movementMultiplier += movementMultiplierIncrement;
     }
 
 
@@ -119,6 +130,7 @@ public class New_Input_System_Controller : MonoBehaviour
     private void OnDisable()
     {
         GameManager.a_GameOver -= StopPlayerControl;
+        GameManager.a_spawnerRoundComplete -= IncrementMovementSpeed;
     }
 
 }

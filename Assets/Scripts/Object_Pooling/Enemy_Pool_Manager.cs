@@ -53,9 +53,8 @@ public class Enemy_Pool_Manager : MonoBehaviour
     {
         foreach (Enemy_Object_Pool pool in enemySpawners)
         {
-            foreach (GameObject enemy in CurrentlyActivePool.EnemyPool)
+            foreach (GameObject enemy in pool.EnemyPool)
             {
-                Debug.Log("Apply difficulty settings SUCCESS");
                 enemy.GetComponentInChildren<Enemy>().SetUpEnemy(movementMultiplier);
             }
         }
@@ -99,6 +98,7 @@ public class Enemy_Pool_Manager : MonoBehaviour
         {
             enemySpawnerIndexer = 0;
             ApplyDifficultyScaling();
+            GameManager.a_spawnerRoundComplete?.Invoke();
             movementMultiplier += movementMultiplierIncrement;
         }
         else

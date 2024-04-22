@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     public static Action a_PlayerValuesUpdated;
     public static Action a_ReleaseHPPickupDrop; // Called from within the script once the player has defeated enough enemies. 
     public static Action<bool> a_PlayerCollectedPickup;
+    public static Action a_spawnerRoundComplete;
 
     public static bool health_Pickup_Is_Active = false;
 

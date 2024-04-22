@@ -82,6 +82,7 @@ public class Enemy : MonoBehaviour
     
     public void SetUpEnemy(float waveMovementSpeedMultiplier)
     {
+        Debug.Log("Enemy Base: Setup Enemy Called to increase difficulty");
        movementSpeed = uneditedMovemenSpeed * waveMovementSpeedMultiplier;
     }
 

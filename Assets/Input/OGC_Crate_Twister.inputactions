@@ -204,6 +204,17 @@
                 },
                 {
                     "name": "",
+                    "id": "499332f3-1508-4c7b-a4c0-a19cd096a66f",
+                    "path": "<Keyboard>/space",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "BoostRelease",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "84b4cb12-9c7f-4445-af56-b6b5cc1fe062",
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
