@@ -15,7 +15,8 @@ public class Enemy_Pool_Manager : MonoBehaviour
     [SerializeField] private List<Transform> spawnPoints = new List<Transform>();
 
     [Header("Difficulty Scaling Parameters")]
-    [SerializeField] private float movementMultiplier = 1.5f;
+    [SerializeField] private float movementMultiplier = 1.25f;
+    [SerializeField] private float movementMultiplierIncrement = 0.25f;  // How much the multiplier will change on each completed Spawner run through.
 
     // Properties
     private Enemy_Object_Pool CurrentlyActivePool 
@@ -43,19 +44,20 @@ public class Enemy_Pool_Manager : MonoBehaviour
     {
         Debug.Log($"{CurrentlyActivePool.gameObject.name} pool has been shut down.");
         CurrentlyActivePool.SpawnTimerActive = false;
-        ApplyDifficultyScaling(CurrentlyActivePool);
         CurrentlyActivePool = SetNewCurrentActivePool();
         CurrentlyActivePool.SpawnTimerActive = true;
     }
 
     // Spawner Editing Methods
-    private void ApplyDifficultyScaling(Enemy_Object_Pool enemy_Object_Pool)
+    private void ApplyDifficultyScaling()
     {
-        
-        foreach(GameObject enemy in CurrentlyActivePool.EnemyPool)
+        foreach (Enemy_Object_Pool pool in enemySpawners)
         {
-            Debug.Log("Apply difficulty settings SUCCESS");
-            enemy.GetComponentInChildren<Enemy>().SetUpEnemy(movementMultiplier);
+            foreach (GameObject enemy in CurrentlyActivePool.EnemyPool)
+            {
+                Debug.Log("Apply difficulty settings SUCCESS");
+                enemy.GetComponentInChildren<Enemy>().SetUpEnemy(movementMultiplier);
+            }
         }
       //  enemy_Object_Pool.enemyWaveData.EnemySpeed *= 1.25f;
     }
@@ -96,14 +98,14 @@ public class Enemy_Pool_Manager : MonoBehaviour
         if(enemySpawnerIndexer + 1 >= enemySpawners.Count)
         {
             enemySpawnerIndexer = 0;
-            CurrentlyActivePool = enemySpawners[enemySpawnerIndexer];
+            ApplyDifficultyScaling();
+            movementMultiplier += movementMultiplierIncrement;
         }
         else
         {
             enemySpawnerIndexer++;
-            CurrentlyActivePool = enemySpawners[enemySpawnerIndexer];
         }
-
+        CurrentlyActivePool = enemySpawners[enemySpawnerIndexer];
         return CurrentlyActivePool;
     }
 }
