@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25b57a15018364e4baab4d049a7cd123, type: 3}
-  m_Name: Random_Bouncer_Wave_EG
+  m_Name: Random_Bouncer_Wave_EG 1
   m_EditorClassIdentifier: 
   enemyToSpawn: {fileID: 6472709418347385813, guid: 9f9e2c4c9caee784f835920587423e51, type: 3}
   potentialShapes:
   - {fileID: 11400000, guid: 3d9ee8712f823404a90b3ad728fa4bb1, type: 2}
   - {fileID: 11400000, guid: aa7ae99502defec41a5e7ee72ae914c2, type: 2}
   - {fileID: 11400000, guid: 71a258af75e9b504c8da6f645c633921, type: 2}
-  enemySpeed: 9
+  enemySpeed: 13.5
   enemyPoolSize: 6
   spawnRate: 3
   spawnSequentially: 1

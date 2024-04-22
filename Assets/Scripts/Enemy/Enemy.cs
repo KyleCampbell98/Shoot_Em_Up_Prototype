@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
    [SerializeField] private Enemy_General_Collisions enemy_General_Collisions;
     [SerializeField] private Enemy_Particle_Handler enemy_Particle_Handler;
 
-  [Header("Generic Movement Configs")]
+    [Header("Generic Movement Configs")]
    [SerializeField] protected float movementSpeed;
    [SerializeField] protected GameObject movementTarget;
 
@@ -76,6 +76,11 @@ public class Enemy : MonoBehaviour
 
         enemyAnimationController.runtimeAnimatorController = shape_Info.ShapeAnimator;
         enemyAnimationController.Play("Entry");
+    }  
+    
+    public void SetUpEnemy(float waveMovementSpeedMultiplier)
+    {
+       
     }
 
     protected virtual void EventSubscriptions() // Every enemy subclass must define its own set of Event subscriptions in order to function  

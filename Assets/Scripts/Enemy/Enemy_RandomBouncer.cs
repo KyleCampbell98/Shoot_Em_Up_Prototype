@@ -125,8 +125,8 @@ public class Enemy_RandomBouncer : Enemy
         newTarget = new Vector2(UnityEngine.Random.Range(playAreaBounds.bounds.min.x, playAreaBounds.bounds.max.x),
             UnityEngine.Random.Range(playAreaBounds.bounds.min.y, playAreaBounds.bounds.max.y));
         return newTarget;
+        
     }
-
     protected override void ResetEnemyOnDisable()
     {
         Debug.Log("Reset Collision Called from Inherited script");
