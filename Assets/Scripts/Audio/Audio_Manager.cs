@@ -9,7 +9,7 @@ using System.Reflection.Emit;
 public class Audio_Manager : MonoBehaviour
 {
     [SerializeField] private Sound[] soundClips;
-    [Serializable] public enum SoundNames { ui_button_click, bomb_active, health_collected, enemy_killed, player_hit, emp, health_low, bomb_placed, background_music }
+    [Serializable] public enum SoundNames { speed_up, ui_button_click, bomb_active, health_collected, enemy_killed, player_hit, emp, health_low, bomb_placed, background_music }
 
     private static Audio_Manager instance;
 

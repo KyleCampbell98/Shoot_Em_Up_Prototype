@@ -50,8 +50,7 @@ public class Enemy_RandomBouncer : Enemy
         enemyRb.velocity =  direction.normalized * movementSpeed;
     }
     private void SwitchDirection()
-    {
-        
+    {      
         enemyRb.velocity = new Vector2(Mathf.Clamp(enemyRb.velocity.x, -movementSpeed, movementSpeed), Mathf.Clamp(enemyRb.velocity.y, -movementSpeed, movementSpeed));
 
         if (Math.Abs(enemyRb.velocity.y) <= 1)
@@ -94,21 +93,15 @@ public class Enemy_RandomBouncer : Enemy
     }
     private void SetAreaTarget(out bool targetSuccessfullySet)
     {
-       // Debug.Log("Enemy Bouncer: \"Set Target\" called.");
-
         if (playAreaBounds == null)
         {
             if (movementTarget.GetComponent<Collider2D>() == null)
             {
                 playAreaBounds = movementTarget.GetComponentInChildren<Collider2D>();
-               // Debug.Log($"Random Bouncer: playAreaBounds set to : {playAreaBounds.name}.\nFound in child component.");
-
             }
             else
             {
                 playAreaBounds = movementTarget.GetComponent<Collider2D>();
-               // Debug.Log($"Random Bouncer: playAreaBounds set to : {playAreaBounds.name}.\nFound in parent component.");
-
             }
             targetSuccessfullySet = true;
         }
@@ -129,7 +122,6 @@ public class Enemy_RandomBouncer : Enemy
     }
     protected override void ResetEnemyOnDisable()
     {
-        Debug.Log("Reset Collision Called from Inherited script");
         base.ResetEnemyOnDisable();
         enemyRb.velocity = Vector3.zero;
         

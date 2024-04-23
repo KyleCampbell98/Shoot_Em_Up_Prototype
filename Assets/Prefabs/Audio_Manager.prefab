@@ -47,33 +47,51 @@ MonoBehaviour:
   soundClips:
   - soundName: UI Button Click
     soundClip: {fileID: 8300000, guid: 371dd98c0c0de644e9dc693642321f21, type: 3}
+    shouldLoopClip: 0
     volume: 0.331
     pitch: 1.014
   - soundName: Bomb Active
     soundClip: {fileID: 8300000, guid: 9f2c7e8f5f9857d4e82f0fab71b527de, type: 3}
-    volume: 0.165
-    pitch: 1.014
+    shouldLoopClip: 0
+    volume: 0.088
+    pitch: 2.054
   - soundName: Health Collected
     soundClip: {fileID: 8300000, guid: b32506bdd2753874895a7f332ee8c0a1, type: 3}
+    shouldLoopClip: 0
     volume: 0.165
     pitch: 1.014
   - soundName: Enemy Killed
     soundClip: {fileID: 8300000, guid: 29984be688a57ed44ac81ad6a92af6df, type: 3}
+    shouldLoopClip: 0
     volume: 0.165
     pitch: 1.014
   - soundName: Player Hit
     soundClip: {fileID: 8300000, guid: 091bf51101e17fa478dcead31bed47d9, type: 3}
-    volume: 0.165
-    pitch: 1.014
+    shouldLoopClip: 0
+    volume: 0.193
+    pitch: 2
   - soundName: EMP
     soundClip: {fileID: 8300000, guid: 27dfe799a6276e749b8e7ba4f935878b, type: 3}
+    shouldLoopClip: 0
     volume: 0.693
     pitch: 1.014
   - soundName: Health Low
     soundClip: {fileID: 8300000, guid: f95dc3902a2e2434d8fde1ae647c8f06, type: 3}
+    shouldLoopClip: 0
     volume: 0.463
-    pitch: 0.79
+    pitch: 1.263
   - soundName: Bomb Placed
     soundClip: {fileID: 8300000, guid: 5ec0a71068e916244b36ccd4f76be152, type: 3}
-    volume: 0.102
+    shouldLoopClip: 0
+    volume: 0.316
+    pitch: 1.263
+  - soundName: Background Music
+    soundClip: {fileID: 8300000, guid: fe8428e1f2f8b9444a18bac52430d137, type: 3}
+    shouldLoopClip: 1
+    volume: 0.037
+    pitch: 1.014
+  - soundName: Speed Up
+    soundClip: {fileID: 8300000, guid: 133a5cfe424f6ab4cacc6d8012fa3657, type: 3}
+    shouldLoopClip: 1
+    volume: 0.037
     pitch: 1.014

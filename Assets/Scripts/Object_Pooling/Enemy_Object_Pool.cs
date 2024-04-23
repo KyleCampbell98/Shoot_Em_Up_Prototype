@@ -103,7 +103,7 @@ public class Enemy_Object_Pool : Object_Pool_Template
 
     protected override void PopulatePool()
     {
-        Debug.Log("Enemy Object Pool: Populate Object pool called");
+      
 
         pooledObjects = new GameObject[objectPoolSize];
         for (int i = 0; i < objectPoolSize; i++)

@@ -2631,46 +2631,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2533175158152503742, guid: e64821422eba9f04f941738b67003f1a, type: 3}
-      propertyPath: soundClips.Array.size
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 2533175158152503742, guid: e64821422eba9f04f941738b67003f1a, type: 3}
-      propertyPath: soundClips.Array.data[8].pitch
-      value: 1.014
-      objectReference: {fileID: 0}
-    - target: {fileID: 2533175158152503742, guid: e64821422eba9f04f941738b67003f1a, type: 3}
-      propertyPath: soundClips.Array.data[9].pitch
-      value: 1.014
-      objectReference: {fileID: 0}
-    - target: {fileID: 2533175158152503742, guid: e64821422eba9f04f941738b67003f1a, type: 3}
-      propertyPath: soundClips.Array.data[8].volume
-      value: 0.037
-      objectReference: {fileID: 0}
-    - target: {fileID: 2533175158152503742, guid: e64821422eba9f04f941738b67003f1a, type: 3}
-      propertyPath: soundClips.Array.data[9].volume
-      value: 0.102
-      objectReference: {fileID: 0}
-    - target: {fileID: 2533175158152503742, guid: e64821422eba9f04f941738b67003f1a, type: 3}
-      propertyPath: soundClips.Array.data[8].soundClip
-      value: 
-      objectReference: {fileID: 8300000, guid: fe8428e1f2f8b9444a18bac52430d137, type: 3}
-    - target: {fileID: 2533175158152503742, guid: e64821422eba9f04f941738b67003f1a, type: 3}
-      propertyPath: soundClips.Array.data[8].soundName
-      value: Background Music
-      objectReference: {fileID: 0}
-    - target: {fileID: 2533175158152503742, guid: e64821422eba9f04f941738b67003f1a, type: 3}
-      propertyPath: soundClips.Array.data[9].soundClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 5ec0a71068e916244b36ccd4f76be152, type: 3}
-    - target: {fileID: 2533175158152503742, guid: e64821422eba9f04f941738b67003f1a, type: 3}
-      propertyPath: soundClips.Array.data[9].soundName
-      value: Bomb Placed
-      objectReference: {fileID: 0}
-    - target: {fileID: 2533175158152503742, guid: e64821422eba9f04f941738b67003f1a, type: 3}
-      propertyPath: soundClips.Array.data[8].shouldLoopClip
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6220711289098658893, guid: e64821422eba9f04f941738b67003f1a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

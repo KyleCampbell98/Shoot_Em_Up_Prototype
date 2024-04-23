@@ -40,6 +40,11 @@ public class Player_Shape_Cutter : MonoBehaviour
         
 
     } // Listens for player action from input system
+    void OnCycleShapesController(InputValue value)
+    {
+        var convert = value.Get<Vector2>();
+        Debug.Log("Controller trigger input: " + convert.x.ToString());
+    }
 
     private void SwitchActiveShape()
     {

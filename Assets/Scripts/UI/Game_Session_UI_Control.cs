@@ -23,6 +23,8 @@ public class Game_Session_UI_Control : Menu_UI_Control
     [SerializeField] private GameObject pause_Panel;
     [SerializeField] private GameObject game_Over_Panel;
     [SerializeField] private GameObject newHighScoreDisplay;
+    [SerializeField] private GameObject speedUpMessage;
+    [SerializeField] private GameObject survivalBonusMessage;
 
     private string completeFormattedTime;
 
@@ -36,6 +38,8 @@ public class Game_Session_UI_Control : Menu_UI_Control
             GameManager.m_GameStateChanged += DisplayCanvas;
             GameManager.a_GameOver += ResetScoringInfo;
             GameManager.a_PlayerValuesUpdated += UpdateOnScreenUI;
+            GameManager.a_spawnerRoundComplete += SpeedUpMessageEnabler;
+            GameManager.a_bonusTimeAdded += BonusMessageEnabler;
         }
         else
         {
@@ -49,7 +53,6 @@ public class Game_Session_UI_Control : Menu_UI_Control
     // Update is called once per frame
     void Update()
     {
-        // NEED TO WORK OUT LOGIC TO THIS ON PAPER
         completeFormattedTime = FormatRawTime(currentGameSessionDetails.CurrentGameSurvivalTime);
         survivalTimer_TMP.text = completeFormattedTime;
     }
@@ -85,6 +88,15 @@ public class Game_Session_UI_Control : Menu_UI_Control
         }
     }
 
+    private void SpeedUpMessageEnabler()
+    {
+        speedUpMessage.gameObject.SetActive(true);
+    }
+    private void BonusMessageEnabler()
+    {
+        survivalBonusMessage.gameObject.SetActive(true);
+    }
+
     private void SetPanelActiveStatus(bool inplay = false, bool pause = false, bool gameOver = false)
     {
         in_Play_Panel.SetActive(inplay);
@@ -96,6 +108,7 @@ public class Game_Session_UI_Control : Menu_UI_Control
     {
         bombCounter_TMP.text = "Bombs: " + currentGameSessionDetails.BombsRemaining.ToString();
         playerHP_TMP.text = "Health: " + (currentGameSessionDetails.PlayerHP + 1).ToString();
+        survivalTimer_TMP.text = FormatRawTime(currentGameSessionDetails.CurrentGameSurvivalTime);
         
 
 

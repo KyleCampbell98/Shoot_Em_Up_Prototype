@@ -99,6 +99,7 @@ public class Enemy_Pool_Manager : MonoBehaviour
             enemySpawnerIndexer = 0;
             ApplyDifficultyScaling();
             GameManager.a_spawnerRoundComplete?.Invoke();
+            Audio_Manager.PlaySoundStatic(Audio_Manager.SoundNames.speed_up);
             movementMultiplier += movementMultiplierIncrement;
         }
         else

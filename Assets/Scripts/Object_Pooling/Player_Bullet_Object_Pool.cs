@@ -138,14 +138,12 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
 
     private void ReloadABullet()
     {
-        Debug.Log("Player Bullet Object Pool: Reload a bullet called.");
+       
         Invoke(nameof(BulletReset), bulletResetDelay);
     }
 
     private void BulletReset()
     {
-        Debug.Log($"Player Bullet Object Pool: Bullet Reset called after {bulletResetDelay} seconds.");
-
         game_Session.BombsRemaining++;
         GameManager.a_PlayerValuesUpdated();
     }
