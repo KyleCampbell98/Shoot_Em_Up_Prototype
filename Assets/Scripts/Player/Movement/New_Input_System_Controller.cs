@@ -74,6 +74,7 @@ public class New_Input_System_Controller : MonoBehaviour
     {
        
         movementDirection = value.Get<Vector2>();
+      //  movementDirection = new Vector2(Mathf.RoundToInt(movementDirection.x), Mathf.RoundToInt(movementDirection.y)).normalized;
     }
 
     public void OnBoost() // Input System Method

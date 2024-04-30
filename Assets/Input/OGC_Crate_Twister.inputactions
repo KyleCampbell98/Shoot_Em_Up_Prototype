@@ -10,7 +10,7 @@
                     "type": "Value",
                     "id": "a0fe0e69-3d25-4ef6-894e-14381f411e59",
                     "expectedControlType": "Vector2",
-                    "processors": "",
+                    "processors": "NormalizeVector2",
                     "interactions": "",
                     "initialStateCheck": true
                 },
@@ -34,12 +34,12 @@
                 },
                 {
                     "name": "Boost",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "d4b1f6c2-b998-4934-b546-d014ca790f95",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "BoostRelease",
@@ -162,7 +162,7 @@
                     "name": "",
                     "id": "f2bf84c5-8cb2-448e-be96-b3c31e789fbd",
                     "path": "<Gamepad>/rightShoulder",
-                    "interactions": "Hold(duration=1.401298E-45)",
+                    "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Boost",
