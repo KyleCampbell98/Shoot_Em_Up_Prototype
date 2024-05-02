@@ -22,7 +22,19 @@ public class New_Input_System_Controller : MonoBehaviour
     [SerializeField] private Rigidbody2D playerRB;
 
     public float EmergencyPulseUseDelay { get { return emergencyPulseUseDelay; } }
-
+    bool isBoosting = false;
+    private bool IsBoosting
+    {
+        get { return isBoosting; }
+        set
+        {
+            isBoosting = value; if (value == true)
+            {
+                boostValue = speedToAddOnBoost;
+            }
+            else if (value == false) { boostValue = 0; }
+        }
+    }
 
     // Fire Rate Control
     private float lastFireTime;
@@ -79,11 +91,16 @@ public class New_Input_System_Controller : MonoBehaviour
 
     public void OnBoost() // Input System Method
     {
-        boostValue = speedToAddOnBoost;
+       
+          IsBoosting = true;
+        
+     
+         
+        
     }
     public void OnBoostRelease() // Input System Method
     {
-        boostValue = 0;
+        IsBoosting = false;
     }
 
     // Actions

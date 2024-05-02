@@ -376,6 +376,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2906827317156340453, guid: 77f8e3781789d7248adfcfa645734cea, type: 3}
+      propertyPath: speedToAddOnBoost
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2906827317156340453, guid: 77f8e3781789d7248adfcfa645734cea, type: 3}
       propertyPath: movementMultiplier
       value: 1.2
       objectReference: {fileID: 0}
