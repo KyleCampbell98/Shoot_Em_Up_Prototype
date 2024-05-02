@@ -56,7 +56,7 @@ public class Player_Animation_Controller : MonoBehaviour
     private void TookDamageAnimEvent()
     {
         Audio_Manager.PlaySoundStatic(Audio_Manager.SoundNames.player_hit); 
-        GameManager.a_PlayerValuesUpdated();
+      
 
         player_Session_Details.PlayerHP--;
         
@@ -77,6 +77,7 @@ public class Player_Animation_Controller : MonoBehaviour
 
         TriggerToSet = startInvulnerabilityEndParam_Hash; // Assigns the ending of invulnerability as the next trigger to set
         StartCoroutine(TimeBeforeCodeExecution(secondsBeforeInvulnerabilityEnds, CoroutineFunction)); // Starts the ending of invulnerability through a delayed coroutine. 
+        GameManager.a_PlayerValuesUpdated();
     }
     private void AddHealthEvent()
     {

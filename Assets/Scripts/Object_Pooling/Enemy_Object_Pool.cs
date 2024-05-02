@@ -10,18 +10,32 @@ using UnityEngine.Pool;
 public class Enemy_Object_Pool : Object_Pool_Template
 {
     [Header("Cached References")]
-    [SerializeField] private Enemy_Wave_SO_Template enemyWaveData;
+    [SerializeField] public Enemy_Wave_SO_Template enemyWaveData;
     [SerializeField] private GameObject waveTarget;
-    private Collider2D waveAreaTarget; // For use in setting a reference to the general play area.
+    [SerializeField] private Enemy_Pool_Manager enemyPoolManagerScript;
+    // private Collider2D waveAreaTarget; // For use in setting a reference to the general play area.
+    public GameObject[] EnemyPool { get { return pooledObjects; } }
 
     [Header("Enemy Activation")]
     [SerializeField] private float spawnTimer;
+    [SerializeField] private float poolLifeSpan; // how long the pool will remain active for in seconds until the next pool is activated.
+    [SerializeField] private float currentPoolLifespan; // The variable that will tick up as the spawner is active.
+    private float CurrentPoolLifespan { get { return currentPoolLifespan; } 
+        set { currentPoolLifespan = value; if (value >= poolLifeSpan) 
+            { 
+                SpawnTimerActive = false; 
+                
+                enemyPoolManagerScript.EnemyPoolLifespanOver?.Invoke();
+                CurrentPoolLifespan = 0f;
+            } 
+        } 
+    }
     private float SpawnTimer { get { return spawnTimer; } set { spawnTimer = value; if (value <= 0) { SpawnTimerHitZero(); } } }
-    [SerializeField] private List<Transform> spawnPoints;
 
     // Internal Script Control 
-    private bool canPopulatePool = false;
-    private bool spawnTimerActive = false;
+    [SerializeField] private bool spawnTimerActive = false;
+
+    public bool SpawnTimerActive { get { return spawnTimerActive; } set { spawnTimerActive = value; if(value == false){ SpawnTimer = enemyWaveData.SpawnRate; }} }
 
     private event UnityAction SpawnTimerHitZero;
 
@@ -29,28 +43,23 @@ public class Enemy_Object_Pool : Object_Pool_Template
 
     private void Awake()
     {
-        InitializePoolSpawnPoints(); // is called once before the pool is populated. MUST BE CALLED BEFORE POOL POPULATION, as if called, after, the enemies will all be added as spawn points too.
+        enemyPoolManagerScript = GetComponentInParent<Enemy_Pool_Manager>();    
+    }
+
+    private void OnEnable()
+    {
+        SpawnTimerHitZero += ActivateEnemyOnSpawnRate;
     }
 
     void Start()
     {
         EventSubscriptions();
         InitialPoolSetup();
-        if (canPopulatePool)
-        {
-            PopulatePool();
-            spawnTimerActive = true;
-        }
-        else
-        {
-            Debug.LogError("PopulatePool() in Enemy_Object_Pool not called as the pool's spawn points weren't initially set first. \n" +
-                "InitializePoolSpawnPoints() must be called before PopulatePool()");
-        }
     }
 
     private void Update()
     {
-        SpawnCountdownTimer();
+        SpawnCountdownTimer(); 
     }
 
     // Spawning Methods
@@ -60,6 +69,7 @@ public class Enemy_Object_Pool : Object_Pool_Template
         if (spawnTimerActive == true)
         {
             SpawnTimer -= Time.deltaTime;
+            CurrentPoolLifespan += Time.deltaTime;
         }
     }
 
@@ -69,7 +79,8 @@ public class Enemy_Object_Pool : Object_Pool_Template
         var cond = arrayControl == (pooledObjects.Length - 1) ? arrayControl = 0 : arrayControl++;
       
 
-        enemyToActivate.transform.position = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Count)].position;
+        enemyToActivate.transform.position = enemyPoolManagerScript.SpawnPoints[UnityEngine.Random.Range(0, enemyPoolManagerScript.SpawnPoints.Count)].position;
+        
         enemyToActivate.SetActive(true);
 
         spawnTimer = enemyWaveData.SpawnRate;
@@ -84,11 +95,15 @@ public class Enemy_Object_Pool : Object_Pool_Template
         spawnTimer = enemyWaveData.SpawnRate;
         SetObjectParentToSelf();
         SetTarget();
+        PopulatePool();
+      
+
+        enemyPoolManagerScript.SpawnPointsInitialized -= InitialPoolSetup;
     }
 
     protected override void PopulatePool()
     {
-        Debug.Log("Enemy Object Pool: Populate Object pool called");
+      
 
         pooledObjects = new GameObject[objectPoolSize];
         for (int i = 0; i < objectPoolSize; i++)
@@ -109,10 +124,11 @@ public class Enemy_Object_Pool : Object_Pool_Template
             // separately was causing 2 random.range calculations, leading to mismatched data in each property call.  
             
             pooledObjects[i].SetActive(false);
+           
         }
     }
 
-    private void InitializePoolSpawnPoints()
+   /* private void InitializePoolSpawnPoints()
     {   
         if (transform.childCount > 0)
         {
@@ -129,7 +145,7 @@ public class Enemy_Object_Pool : Object_Pool_Template
         }
 
         canPopulatePool = true;
-    }
+    }*/
 
     // Internal Script Logic Methods
 
@@ -150,7 +166,8 @@ public class Enemy_Object_Pool : Object_Pool_Template
 
     private void EventSubscriptions()
     {
-        SpawnTimerHitZero += ActivateEnemyOnSpawnRate;
+        enemyPoolManagerScript.SpawnPointsInitialized += InitialPoolSetup; 
+        
     }
 
     private void SetTarget()

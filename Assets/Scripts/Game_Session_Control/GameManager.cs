@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
     public static Action a_PlayerValuesUpdated;
     public static Action a_ReleaseHPPickupDrop; // Called from within the script once the player has defeated enough enemies. 
     public static Action<bool> a_PlayerCollectedPickup;
+    public static Action a_spawnerRoundComplete;
+    public static Action a_bonusTimeAdded;
 
     public static bool health_Pickup_Is_Active = false;
 
@@ -45,12 +47,14 @@ public class GameManager : MonoBehaviour
     }
 
     private void StartNewGame()
-    {
-        Debug.Log("Game Manager: New Game Started");
-        
+    {   
         if (currentGameState == GameState.Paused)
         {
             PauseGame(); // Unpauses game if it has loaded in a paused state.
+        }
+        else
+        {
+            currentGameState = GameState.In_Play;
         }
         currentGameSession.ResetGameSession();
     }
@@ -93,26 +97,29 @@ public class GameManager : MonoBehaviour
     }
     private void PlayerDefeatedEnemy()
     {
-        Debug.Log("Game Manager: Player Defeated Enemy Called.");
+       
         currentGameSession.CurrentGameEnemiesDefeated++;
         currentEnemyDefeatProgress++;
-        if(currentEnemyDefeatProgress >= enemyDefeatsNeededForNextHPDrop )
+        Debug.Log("Enemies Defeated: " + currentEnemyDefeatProgress + "\nEnemies needed for drop: " + enemyDefeatsNeededForNextHPDrop);
+        if (currentEnemyDefeatProgress >= enemyDefeatsNeededForNextHPDrop )
         {
             if (currentGameSession.PlayerHP < currentGameSession.StartingPlayerHP)
             {
                 if (health_Pickup_Is_Active) { Debug.Log("Game Manager: Health Pickup already on field. No Pickup Activated"); return; }
                 Debug.Log("Game Manager: Dropping HP pickup.");
-                enemyDefeatsNeededForNextHPDrop += amountToIncreaseEnemyDefeatRequirementBy;
+                enemyDefeatsNeededForNextHPDrop += amountToIncreaseEnemyDefeatRequirementBy; // Requirements only increase when player has a health drop spawned
                 a_ReleaseHPPickupDrop?.Invoke();
                 health_Pickup_Is_Active = true;
             }
             else
             {
                 Pickup_Slider_Controller.a_ResetSlider();
-                // TO DO: ADD CODE FOR BONUS POINT INCREASE
+                currentGameSession.CurrentGameSurvivalTime += 5f;
+                a_bonusTimeAdded?.Invoke();
                 Debug.Log("Game Manager: Adding bonus points to player score.");
 
             }
+          
             currentEnemyDefeatProgress = 0;
         }
         a_PlayerValuesUpdated?.Invoke();
@@ -129,7 +136,7 @@ public class GameManager : MonoBehaviour
 
                 case true:
                 Debug.Log("Game Manager: Increasing Player Health");
-                currentGameSession.PlayerHP++;
+                currentGameSession.PlayerHP = currentGameSession.StartingPlayerHP;
                 
                 a_PlayerValuesUpdated?.Invoke();
                 break;
@@ -142,7 +149,6 @@ public class GameManager : MonoBehaviour
     private void OnDisable()
     {
         currentEnemyDefeatProgress = 0;
-        Debug.Log("Game Manager: On Disable called");
         a_ActivatePause -= PauseGame;
         a_GameOver -= GameOver;
     }

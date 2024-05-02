@@ -9,7 +9,7 @@ using System.Reflection.Emit;
 public class Audio_Manager : MonoBehaviour
 {
     [SerializeField] private Sound[] soundClips;
-    [Serializable] public enum SoundNames { ui_button_click, bomb_active, health_collected, enemy_killed, player_hit, emp, health_low, bomb_placed, background_music }
+    [Serializable] public enum SoundNames { speed_up, ui_button_click, bomb_active, health_collected, enemy_killed, player_hit, emp, health_low, bomb_placed, background_music }
 
     private static Audio_Manager instance;
 
@@ -52,7 +52,7 @@ public class Audio_Manager : MonoBehaviour
             //s.SoundName = formattedSoundName;
             if (Enum.IsDefined(typeof(SoundNames), formattedSoundName))
             {
-                Debug.Log(String.Format("Enum name match found for: {0}. Enum Equivelant is: {1}.", s.SoundName, formattedSoundName));
+               // Debug.Log(String.Format("Enum name match found for: {0}. Enum Equivelant is: {1}.", s.SoundName, formattedSoundName));
             }
             else
             {
@@ -85,6 +85,7 @@ public class Audio_Manager : MonoBehaviour
 
     public static void PlaySoundStatic(SoundNames nameOfSoundToPlay)
     {
+
         if(instance == null)
         {
             Debug.LogWarning("Cannot play sound from static method. No Audio Manager Instance detected.");

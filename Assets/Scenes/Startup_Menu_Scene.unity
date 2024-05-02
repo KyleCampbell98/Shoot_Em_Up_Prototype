@@ -161,7 +161,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 728, y: -441}
+  m_AnchoredPosition: {x: 0, y: -310}
   m_SizeDelta: {x: 400, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &242431178
@@ -177,10 +177,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 1312043778}
+    m_SelectOnDown: {fileID: 2144500327}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -1226,7 +1226,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -299}
+  m_AnchoredPosition: {x: 0, y: -180}
   m_SizeDelta: {x: 400, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1312043778
@@ -1242,10 +1242,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 1846090676}
+    m_SelectOnDown: {fileID: 242431178}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -1522,7 +1522,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 125}
+  m_AnchoredPosition: {x: 0, y: 194}
   m_SizeDelta: {x: -1000, y: -750}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1509155421
@@ -1601,7 +1601,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -153}
+  m_AnchoredPosition: {x: 0, y: -50}
   m_SizeDelta: {x: 400, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1846090676
@@ -1617,10 +1617,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnDown: {fileID: 1312043778}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -2031,7 +2031,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -165}
+  m_AnchoredPosition: {x: 0, y: -103}
   m_SizeDelta: {x: 1000, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2004604405
@@ -2438,7 +2438,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -740, y: -441}
+  m_AnchoredPosition: {x: 0, y: -440}
   m_SizeDelta: {x: 400, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2144500326
@@ -2469,10 +2469,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 242431178}
+    m_SelectOnDown: {fileID: 1846090676}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -2631,46 +2631,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2533175158152503742, guid: e64821422eba9f04f941738b67003f1a, type: 3}
-      propertyPath: soundClips.Array.size
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 2533175158152503742, guid: e64821422eba9f04f941738b67003f1a, type: 3}
-      propertyPath: soundClips.Array.data[8].pitch
-      value: 1.014
-      objectReference: {fileID: 0}
-    - target: {fileID: 2533175158152503742, guid: e64821422eba9f04f941738b67003f1a, type: 3}
-      propertyPath: soundClips.Array.data[9].pitch
-      value: 1.014
-      objectReference: {fileID: 0}
-    - target: {fileID: 2533175158152503742, guid: e64821422eba9f04f941738b67003f1a, type: 3}
-      propertyPath: soundClips.Array.data[8].volume
-      value: 0.037
-      objectReference: {fileID: 0}
-    - target: {fileID: 2533175158152503742, guid: e64821422eba9f04f941738b67003f1a, type: 3}
-      propertyPath: soundClips.Array.data[9].volume
-      value: 0.102
-      objectReference: {fileID: 0}
-    - target: {fileID: 2533175158152503742, guid: e64821422eba9f04f941738b67003f1a, type: 3}
-      propertyPath: soundClips.Array.data[8].soundClip
-      value: 
-      objectReference: {fileID: 8300000, guid: fe8428e1f2f8b9444a18bac52430d137, type: 3}
-    - target: {fileID: 2533175158152503742, guid: e64821422eba9f04f941738b67003f1a, type: 3}
-      propertyPath: soundClips.Array.data[8].soundName
-      value: Background Music
-      objectReference: {fileID: 0}
-    - target: {fileID: 2533175158152503742, guid: e64821422eba9f04f941738b67003f1a, type: 3}
-      propertyPath: soundClips.Array.data[9].soundClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 5ec0a71068e916244b36ccd4f76be152, type: 3}
-    - target: {fileID: 2533175158152503742, guid: e64821422eba9f04f941738b67003f1a, type: 3}
-      propertyPath: soundClips.Array.data[9].soundName
-      value: Bomb Placed
-      objectReference: {fileID: 0}
-    - target: {fileID: 2533175158152503742, guid: e64821422eba9f04f941738b67003f1a, type: 3}
-      propertyPath: soundClips.Array.data[8].shouldLoopClip
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6220711289098658893, guid: e64821422eba9f04f941738b67003f1a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

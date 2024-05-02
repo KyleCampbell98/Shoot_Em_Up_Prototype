@@ -35,9 +35,10 @@ public class Pickup_Slider_Controller : MonoBehaviour
 
     private void SetupSlider()
     {
-        Debug.Log("Pickup Slider Controller: Setup slider.");
+      
         pickupDropProgressBar.maxValue = GameManager.EnemyDefeatsNeededForNextHPDrop;
         pickupDropProgressBar.value = 0;
+        Debug.Log($"Pickup Slider Controller: Setup slider Called.\nEnemies Needed for drop: {GameManager.EnemyDefeatsNeededForNextHPDrop}");
     }
 
     private void UpdateSliderOnEnemyKill()

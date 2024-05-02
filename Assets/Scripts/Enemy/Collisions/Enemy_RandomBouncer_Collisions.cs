@@ -42,13 +42,16 @@ public class Enemy_RandomBouncer_Collisions : Enemy_General_Collisions
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (!stayInPlayArea)
+        if (collision.gameObject == playAreaColl.gameObject)
         {
-            stayInPlayArea=true;
-           
-            // make a getComponent reference call
-            thisEnemyCollider.isTrigger = false;
-          
+            if (!stayInPlayArea)
+            {
+                stayInPlayArea = true;
+
+                // make a getComponent reference call
+                thisEnemyCollider.isTrigger = false;
+
+            }
         }
     }
 
@@ -66,6 +69,7 @@ public class Enemy_RandomBouncer_Collisions : Enemy_General_Collisions
     protected override void ResetCollisionLogic()
     {
         base.ResetCollisionLogic();
+            thisEnemyCollider.isTrigger = true; 
         currentBounces = 0;
 
     } // Resets "Play Area Collision Control" on disable.
