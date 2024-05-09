@@ -10,6 +10,7 @@ public class Game_Scene_UI_Event_Control : UI_Event_Control
     [SerializeField] private GameObject continueGameGameOverButton;
     [SerializeField] private GameObject confirmQuitToMenuButton;
     [SerializeField] private GameObject confirmQuitToDesktopButton;
+    [SerializeField] private GameObject gameOverDefaultButton;
 
     // Start is called before the first frame update
     new void Start()
@@ -35,7 +36,13 @@ public class Game_Scene_UI_Event_Control : UI_Event_Control
         {
             ResetCurrentSelectedObject(null);
         }
+        else if(currentState == GameManager.GameState.Game_Over)
+        {
+            ResetCurrentSelectedObject(gameOverDefaultButton);
+        }
     }
+
+   
 
     public void ReturnToPauseScreen()
     {
@@ -53,5 +60,10 @@ public class Game_Scene_UI_Event_Control : UI_Event_Control
             ResetCurrentSelectedObject(confirmQuitToDesktopButton);
         }
     }
-    
+
+    private void OnDisable()
+    {
+        GameManager.m_GameStateChanged -= OnPauseUIShown;
+    }
+
 }
