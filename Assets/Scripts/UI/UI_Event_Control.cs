@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class UI_Event_Control : MonoBehaviour
 {
     [SerializeField] protected GameObject initialButtonSelection;
-    private GameObject lastSelectedObjectBeforeFocusLoss;
+    [SerializeField] private GameObject lastSelectedObjectBeforeFocusLoss;
     // Start is called before the first frame update
     protected void Start()
     {
@@ -20,8 +20,8 @@ public class UI_Event_Control : MonoBehaviour
         if(focus) 
         {
             Debug.Log("Focus to app returned");
-          
-            EventSystem.current.SetSelectedGameObject(lastSelectedObjectBeforeFocusLoss); 
+
+            ResetCurrentSelectedObject(lastSelectedObjectBeforeFocusLoss);
             
         }
         else
@@ -34,7 +34,12 @@ public class UI_Event_Control : MonoBehaviour
     protected void SetInitialButtonSelection()
     {
         Debug.Log("Initial Button Selection Called");
-        EventSystem.current.SetSelectedGameObject(null); // Good practice to set null before resetting to anything else;
-        EventSystem.current.SetSelectedGameObject(initialButtonSelection);
+        ResetCurrentSelectedObject(initialButtonSelection);
+    }
+
+    protected void ResetCurrentSelectedObject(GameObject targetObjectSelection)
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(targetObjectSelection);
     }
 }
