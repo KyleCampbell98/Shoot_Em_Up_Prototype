@@ -16,6 +16,7 @@ public class Game_Session_UI_Control : Menu_UI_Control
     [SerializeField] private TextMeshProUGUI survivalTimer_TMP;
     [SerializeField] private TextMeshProUGUI bombCounter_TMP;
     [SerializeField] private TextMeshProUGUI playerHP_TMP;
+    [SerializeField] private TextMeshProUGUI resultsText;
     [SerializeField] private TextMeshProUGUI newBestSurvivalTimeDisplay;
     
     [Header("Canvas Refs")]
@@ -23,6 +24,7 @@ public class Game_Session_UI_Control : Menu_UI_Control
     [SerializeField] private GameObject pause_Panel;
     [SerializeField] private GameObject game_Over_Panel;
     [SerializeField] private GameObject newHighScoreDisplay;
+    [SerializeField] private GameObject resultsDisplay;
     [SerializeField] private GameObject speedUpMessage;
     [SerializeField] private GameObject survivalBonusMessage;
 
@@ -61,11 +63,23 @@ public class Game_Session_UI_Control : Menu_UI_Control
 
     private void ResetScoringInfo()
     {
+        string sessionEndTime = FormatRawTime(currentGameSessionDetails.CurrentGameSurvivalTime);
         bool newBestSet = currentGameSessionDetails.CompareBestScores();
 
-        newBestSurvivalTimeDisplay.text = FormatRawTime(currentGameSessionDetails.BestSurvivalTime);
-        newHighScoreDisplay.SetActive(newBestSet);
-        
+        newBestSurvivalTimeDisplay.text = sessionEndTime;
+        resultsText.text = sessionEndTime;
+
+        if (newBestSet)
+        {
+            resultsDisplay.SetActive(false);
+            newHighScoreDisplay.SetActive(true);
+        }
+        else if(!newBestSet)
+        {
+            resultsDisplay.SetActive(true);
+            newHighScoreDisplay.SetActive(false);
+
+        }
     }
 
     private void DisplayCanvas(GameManager.GameState state)
@@ -90,10 +104,12 @@ public class Game_Session_UI_Control : Menu_UI_Control
 
     private void SpeedUpMessageEnabler()
     {
+        Debug.Log("Speed Up Message Activated");
         speedUpMessage.gameObject.SetActive(true);
     }
     private void BonusMessageEnabler()
     {
+        Debug.Log("Bonus Message Activated");
         survivalBonusMessage.gameObject.SetActive(true);
     }
 
@@ -119,5 +135,7 @@ public class Game_Session_UI_Control : Menu_UI_Control
         GameManager.m_GameStateChanged -= DisplayCanvas;
         GameManager.a_GameOver -= ResetScoringInfo;
         GameManager.a_PlayerValuesUpdated -= UpdateOnScreenUI;
+        GameManager.a_spawnerRoundComplete -= SpeedUpMessageEnabler;
+        GameManager.a_bonusTimeAdded -= BonusMessageEnabler;
     }
 }

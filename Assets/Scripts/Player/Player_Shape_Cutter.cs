@@ -36,6 +36,8 @@ public class Player_Shape_Cutter : MonoBehaviour
         {
             Debug.LogWarning("Player Shape Cutter: no game manager found, could not assign event listeners. ");
         }
+
+        canCycleShapes = true;
     }
     void OnCycleShapes(InputValue value)
     {
