@@ -21,17 +21,29 @@ public class Player_Shape_Cutter : MonoBehaviour
     private int arrayIterator = 0; // iterates through the available shape enums. 
     private int shapeCyclerInt = 0;
     private int numberOfPossibleShapes; // upon instantiation, sets the possible number of shapes to iterate through.
-
+    bool canCycleShapes;
     private void Awake()
     {
         ShapeCutterListSetup();
-    }  
+    }
+    private void Start()
+    {
+        if (FindObjectOfType<GameManager>())
+        {
+            GameManager.m_GameStateChanged += CanCycleShapes;
+        }
+        else
+        {
+            Debug.LogWarning("Player Shape Cutter: no game manager found, could not assign event listeners. ");
+        }
 
+        canCycleShapes = true;
+    }
     void OnCycleShapes(InputValue value)
     {
         // Link below is for reading further into Getting the total number of values in an ENUM/ how ENUMS work.
         // https://stackoverflow.com/questions/856154/total-number-of-items-defined-in-an-enum
-
+        if (!canCycleShapes) { return; } 
         Vector2 valueAsVector = value.Get<Vector2>();
      
         shapeCyclerInt = (int)valueAsVector.x;
@@ -95,4 +107,25 @@ public class Player_Shape_Cutter : MonoBehaviour
       
     }
 
+    private void CanCycleShapes (GameManager.GameState gameState)
+    {
+        switch (gameState)
+        {
+            case
+                GameManager.GameState.In_Play:
+                    {
+                    Debug.LogWarning("Player Shape Cutter: Cycle Shapes Enabled");
+                    canCycleShapes = true; break;
+                }
+            default: canCycleShapes = false; 
+                    Debug.LogWarning("Player Shape Cutter: Cycle Shapes DISABLED");
+                break;
+        }
+    }
+
+    private void OnDisable()
+    {
+        Debug.Log("Player shape cutter disabled");
+        GameManager.m_GameStateChanged -= CanCycleShapes;
+    }
 }

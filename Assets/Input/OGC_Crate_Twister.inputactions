@@ -34,11 +34,11 @@
                 },
                 {
                     "name": "Boost",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "d4b1f6c2-b998-4934-b546-d014ca790f95",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Integer",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press(behavior=2)",
                     "initialStateCheck": true
                 },
                 {
@@ -58,15 +58,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "BoostRelease",
-                    "type": "Button",
-                    "id": "9afac71b-ef0c-4d81-b269-f18edd61c6a7",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Press(behavior=1)",
-                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -173,7 +164,7 @@
                     "name": "",
                     "id": "48bd0794-0310-4a92-b9da-3e7b9d19139d",
                     "path": "<Keyboard>/space",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Boost",
@@ -289,17 +280,6 @@
                     "action": "CycleShapes",
                     "isComposite": false,
                     "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "aeed8d4c-73dc-4cbd-924e-fce82f9faf01",
-                    "path": "<Gamepad>/rightShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "BoostRelease",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         }

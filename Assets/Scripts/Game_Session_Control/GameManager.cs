@@ -20,7 +20,8 @@ public class GameManager : MonoBehaviour
 
     // Game Element Control
     private static int enemyDefeatsNeededForNextHPDrop = 4;
-    private static int currentEnemyDefeatProgress;
+    [SerializeField] private static int currentEnemyDefeatProgress;
+    [SerializeField] private int displayCurrentEnemyDefeatProgress; // DELETE BEFORE RELEASE. ONLY HERE TO MONITOR A STATIC VARIABLE.
     private static int amountToIncreaseEnemyDefeatRequirementBy = 1; // Every time a health pickup is dropped, the next pickup is made more difficult to obtain due to this value. 
 
     public static int EnemyDefeatsNeededForNextHPDrop { get { return enemyDefeatsNeededForNextHPDrop; } }
@@ -44,6 +45,11 @@ public class GameManager : MonoBehaviour
     {
         InternalEventSubscriptions();
         StartNewGame();
+    }
+
+    private void Update()
+    {
+        displayCurrentEnemyDefeatProgress = currentEnemyDefeatProgress;
     }
 
     private void StartNewGame()
@@ -151,6 +157,8 @@ public class GameManager : MonoBehaviour
         currentEnemyDefeatProgress = 0;
         a_ActivatePause -= PauseGame;
         a_GameOver -= GameOver;
+        a_PlayerDefeatedEnemy -= PlayerDefeatedEnemy; // Added 18/05
+        a_PlayerCollectedPickup -= EditPlayerStatus; // Added 18/05
     }
 
 }

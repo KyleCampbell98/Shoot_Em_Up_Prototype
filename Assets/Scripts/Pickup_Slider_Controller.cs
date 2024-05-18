@@ -14,6 +14,8 @@ public class Pickup_Slider_Controller : MonoBehaviour
 
     public static Action a_ResetSlider;
 
+    private bool initialSetupComplete = false;
+
     private void Awake()
     {
         pickupDropProgressBar = GetComponent<Slider>();
@@ -25,10 +27,20 @@ public class Pickup_Slider_Controller : MonoBehaviour
     {
         SetupSlider();
         EventSubscriptions();
+        initialSetupComplete = true;
+    }
+
+    private void OnEnable()
+    {
+        if (initialSetupComplete)
+        {
+            EventSubscriptions();
+        }
     }
 
     private void EventSubscriptions()
     {
+        Debug.Log("Pickup Slider: Event Subscription Called");
         GameManager.a_PlayerDefeatedEnemy += UpdateSliderOnEnemyKill;
         a_ResetSlider += ResetSlider;
     }
@@ -57,6 +69,7 @@ public class Pickup_Slider_Controller : MonoBehaviour
         sliderAnimator.SetBool(enemyGoalHitAnim_param, false);
         pickupDropProgressBar.value = 0;
         pickupDropProgressBar.maxValue = GameManager.EnemyDefeatsNeededForNextHPDrop;
+        Debug.Log("Pickup_Slider: Enemies needed for drop is now: " + GameManager.EnemyDefeatsNeededForNextHPDrop);
     }
 
     private void SliderFlash()
@@ -67,6 +80,7 @@ public class Pickup_Slider_Controller : MonoBehaviour
 
     private void OnDisable()
     {
+        Debug.Log("Pickup_Slider: On disable called");
         GameManager.a_PlayerDefeatedEnemy -= UpdateSliderOnEnemyKill;
         a_ResetSlider -= ResetSlider;
     }
