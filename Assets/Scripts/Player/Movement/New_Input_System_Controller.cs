@@ -15,8 +15,8 @@ public class New_Input_System_Controller : MonoBehaviour
     [SerializeField] private float movementMultiplierIncrement = 0.2f;
     [SerializeField] private float speedToAddOnBoost;
     [Range(0f, 1f)][SerializeField] private float fireRateDelay = 0.5f;
-    [Range(2f, 30f)][SerializeField] private float emergencyPulseUseDelay = 20f; // Could potetnially add a UI element to tell players when the emergency pulse has cooled down. 
-    private float boostValue = 10;
+    [Range(2f, 30f)][SerializeField] private float emergencyPulseUseDelay; // Could potetnially add a UI element to tell players when the emergency pulse has cooled down. 
+    private float boostValue = 20;
 
     [Header("Player Component Cache")]
     [SerializeField] private Rigidbody2D playerRB;
@@ -29,7 +29,6 @@ public class New_Input_System_Controller : MonoBehaviour
     private float lastFireTime;
     private float lastEmergencyPulseTime;
     bool canFire = true;
-    bool canMove = true;
     bool canEmergencyPulse = true;
 
     // Emergency Wave Push Control
@@ -45,6 +44,7 @@ public class New_Input_System_Controller : MonoBehaviour
     {
         playerRB = GetComponentInParent<Rigidbody2D>();
         GameManager.a_GameOver += StopPlayerControl;
+        GameManager.m_GameStateChanged += PlayerControlOnPause;
         GameManager.a_spawnerRoundComplete += IncrementMovementSpeed;
         lastEmergencyPulseTime -= emergencyPulseUseDelay;
         originalMovementSpeed = movementSpeed;
@@ -103,8 +103,6 @@ public class New_Input_System_Controller : MonoBehaviour
       
     }
    
-   
-
     // Actions
     public void OnFire() 
     {     
@@ -145,11 +143,25 @@ public class New_Input_System_Controller : MonoBehaviour
     {
         Debug.Log("Stop Player Control Called");
        movementSpeed = 0;
+        canFire = false;
+    }
+
+    private void PlayerControlOnPause(GameManager.GameState state) 
+    {
+        if(state == GameManager.GameState.In_Play)
+        {
+            canFire = true;
+        }
+        else
+        {
+            canFire = false;
+        }
     }
 
     private void OnDisable()
     {
         GameManager.a_GameOver -= StopPlayerControl;
+        GameManager.m_GameStateChanged -= PlayerControlOnPause;
         GameManager.a_spawnerRoundComplete -= IncrementMovementSpeed;
     }
 

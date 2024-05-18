@@ -114,14 +114,18 @@ public class Player_Shape_Cutter : MonoBehaviour
             case
                 GameManager.GameState.In_Play:
                     {
+                    Debug.LogWarning("Player Shape Cutter: Cycle Shapes Enabled");
                     canCycleShapes = true; break;
                 }
-            default: canCycleShapes = false; break;
+            default: canCycleShapes = false; 
+                    Debug.LogWarning("Player Shape Cutter: Cycle Shapes DISABLED");
+                break;
         }
     }
 
     private void OnDisable()
     {
+        Debug.Log("Player shape cutter disabled");
         GameManager.m_GameStateChanged -= CanCycleShapes;
     }
 }

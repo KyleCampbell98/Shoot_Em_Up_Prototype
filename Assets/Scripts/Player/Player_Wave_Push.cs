@@ -88,7 +88,6 @@ public class Player_Wave_Push : MonoBehaviour
 
         while (timeElapsed < leprDuration && !Mathf.Approximately(maxWaveSize, wavePush_Collider.radius))
         {
-            Debug.Log("Coroutine actually ran");
             wavePush_Collider.radius = Mathf.Lerp(wavePush_Collider.radius, maxWaveSize, timeElapsed /  wavePushSpeed);
             timeElapsed += Time.deltaTime;
             yield return null;

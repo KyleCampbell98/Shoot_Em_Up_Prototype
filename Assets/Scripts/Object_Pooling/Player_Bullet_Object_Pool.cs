@@ -148,13 +148,4 @@ public class Player_Bullet_Object_Pool : Object_Pool_Template
         GameManager.a_PlayerValuesUpdated();
     }
 
-    private void OnDisable()
-    {
-     //   GetComponentInParent<New_Input_System_Controller>().OnFireHit -= ActivateBullets;
-     ///* This code can't run as a disabled object can't retrieve a component.Need to have a separate function that
-     ///unsubs from all events, before finalising the player destruction/disabling.
-     ///*
-
-
-    }
 }

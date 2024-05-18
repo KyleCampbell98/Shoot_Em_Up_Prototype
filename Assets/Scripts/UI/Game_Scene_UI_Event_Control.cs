@@ -11,6 +11,7 @@ public class Game_Scene_UI_Event_Control : UI_Event_Control
     [SerializeField] private GameObject confirmQuitToMenuButton;
     [SerializeField] private GameObject confirmQuitToDesktopButton;
     [SerializeField] private GameObject gameOverDefaultButton;
+    [SerializeField] private GameObject returnFromControlsScreenButton;
 
     // Start is called before the first frame update
     new void Start()
@@ -61,6 +62,10 @@ public class Game_Scene_UI_Event_Control : UI_Event_Control
         }
     }
 
+    public void OnControlsScreenShow()
+    {
+        ResetCurrentSelectedObject(returnFromControlsScreenButton);
+    }
     private void OnDisable()
     {
         GameManager.m_GameStateChanged -= OnPauseUIShown;
